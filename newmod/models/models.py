@@ -16,12 +16,11 @@ from odoo import models, fields, api
 
 class CourseCalendar(models.Model):
     """Model for course calendar
-
     """
     _name = 'GestCal.course'
     _description = ""
     _inherit = "calendar.event"
-    _order = "" ## Ordering field when searching without an ordering specified (default: 'id') prova prova
+    _order = "" ## Ordering field when searching without an ordering specified (default: 'id') 
 
     proj = fields.Many2one()
     
