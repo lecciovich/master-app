@@ -21,7 +21,7 @@ class CourseCalendar(models.Model):
     _name = 'GestCal.course'
     _description = ""
     _inherit = "calendar.event"
-    _order = "" ## Ordering field when searching without an ordering specified (default: 'id')
+    _order = "" ## Ordering field when searching without an ordering specified (default: 'id') prova prova
 
     proj = fields.Many2one()
     
