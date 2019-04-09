@@ -55,7 +55,7 @@ i **PROGETTI** formativi (che verranno resi in una dashboard) in cui vengono spe
 ## Classi
 *i campi con `**` sono possibilmente puntatori a campi di altre classi (one2many, many2one, many2many)*
 
-`class progetti():`
++ `class progetti():`
     + codice progetto (string)
     + `**` fondo  (ref fondi)
     + importo finanziamento (float)
@@ -80,7 +80,7 @@ i **PROGETTI** formativi (che verranno resi in una dashboard) in cui vengono spe
     + `**` amministratori (ref contatto)
     + `**` queo_che_serve (ref contatto)
 
-`class moduli():`
++ `class moduli():`
     + titolo (string)
     + edizione (id edizione incrementale)
     + ore singola edizione (num)
@@ -88,7 +88,7 @@ i **PROGETTI** formativi (che verranno resi in una dashboard) in cui vengono spe
     + UFC (boh)
     + metodologia intervento (boh)
 
-`class calendari():`
++ `class calendari():`
     + data (datetime)
     + ora inizio (datetime/float)
     + ora fine (datetime/float)
@@ -97,17 +97,17 @@ i **PROGETTI** formativi (che verranno resi in una dashboard) in cui vengono spe
     + `**` modulo (ref moduli)
     + `**` docente (ref contatto)
 
-`class fondi():`
++ `class fondi():`
     + nome (string)
     + area \[regione,nazione,interprofessionale\]
 
-`class avviso/dgr():`
++ `class avviso/dgr():`
     + data scadenza finanziamento (datetime/float)
     + data scadenza richiesta anticipo (datetime/float)
     + data avvio formazione (datetime/float)
     + `**` fondo (ref fondi)
 
-`class sedi():`
++ `class sedi():`
     + nome (string)
     + posti (int)
     + dotazione (string)
@@ -115,7 +115,7 @@ i **PROGETTI** formativi (che verranno resi in una dashboard) in cui vengono spe
     + comune (string)
     + `**` referente (ref contatto)
 
-`class anagrafe():`
++ `class anagrafe():`
     + nome
     + cognome
     + `**` azienda (ref contatto)
