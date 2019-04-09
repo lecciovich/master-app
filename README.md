@@ -53,7 +53,7 @@ i **PROGETTI** formativi (che verranno resi in una dashboard) in cui vengono spe
 
 
 ## Classi
-*i campi con `**` sono possibilmente puntatori a campi di altre classi (one2many, many2one, many2many)*
+*i campi con `**` sono possibilmente puntatori a campi di altre classi (One2Many, Many2One, Many2Many)*
 
 + `class progetti():`
     + codice progetto (string)
