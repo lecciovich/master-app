@@ -2,7 +2,7 @@
 A new odoo based module for calls project management
 
 ------
-
+🇮🇹
 ## Oggetti da modellare:
 **CALENDARIO** corsi le cui i singoli record sono composti da:
 + data;
