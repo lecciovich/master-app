@@ -57,12 +57,12 @@ class Project(models.Model):
     presentation_date = fields.Date()
     # notify_date = fields.Date()
     # convention_date = fields.Date()
-    finish_date = fields.Date() ## data che va computata in base alle regole della dgr/fondo in cui il progetto è stato presentato
-    acconto_date = fields.Date() ## data che va computata in base a diversi fattori, quindi nel costruttore va prevista una funzione che la calcola in base al fondo e alla dgr in cui il progetto è stato presentato
+    finish_date = fields.Date() ## TODO data che va computata in base alle regole della dgr/fondo in cui il progetto è stato presentato
+    acconto_date = fields.Date() ## TODO data che va computata in base a diversi fattori, quindi nel costruttore va prevista una funzione che la calcola in base al fondo e alla dgr in cui il progetto è stato presentato
     attachments = fields.Selection([]) ##lista (vuota) di allegati, issue#2 capire cosa usare
-    holder = fields.Many2one('res.user')  ##io contunuo a usare res.user ma non so se va bene
-    partners = fields.Many2many('res.user')  ##io contunuo a usare res.user ma non so se va bene
-    users = fields.Many2many('res.user')  ##io contunuo a usare res.user ma non so se va bene
+    holder = fields.Many2one('res.user')  ## FIXME io contunuo a usare res.user ma non so se va bene
+    partners = fields.Many2many('res.user')  ## FIXME io contunuo a usare res.user ma non so se va bene
+    users = fields.Many2many('res.user')  ## FIXME io contunuo a usare res.user ma non so se va bene
     # corsi = ??? # non so ancora cosa c'è qua: come si rappresentano i corsi di un progetto? ==> ogni corso è un'edizione di un singolo modulo formativo
     policy = fields.Text()
     # operators = ??? ## potrebbero essere in un dizionario tipo {ruolo:res.user,...} in cui ruolo può essere o una stringa che specifica il ruolo o un oggetto se è il caso di avere un oggetto ma non credo
