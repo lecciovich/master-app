@@ -41,15 +41,15 @@ A new odoo based module for calls project management
     + (se docente) cosa insegna
 
 i **PROGETTI** formativi (che verranno resi in una dashboard) in cui vengono specificati:
-azienda proponente (intestatario del progetto);
-partner progetto (chi partecipa, di solito altre aziende);
-fondo in cui viene presentato il progetto;
-data presentazione progetto;
-data ammissione progetto;
-scadenza/scadenze (questa è una cosa molto importante. Un progetto una volta ammesso al finanziamento ha un termine massimo per svolgere tutte le attività che vengono finanziate, inoltre ci sono scadenze intermedie per la presentazione al fondo di anticipi di finanziamento ecc. Tutte queste scadenze variano da fondo a fondo. Utilizzando il modulo CRM come base dovremmo riuscire a implementare una cosa del genere);
-budget di spesa (ce ne sarà più di uno probabilmente di voci di budget, al momento non lo so);
-ore formazione erogate (che sarà un campo calcolato, alla data corrente, in base al [numero di destinatari]*[ore di corso effettuate]);
-avanzamento progetto (indicativo di una view per dire che bisognerà mostrare il grado di avanzamento del progetto. Dipendentemente da più fattori, uno su tutti il fondo su cui è stato presentato, bisognerà dare all’utente la percezione del grado di avanzamento del progetto);
++ azienda proponente (intestatario del progetto);
++ partner progetto (chi partecipa, di solito altre aziende);
++ fondo in cui viene presentato il progetto;
++ data presentazione progetto;
++ data ammissione progetto;
++ scadenza/scadenze (questa è una cosa molto importante. Un progetto una volta ammesso al finanziamento ha un termine massimo per svolgere tutte le attività che vengono finanziate, inoltre ci sono scadenze intermedie per la presentazione al fondo di anticipi di finanziamento ecc. Tutte queste scadenze variano da fondo a fondo. Utilizzando il modulo CRM come base dovremmo riuscire a implementare una cosa del genere);
++ budget di spesa (ce ne sarà più di uno probabilmente di voci di budget, al momento non lo so);
++ ore formazione erogate (che sarà un campo calcolato, alla data corrente, in base al [numero di destinatari]*[ore di corso effettuate]);
++ avanzamento progetto (indicativo di una view per dire che bisognerà mostrare il grado di avanzamento del progetto. Dipendentemente da più fattori, uno su tutti il fondo su cui è stato presentato, bisognerà dare all’utente la percezione del grado di avanzamento del progetto);
 
 
 ## Classi
