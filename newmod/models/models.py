@@ -39,4 +39,13 @@ class CourseModule(models.Model):
     ufc = fields.Tex()
     method = fields.Tex()
 
+class Project(models.Model):
+    """Model for a project that embodies and tracks all the feature and other
+    things that are done as an activity
+    """
+    _name = 'gestcal.project'
+    _description = ""
+    # _inherit = ""
+    # _order = ""
+
     
