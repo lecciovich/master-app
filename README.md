@@ -116,8 +116,9 @@ i **PROGETTI** formativi (che verranno resi in una dashboard) in cui vengono spe
     + `**` referente (ref contatto)
 
 + `class anagrafe():`
-    + nome
-    + cognome
-    + `**` azienda (ref contatto)
+    >*in realtà ci sono già res.partner e res.company che sarebbero da overloaddare con i dati in più che ci servono e con una parte per gli attachments*
 
-
++ `class allegati():` *//ci sarebbe ir.attachments*
+    + nome (string)
+    + validità (data) *//da capire come triggerare un avviso sugli allegati in scadenza*
+    + file (binary)
