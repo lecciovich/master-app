@@ -122,3 +122,4 @@ i **PROGETTI** formativi (che verranno resi in una dashboard) in cui vengono spe
     + nome (string)
     + validità (data) *//da capire come triggerare un avviso sugli allegati in scadenza*
     + file (binary)
+    
