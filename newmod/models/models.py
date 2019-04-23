@@ -7,7 +7,7 @@ from odoo import models, fields, api
 #         self.value2 = float(self.value) / 100
 
 class CourseCalendar(models.Model):
-    """Model for course calendar
+    """Model for course calendar that links all the items of a course: dates scheduling, people, classrooms, teachers and so on
     """
     _name = 'gestcal.date'
     _description = ""
@@ -18,17 +18,17 @@ class CourseCalendar(models.Model):
     start_time = fields.Datetime()
     end_time = fields.Datetime()
     place = fields.Many2one('gestcal.place') ## (comodel_name=<object object>, inverse_name=<object object>, string=<object object>, **kwargs)
-                                             ## comodel c'è, inverse name bisogna fare la classe per le sedi, il resto non so manco cos'è
+                                             ## comodel c'è, inverse name bisogna fare la classe per le sedi TODO, il resto non so manco cos'è
     beneficiaries = fields.Many2one('res.user')  ## oppure users che beneficiaries è lungo e tedioso
-    docent = fields.Many2one('res.user')
-    course_module = fields('gestcal.module')
+    teachers = fields.Many2one('res.user')
+    course_module = fields('gestcal.coursemod')
 
 
 class CourseModule(models.Model):
     """Model for the courses modules in a project
     """
     _name = 'gestcal.coursemod'
-    _description = ""
+    _description = "Module of a course"
     #_inherit = "" ## anche niente da ereditare
     #_order = "" ## boh
 
@@ -66,4 +66,31 @@ class Project(models.Model):
     # corsi = ??? # non so ancora cosa c'è qua: come si rappresentano i corsi di un progetto? ==> ogni corso è un'edizione di un singolo modulo formativo
     policy = fields.Text()
     # operators = ??? ## potrebbero essere in un dizionario tipo {ruolo:res.user,...} in cui ruolo può essere o una stringa che specifica il ruolo o un oggetto se è il caso di avere un oggetto ma non credo
-    
+
+class CourseClassroom(models.Model):
+    """Model for a classroom or either a place to be managed for class courses
+    """
+    _name = "gestcal.classroom"
+    _description = ""
+    #_inherit = ""  ##e che mai può ereditare?
+    #_order = "" 
+
+    address = fields.Text()
+    addressmore = fields.Text() ##optional for more information
+    city = fields.Text()
+    zipcode = fields.Text()
+    state = fields.Text()
+    numpleople = fields.Integer()
+    inventory =  ## TODO qui ci vorrebbero i tag per segnalare cosa c'è in un'aula
+
+class ClassroomInv(models.Model): ##copiato bellamente da calendar.event.type
+    """Items for a classroom inventory
+    """
+    _name = 'gestcal.classroom.inventory'
+    _description = 'Classroom inventory items'
+
+    name = fields.Char('Name', required=True)
+
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Tag name already exists !"),
+    ]
