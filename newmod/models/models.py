@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 #     @api.depends('value')
 #     def _value_pc(self):
@@ -10,7 +10,7 @@ class CourseCalendar(models.Model):
     """Model for course calendar that links all the items of a course: dates scheduling, people, classrooms, teachers and so on
     """
     _name = 'gestcal.date'
-    _description = ""
+    _description = "Course Calendar"
     _inherit = "calendar.event"
     _order = "" ## Ordering field when searching without an ordering specified (default: 'id') 
 
@@ -44,8 +44,8 @@ class Project(models.Model):
     things that are done as an activity
     """
     _name = 'gestcal.project'
-    _description = ""
-    # _inherit = ""
+    _description = "Financed Project"
+    # _inherit = 'gestcal.coursemod'
     # _order = ""
 
     projcode = fields.Text()
@@ -63,7 +63,8 @@ class Project(models.Model):
     holder = fields.Many2one('res.user')  ## FIXME io contunuo a usare res.user ma non so se va bene
     partners = fields.Many2many('res.user')  ## FIXME io contunuo a usare res.user ma non so se va bene
     users = fields.Many2many('res.user')  ## FIXME io contunuo a usare res.user ma non so se va bene
-    # corsi = ??? # non so ancora cosa c'è qua: come si rappresentano i corsi di un progetto? ==> ogni corso è un'edizione di un singolo modulo formativo
+    # corsi = ??? ## non so ancora cosa c'è qua: come si rappresentano i corsi di un progetto? ==> ogni corso è un'edizione di un singolo modulo formativo
+                  ## quindi magari potrebbe essere una lista di coursemod
     policy = fields.Text()
     # operators = ??? ## potrebbero essere in un dizionario tipo {ruolo:res.user,...} in cui ruolo può essere o una stringa che specifica il ruolo o un oggetto se è il caso di avere un oggetto ma non credo
 
@@ -71,7 +72,7 @@ class CourseClassroom(models.Model):
     """Model for a classroom or either a place to be managed for class courses
     """
     _name = "gestcal.classroom"
-    _description = ""
+    _description = "Classroom"
     #_inherit = ""  ##e che mai può ereditare?
     #_order = "" 
 
@@ -84,7 +85,7 @@ class CourseClassroom(models.Model):
     inventory =  ## TODO qui ci vorrebbero i tag per segnalare cosa c'è in un'aula
 
 class ClassroomInv(models.Model): ##copiato bellamente da calendar.event.type
-    """Items for a classroom inventory
+    """Items for a classroom inventory rendered as a tag list
     """
     _name = 'gestcal.classroom.inventory'
     _description = 'Classroom inventory items'
