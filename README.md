@@ -120,7 +120,7 @@ Is mandatory to model this with the thought of using import functions: the user 
     + validity (data) *//based on this there has to be a warinng if one attachment is going to and validity*
     + file (file or blog)
 
-------
+<!------
 🇮🇹
 ## Oggetti da modellare:
 **CALENDARIO** corsi le cui i singoli record sono composti da:
@@ -242,3 +242,4 @@ i **PROGETTI** formativi (che verranno resi in una dashboard) in cui vengono spe
     + validità (data) *//da capire come triggerare un avviso sugli allegati in scadenza*
     + file (binary)
     
+-->
