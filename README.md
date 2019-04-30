@@ -2,6 +2,125 @@
 A new odoo based module for calls project management
 
 ------
+## Object to model:
+**CALENDAR** courses where individual records are composed by:
++ date;
++ starting time;
++ end time (how to do these? two datetime fields or one datetime and one float for the duration and the end time is calculated?);
++ classroom (place where the lession happen);
++ recipients (typically the alumni, one2many);
++ teacher;
++ course of which the lession is part;
++ project of which the course is part;
++ lession edition (This represent the n-repetition of the same course in the project, typically with the same teachers but different recipients);
+Is mandatory to model this with the thought of using import functions: the user shall do imports to update present data and, more importantly, creating or importing records there have to be some verification if resources for that day/time are still available or occupied.
+
+
+**CONTACTS** are another important part, they are: courses recipients, courses teacher, project partners, project heads. It can inherit much from the HR Odoo standard module. Viewing the Contact details the user shall see in which project the contact has been involved. A person contact can be a course recipient AND a course teacher (not within the same project), a company contact can be a project head AND a project partner (not within the same project). In detail:
++ if company
+    + company name
+    + legal form
+    + VAT number
+    + legal office
+    + CEO
+    + company dimension (a list(select) of sizes)
+    + fund subscription (a list(select) of funds the company have subscribed)
+    + social security drawer (given data, amount of money used in the last 3 years)
+    + IBAN
+    + attachments (files with description, type and validity date)
+    + projects involved in (query/view)
+    + referent (name + number OR another contact)
++ if person
+    + personal data (social security number, date of birth, VAT)
+    + job status
+    + company who works for
+    + IBAN
+    + attachments (files with description, type and validity date)
+    + projects involved in (query/view)
+    + (if teacher) topics of the teaching
+
+**PROJECTS** are the container of the lessions/courses and they defines with what rules the courses are made. The default view can be like the kanban of CRM module. In details:
++ project company head;
++ project company partners;
++ entitled project fund;
++ project submission date;
++ project ammission date;
++ deadlines (this is an important part. A project, based on which funds is submitted, have deadlines in which all the courses and other activities have to be completed. Instead of making things complicated, we can let the user put those deadline creating a new project);
++ budget (it won't be surely only a single money input);
++ provided lession hours (calculated based on the current date, number of recipients multiplied for the hours of completed lessions);
++ project progress/stage (in the kanban view the user have to see the completion stage of the project);
+
+
+## Classes
+*records with `**` should point to other object (One2Many, Many2One, Many2Many)*
+
++ `class projects():`
+    + project code (string, input given)
+    + `**` fund (user chioce)
+    + financing amount (float)
+    + budgeted lessions hours (float, input given)
+    + budgeted other activities (float, input given)
+    + calls (string, user choice)
+    + submission_date (datetime)
+    + admittance_date (datetime)
+    + agreement_date (datetime)
+    + account_request_date (datetime)
+    + `**` attachments (ref attachment model)
+    + `**` project_head (ref contact)
+    + `**` project_partners (ref contact)
+    + `**` recipients (ref anagrafe)
+    + `**` courses (ref ???)
+    + end_date (datetime)(calculated depending from admittance_date and with the fund and call rules )
+    + insurance_policy (string)
+    + `**` tutor (ref anagrafe)
+    + `**` coordinators (ref contact)
+    + `**` administrators (ref contact)
+
++ `class module():`
+    + title (string)
+    + repetitions (???)
+    + single edition hours (num)
+    + `**` lessions (ref calendar)
+    + UFC (string list, uncertain)
+    + teaching method (string user choice)
+
++ `class calendars():`
+    + lession_date (datetime)
+    + start_time (datetime/float)
+    + end_time (datetime/float)
+    + classroom (string/ ref places?)
+    + `**` recipients (ref anagrafe)
+    + `**` module (ref module)
+    + `**` teacher (ref contact)
+
++ `class funds():`
+    + nome (string)
+    + area \[region,state,....\]
+
++ `class call():` *//not sure about this*
+    + deadline_funding (datetime/float)
+    + deadline_accounting (datetime/float)
+    + lessions_start (datetime/float)
+    + `**` fund (ref fondi)
+
++ `class places():` 
+    + name (string)
+    + seats (int)
+    + inventory (string)
+    + address (string)
+    + city (string)
+    + `**` referent (ref contact)
+
++ `class contacts():`
+    >*res.partner and res.company can be overloaded for this with some more fields and file attachments*
+
++ `class attachments():` *//ir.attachments?*
+    + type (string)
+    + description (string)
+    + validity (data) *//based on this there has to be a warinng if one attachment is going to and validity*
+    + file (file or blog)
+
+------
 🇮🇹
 ## Oggetti da modellare:
 **CALENDARIO** corsi le cui i singoli record sono composti da:

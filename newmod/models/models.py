@@ -82,7 +82,7 @@ class CourseClassroom(models.Model):
     zipcode = fields.Text()
     state = fields.Text()
     numpleople = fields.Integer()
-    inventory =  ## TODO qui ci vorrebbero i tag per segnalare cosa c'è in un'aula
+    # inventory = "" ## TODO qui ci vorrebbero i tag per segnalare cosa c'è in un'aula
 
 class ClassroomInv(models.Model): ##copiato bellamente da calendar.event.type
     """Items for a classroom inventory rendered as a tag list
