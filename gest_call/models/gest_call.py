@@ -77,7 +77,7 @@ class GestcalCourse(models.Model):
    
     _name = 'gestcal.course'
     _rec_name = 'name'
-    _description = " Gestcal Course" 
+    _description = " Gestcal Course"  
     
     name = fields.Char(string="Name")
     repetition = fields.Integer(string="Repetition")
