@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- PROJECT -->
+        <!-- Form View Of project Information -->
+        <record id="view_gestcal_project_form" model="ir.ui.view">
+            <field name="name">gestcal.project.form</field>
+            <field name="model">gestcal.project</field>
+            <field name="arch" type="xml">
+                <form string="Project">
+                    <sheet>
+                 <label for="title" class="oe_edit_only"/>
+                <h1>
+                 <field name="title"/>
+               	</h1>
+                        <group col="4" colspan="4"> 
+                            <field name="project_code"/>
+                            <field name="found"/>
+                            <field name="financing_amount"/>
+                            <field name="total_lesson_hours" />
+                        </group>
+                      <group col="4" colspan="4"> 
+                            <field name="call"/>
+                            <field name="submission"/>
+                            <field name="admittance"/>
+                            <field name="agreement" />
+                        </group>
+                        
+                          <group col="4" colspan="4"> 
+                            <field name="account_request"/>
+                            <field name="partner"/>
+                            <field name="deadline"/>
+                            <field name="courses" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of project Information -->
+        <record id="view_gestcal_project_tree" model="ir.ui.view">
+            <field name="name">gestcal.project.tree</field>
+            <field name="model">gestcal.project</field>
+            <field name="arch" type="xml">
+                <tree string="Project">
+                   <field name="title"/>
+                          <field name="project_code"/>
+                            <field name="found"/>
+                            <field name="financing_amount"/>
+                            <field name="total_lesson_hours" />
+                </tree>
+            </field>
+        </record>
+ 
+        <!-- Actions Of Form & Tree Views Of project Information -->
+        <record id="action_gestcal_project_view" model="ir.actions.act_window">
+            <field name="name">Project</field>
+            <field name="res_model">gestcal.project</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+<!-- LESSON -->
+        <!-- Form View Of  lesson Information -->
+        <record id="view_gestcal_lesson_form" model="ir.ui.view">
+            <field name="name">gestcal.lesson.form</field>
+            <field name="model">gestcal.lesson</field>
+            <field name="arch" type="xml">
+                <form string="Lesson">
+                    <sheet>
+                        <group col="4" colspan="4">
+                         <field name="title"/>
+                            <field name="date"/>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                            <field name="beneficiaries_id"/>
+                            <field name="teacher_id" />
+                        </group>
+                      
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of lesson Information -->
+        <record id="view_gestcal_lesson_tree" model="ir.ui.view">
+            <field name="name">gestcal.lesson.tree</field>
+            <field name="model">gestcal.lesson</field>
+            <field name="arch" type="xml">
+                <tree string="Lesson">
+                            <field name="date"/>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                            <field name="beneficiaries_id"/>
+                            <field name="teacher_id" />
+                </tree>
+            </field>
+        </record>
+ 
+        <!-- Actions Of Form & Tree Views Of lesson Information -->
+        <record id="action_gestcal_lesson_view" model="ir.actions.act_window">
+            <field name="name">Lesson</field>
+            <field name="res_model">gestcal.lesson</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!-- PLACE -->  
+<!-- Form View Of  place Information -->  
+     <record id="view_gestcal_place_form" model="ir.ui.view">
+            <field name="name">gestcal.place.form</field>
+            <field name="model">gestcal.place</field>
+            <field name="arch" type="xml">
+                <form string="Lesson Place">
+                    <sheet>
+                        <group col="4" colspan="4">
+                            <field name="name"/>
+                            <field name="adresse"/>
+                            <field name="seats"/> 
+                            <field name="referent" />
+                        <field name="equipement">
+ 							<tree editable="bottom">
+								<field name="number" />  
+								<field name="name"/>  
+							</tree>
+						</field>
+                        </group>
+                      
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of lesson Information -->
+        <record id="view_gestcal_place_tree" model="ir.ui.view">
+            <field name="name">gestcal.place.tree</field>
+            <field name="model">gestcal.place</field>
+            <field name="arch" type="xml">
+                <tree string="Lesson place">
+                            <field name="name"/>
+                            <field name="adresse"/>
+                            <field name="seats"/> 
+                            <field name="referent" />
+                </tree>
+            </field>
+        </record>
+ 
+        <!-- Actions Of Form & Tree Views Of place Information -->
+        <record id="action_gestcal_place_view" model="ir.actions.act_window">
+            <field name="name">Place</field>
+            <field name="res_model">gestcal.place</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>     
+        
+        
+        
+<!-- COURSE -->  
+<!-- Form View Of  place Information -->  
+     <record id="view_gestcal_course_form" model="ir.ui.view">
+            <field name="name">gestcal.course.form</field>
+            <field name="model">gestcal.course</field>
+            <field name="arch" type="xml">
+                <form string="Course">
+                    <sheet>
+                        <group col="4" colspan="4">
+                 
+							<field name="name" />
+							<field name="repetition" />
+							<field name="total_hours" />
+							<field name="topics" />
+							<field name="lesson_id" />
+						 
+                        </group>
+                      
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of course Information -->
+        <record id="view_gestcal_course_tree" model="ir.ui.view">
+            <field name="name">gestcal.course.tree</field>
+            <field name="model">gestcal.course</field>
+            <field name="arch" type="xml">
+                <tree string="Lesson place">
+                            <field name="name" />
+							<field name="repetition" />
+							<field name="total_hours" />
+							<field name="topics" />
+							<field name="lesson_id" />
+                </tree>
+            </field>
+        </record>
+ 
+        <!-- Actions Of Form & Tree Views Of course Information -->
+        <record id="action_gestcal_course_view" model="ir.actions.act_window">
+            <field name="name">Course</field>
+            <field name="res_model">gestcal.course</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>             
+        
+        <!-- Menu items -->
+        <menuitem id="menu_gestcal_root" name="Gest Call" sequence="1"/>
+        <menuitem id="menu_gestcal_project" name="Project" parent="menu_gestcal_root" action="action_gestcal_project_view" sequence="1"/>
+        <menuitem id="menu_gestcal_course" name="Course" parent="menu_gestcal_root" action="action_gestcal_course_view" sequence="2"/>
+        <menuitem id="menu_gestcal_lesson" name="Lesson" parent="menu_gestcal_root" action="action_gestcal_lesson_view" sequence="3"/>
+        <menuitem id="menu_gestcal_place" name="Place" parent="menu_gestcal_root" action="action_gestcal_place_view" sequence="4"/>
+</odoo>
