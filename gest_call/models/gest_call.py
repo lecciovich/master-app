@@ -33,7 +33,7 @@ class GestcalProject(models.Model):
     
 
 class GestcalLesson(models.Model):
- 
+
     _name = 'gestcal.lesson'
     _rec_name = 'title'
     _description = "Gestcal lesson"
@@ -48,8 +48,9 @@ class GestcalLesson(models.Model):
     beneficiaries_id = fields.Many2one('hr.employee', string="Beneficiaries") # shouldn't this be One2many? One lession has many beneficiaries (or recipients)
     teacher_id = fields.Many2one('hr.employee', string="Teacher") # each lession have only ONE teacher
 
+
 class GestcalEquipment(models.Model):
-   
+
     _name = 'gestcal.equipment'
     _rec_name = 'name'
     _description = "Gestcal Course equipment" 
@@ -66,7 +67,7 @@ class GestcalPlace(models.Model):
     _description = "Gestcal Place" 
     
     name = fields.Char(string="Name")
-    adresse = fields.Char(string="Adresse") 
+    adress = fields.Char(string="Adress") 
     seats = fields.Integer (string="Seats")
     equipment = fields.One2many('gestcal.equipment','place_id' ,string="Equipment",
                               help="Related Course equipment") 
