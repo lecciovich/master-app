@@ -72,11 +72,18 @@
                          <field name="title"/>
                             <field name="date"/>
                             <field name="start_time"/>
-                            <field name="end_time"/>
-                            <field name="beneficiaries_id"/>
+                            <field name="end_time"/> 
                             <field name="teacher_id" />
                         </group>
-                      
+                        <group>
+                          <field name="beneficiaries_id" >
+								<tree string="Lesson" editable="bottom">
+              						  <field name="name" />
+              						  <field name="gender" />
+              						  <field name="country_id" /> 
+           						 </tree>
+           					 </field>
+                      </group>
                     </sheet>
                 </form>
             </field>
@@ -89,8 +96,7 @@
                 <tree string="Lesson">
                             <field name="date"/>
                             <field name="start_time"/>
-                            <field name="end_time"/>
-                            <field name="beneficiaries_id"/>
+                            <field name="end_time"/> 
                             <field name="teacher_id" />
                 </tree>
             </field>
@@ -114,10 +120,10 @@
                     <sheet>
                         <group col="4" colspan="4">
                             <field name="name"/>
-                            <field name="adresse"/>
+                            <field name="adress"/>
                             <field name="seats"/> 
                             <field name="referent" />
-                        <field name="equipement">
+                        <field name="equipment">
  							<tree editable="bottom">
 								<field name="number" />  
 								<field name="name"/>  
@@ -136,7 +142,7 @@
             <field name="arch" type="xml">
                 <tree string="Lesson place">
                             <field name="name"/>
-                            <field name="adresse"/>
+                            <field name="adress"/>
                             <field name="seats"/> 
                             <field name="referent" />
                 </tree>
@@ -167,8 +173,14 @@
 							<field name="repetition" />
 							<field name="total_hours" />
 							<field name="topics" />
-							<field name="lesson_id" />
-						 
+							<field name="lesson_id" >
+								<tree string="Lesson" editable="bottom">
+              						  <field name="title" />
+              						  <field name="date" />
+              						  <field name="start_time" />
+              						  <field name="end_time" />
+           						 </tree>
+						 	</field>
                         </group>
                       
                     </sheet>

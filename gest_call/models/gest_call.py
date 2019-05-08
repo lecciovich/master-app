@@ -30,7 +30,14 @@ class GestcalProject(models.Model):
     partner = fields.Many2one('res.partner', string="Partner")
     deadline = fields.Datetime(string="Deadline")
     courses = fields.Many2one('gestcal.course', string="Courses")
+
+
+class HrEmployee(models.Model):
+
+    _inherit = "hr.employee"
     
+    lesson_id = fields.Many2one("gestcal.lesson", 'lesson')
+    is_teacher = fields.Boolean('Is Teacher')
 
 class GestcalLesson(models.Model):
 
@@ -45,9 +52,9 @@ class GestcalLesson(models.Model):
                               help="Time according to timeformat of 24 hours")
     end_time = fields.Float('End Time', required=True,
                             help="Time according to timeformat of 24 hours")
-    beneficiaries_id = fields.Many2one('hr.employee', string="Beneficiaries") # shouldn't this be One2many? One lession has many beneficiaries (or recipients)
+    beneficiaries_id = fields.One2many('hr.employee','lesson_id', string="Beneficiaries") # shouldn't this be One2many? One lession has many beneficiaries (or recipients)
     teacher_id = fields.Many2one('hr.employee', string="Teacher") # each lession have only ONE teacher
-
+    course_id = fields.Many2one('gestcal.course', string="course")
 
 class GestcalEquipment(models.Model):
 
@@ -86,6 +93,6 @@ class GestcalCourse(models.Model):
                                                      # the same course (so, hours, teacher, title are identical) BUT with DIFFERENT STUDENTS. It's basically ID for the user.
     total_hours = fields.Float(string="Total Hours")
     topics = fields.Char(string='Topics')
-    lesson_id = fields.Many2one('gestcal.lesson', string="Lesson") # same of line 48: shouldn't this be One2many? Each course have many lessions date
+    lesson_id = fields.One2many('gestcal.lesson','course_id', string="Lesson") # same of line 48: shouldn't this be One2many? Each course have many lessions date
 
  
