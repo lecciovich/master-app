@@ -50,7 +50,7 @@ Is mandatory to model this with the thought of using import functions: the user 
 + provided lession hours (calculated based on the current date, number of recipients multiplied for the hours of completed lessions);
 + project progress/stage (in the kanban view the user have to see the completion stage of the project);
 
-
+<!------
 ## Classes
 *records with `**` should point to other object (One2Many, Many2One, Many2Many)*
 
@@ -120,7 +120,6 @@ Is mandatory to model this with the thought of using import functions: the user 
     + validity (data) *//based on this there has to be a warinng if one attachment is going to and validity*
     + file (file or blog)
 
-<!------
 🇮🇹
 ## Oggetti da modellare:
 **CALENDARIO** corsi le cui i singoli record sono composti da:
