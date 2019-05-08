@@ -30,6 +30,7 @@ class GestcalProject(models.Model):
     partner = fields.Many2one('res.partner', string="Partner")
     deadline = fields.Datetime(string="Deadline")
     courses = fields.Many2one('gestcal.course', string="Courses")
+    attachments = fields.Many2one('gestcal.attachment', string="Attachments")
 
 
 class HrEmployee(models.Model):
@@ -95,4 +96,15 @@ class GestcalCourse(models.Model):
     topics = fields.Char(string='Topics')
     lesson_id = fields.One2many('gestcal.lesson','course_id', string="Lesson") # same of line 48: shouldn't this be One2many? Each course have many lessions date
 
+class GestcalAttachment(models.Model):
+   
+    _name = 'gestcal.attachment'
+    _rec_name = 'name'
+    
+    name = fields.Char(string="Name")
+    description = fields.Char(string="Name")
+    validity = fields.Datetime(string="Validity")
+    type = fields.Char(string="Type")
+    attachment_ids = fields.Many2many('ir.attachment', string='Attachment') 
+    
  
