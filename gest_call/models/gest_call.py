@@ -4,7 +4,8 @@ from odoo import models, fields, api, _
 from datetime import datetime
 import time
 from odoo.exceptions import ValidationError
-
+import logging
+logger=logging.getLogger('_______LOGGER B____________')
 
 # class res_partner(models.Model):
 #     _inherit = 'res.partner'
@@ -30,8 +31,35 @@ class GestcalProject(models.Model):
     partner = fields.Many2one('res.partner', string="Partner")
     deadline = fields.Datetime(string="Deadline")
     courses = fields.Many2one('gestcal.course', string="Courses")
+    attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string="Attachments")
+    attachment_count = fields.Integer(compute='_compute_attachment_count', string="Attachment count")
 
+
+    def _compute_attachment_count(self):
+        for attachment in self: 
+            attachment.attachment_count = len(attachment.attachments_ids)
+            logger.info("___________count________: %s  ",attachment.attachment_count)
+
+    @api.multi
+    def attachment_action_to_open(self):
+        """ This opens the xml view specified in xml_id for the current attachment """
+        self.ensure_one()
+        xml_id = self.env.context.get('xml_id')
+
+        if xml_id:
+            res = self.env['ir.actions.act_window'].for_xml_id('gest_call', xml_id)
+            res.update(
+                context={'default_projects_id': self.id,
+                         },
+                domain=[('projects_id', '=', self.id)]
+            )
+            logger.info("___________res________: %s  ",res)
+            return res
+            
+        
+        
+        return False
 
 class HrEmployee(models.Model):
 
@@ -95,6 +123,31 @@ class GestcalCourse(models.Model):
     total_hours = fields.Float(string="Total Hours")
     topics = fields.Char(string='Topics')
     lesson_id = fields.One2many('gestcal.lesson','course_id', string="Lesson") # same of line 48: shouldn't this be One2many? Each course have many lessions date
+    attachments_ids = fields.One2many('gestcal.attachment', 'courses_id', string='Attachment')
+    attachment_count = fields.Integer(compute='_compute_attachment_count', string="Attachment count")
+
+
+    def _compute_attachment_count(self):
+        for attachment in self:
+            attachment.attachment_count = len(attachment.attachments_ids)
+
+    @api.multi
+    def attachment_action_to_open(self):
+        """ This opens the xml view specified in xml_id for the current attachment """
+        self.ensure_one()
+        xml_id = self.env.context.get('xml_id')
+
+        if xml_id:
+            res = self.env['ir.actions.act_window'].for_xml_id('gest_call', xml_id)
+            res.update(
+                context={'default_courses_id': self.id,
+                         },
+                domain=[('courses_id', '=', self.id)]
+            )
+            return res
+        
+        return False
+
 
 class GestcalAttachment(models.Model):
    
@@ -105,6 +158,12 @@ class GestcalAttachment(models.Model):
     description = fields.Char(string="Name")
     validity = fields.Datetime(string="Validity")
     type = fields.Char(string="Type")
-    attachment_ids = fields.Many2many('ir.attachment', string='Attachment') 
+    attachment_ids = fields.Many2many('ir.attachment', string='Attachment')
+    projects_id = fields.Many2one('gestcal.project', string='projects_id') 
+#     contacts_id = fields.Many2one('res.partner', string='contacts_id')
+    courses_id = fields.Many2one('gestcal.course', string='courses_id')
+#     classrooms_id = fields.Many2one('gestcal.classrooms', string='classrooms_id')
+
+
     
  
