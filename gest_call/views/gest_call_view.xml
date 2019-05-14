@@ -87,13 +87,14 @@
                             <field name="start_time"/>
                             <field name="end_time"/> 
                             <field name="teacher_id" />
+                            <field name="course_id" />
                         </group>
                         <group>
                           <field name="beneficiaries_id" >
 								<tree string="Lesson" editable="bottom">
               						  <field name="name" />
-              						  <field name="gender" />
-              						  <field name="country_id" /> 
+              						  <field name="street" />
+              						  <field name="company_type" /> 
            						 </tree>
            					 </field>
                       </group>

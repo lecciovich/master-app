@@ -7,9 +7,6 @@ from odoo.exceptions import ValidationError
 import logging
 logger=logging.getLogger('_______LOGGER B____________')
 
-# class res_partner(models.Model):
-#     _inherit = 'res.partner'
-
 
 class GestcalProject(models.Model):
  
@@ -81,9 +78,10 @@ class GestcalLesson(models.Model):
                               help="Time according to timeformat of 24 hours")
     end_time = fields.Float('End Time', required=True,
                             help="Time according to timeformat of 24 hours")
-    beneficiaries_id = fields.One2many('hr.employee','lesson_id', string="Beneficiaries") # shouldn't this be One2many? One lession has many beneficiaries (or recipients)
-    teacher_id = fields.Many2one('hr.employee', string="Teacher") # each lession have only ONE teacher
-    course_id = fields.Many2one('gestcal.course', string="course")
+    teacher_id = fields.Many2one('hr.employee', string="Teacher" , required=True) # each lession have only ONE teacher
+    beneficiaries_id = fields.Many2many('res.partner','lesson_id', string="Beneficiaries") # shouldn't this be One2many? One lession has many beneficiaries (or recipients)
+    course_id = fields.Many2one('gestcal.course', string="course", required=True)
+    project_id = fields.Many2one('gestcal.project', string="Project")
 
 class GestcalEquipment(models.Model):
 
@@ -163,6 +161,12 @@ class GestcalAttachment(models.Model):
 #     contacts_id = fields.Many2one('res.partner', string='contacts_id')
     courses_id = fields.Many2one('gestcal.course', string='courses_id')
 #     classrooms_id = fields.Many2one('gestcal.classrooms', string='classrooms_id')
+
+class res_partner(models.Model):
+    _inherit = 'res.partner'
+ 
+    lesson_id = fields.Many2one("gestcal.lesson", 'lesson')
+    
 
 
     
