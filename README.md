@@ -1,6 +1,7 @@
 # Master Module for Calls activity management 
 A new odoo based module for calls project management
 
+<!------
 ------
 ## Object to model:
 **CALENDAR** courses where individual records are composed by:
@@ -50,7 +51,6 @@ Is mandatory to model this with the thought of using import functions: the user 
 + provided lession hours (calculated based on the current date, number of recipients multiplied for the hours of completed lessions);
 + project progress/stage (in the kanban view the user have to see the completion stage of the project);
 
-<!------
 ## Classes
 *records with `**` should point to other object (One2Many, Many2One, Many2Many)*
 
