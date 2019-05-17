@@ -1,0 +1,398 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* gest_call
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-17 17:02+0000\n"
+"PO-Revision-Date: 2019-05-17 17:02+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: gest_call
+#: model:ir.model,name:gest_call.model_gestcal_course
+msgid " Gestcal Course"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_account_request
+msgid "Account Request"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_admittance
+msgid "Admittance"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place_adress
+msgid "Adress"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_agreement
+msgid "Agreement"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_attachment_form
+msgid "Attach a file"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.actions.act_window,name:gest_call.action_gestcal_attachment_view
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_attachment_ids
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_attachments_ids
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_attachments_ids
+#: model:ir.ui.menu,name:gest_call.menu_gestcal_attachment
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_attachment_form
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_attachment_tree
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_course_form
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_project_form
+msgid "Attachment"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_attachment_count
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_attachment_count
+msgid "Attachment count"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_attachments
+msgid "Attachments"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_beneficiaries_id
+msgid "Beneficiaries"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_call
+msgid "Call"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model,name:gest_call.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.actions.act_window,name:gest_call.action_gestcal_course_view
+#: model:ir.ui.menu,name:gest_call.menu_gestcal_course
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_course_form
+msgid "Course"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_courses
+msgid "Courses"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_create_uid
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_create_uid
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_equipment_create_uid
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_create_uid
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place_create_uid
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_create_date
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_create_date
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_equipment_create_date
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_create_date
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place_create_date
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_date
+msgid "Date"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_deadline
+msgid "Deadline"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_display_name
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_display_name
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_equipment_display_name
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_display_name
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place_display_name
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model,name:gest_call.model_hr_employee
+msgid "Employee"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_end_time
+msgid "End Time"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place_equipment
+msgid "Equipment"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_financing_amount
+msgid "Financing Amount"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_found
+msgid "Found"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.ui.menu,name:gest_call.menu_gestcal_root
+msgid "Gest Call"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model,name:gest_call.model_gestcal_equipment
+msgid "Gestcal Course equipment"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model,name:gest_call.model_gestcal_place
+msgid "Gestcal Place"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model,name:gest_call.model_gestcal_lesson
+msgid "Gestcal lesson"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model,name:gest_call.model_gestcal_project
+msgid "Gestcal project"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_id
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_id
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_equipment_id
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_id
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place_id
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_id
+msgid "ID"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_hr_employee_is_teacher
+msgid "Is Teacher"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment___last_update
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course___last_update
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_equipment___last_update
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson___last_update
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place___last_update
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_write_uid
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_write_uid
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_equipment_write_uid
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_write_uid
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place_write_uid
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_write_date
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_write_date
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_equipment_write_date
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_write_date
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place_write_date
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.actions.act_window,name:gest_call.action_gestcal_lesson_view
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_lesson_id
+#: model:ir.ui.menu,name:gest_call.menu_gestcal_lesson
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_course_form
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_lesson_form
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_lesson_tree
+msgid "Lesson"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_place_form
+msgid "Lesson Place"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_course_tree
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_place_tree
+msgid "Lesson place"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_description
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_name
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_name
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_equipment_name
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place_name
+msgid "Name"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_equipment_number
+msgid "Number"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_partner
+msgid "Partner"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.actions.act_window,name:gest_call.action_gestcal_place_view
+#: model:ir.ui.menu,name:gest_call.menu_gestcal_place
+msgid "Place"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_equipment_place_id
+msgid "Placeid"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.actions.act_window,name:gest_call.action_gestcal_project_view
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_project_id
+#: model:ir.ui.menu,name:gest_call.menu_gestcal_project
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_project_form
+#: model:ir.ui.view,arch_db:gest_call.view_gestcal_project_tree
+msgid "Project"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_project_code
+msgid "Project code"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place_referent
+msgid "Referent"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,help:gest_call.field_gestcal_place_equipment
+msgid "Related Course equipment"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_repetition
+msgid "Repetition"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_place_seats
+msgid "Seats"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_start_time
+msgid "Start Time"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_submission
+msgid "Submission"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_teacher_id
+msgid "Teacher"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,help:gest_call.field_gestcal_lesson_end_time
+#: model:ir.model.fields,help:gest_call.field_gestcal_lesson_start_time
+#: model:ir.model.fields,help:gest_call.field_gestcal_place_referent
+msgid "Time according to timeformat of 24 hours"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_title
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_title
+msgid "Title"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_topics
+msgid "Topics"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_course_total_hours
+msgid "Total Hours"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_project_total_lesson_hours
+msgid "Total Lesson Hours"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_type
+msgid "Type"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_validity
+msgid "Validity"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson_course_id
+msgid "course"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_courses_id
+msgid "courses_id"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model,name:gest_call.model_gestcal_attachment
+msgid "gestcal.attachment"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_hr_employee_lesson_id
+#: model:ir.model.fields,field_description:gest_call.field_res_partner_lesson_id
+#: model:ir.model.fields,field_description:gest_call.field_res_users_lesson_id
+msgid "lesson"
+msgstr ""
+
+#. module: gest_call
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment_projects_id
+msgid "projects_id"
+msgstr ""
+
