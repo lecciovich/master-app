@@ -81,13 +81,19 @@
             <field name="arch" type="xml">
                 <form string="Lesson">
                     <sheet>
-                        <group col="4" colspan="4">
-                         <field name="title"/>
+                        <group>
+                        
+                           <group>
+                            <field name="title"/>
+                            <field name="project_id" />
                             <field name="date"/>
-                            <field name="start_time"/>
-                            <field name="end_time"/> 
-                            <field name="teacher_id" />
-                            <field name="course_id" />
+		                    </group>
+		                        <group>
+		                           <field name="start_time" />
+		                            <field name="end_time" /> 
+		                            <field name="teacher_id" />
+		                            <field name="course_id" />
+		                         </group>     
                         </group>
                         <group>
                           <field name="beneficiaries_id" >
@@ -108,9 +114,10 @@
             <field name="model">gestcal.lesson</field>
             <field name="arch" type="xml">
                 <tree string="Lesson">
+             			    <field name="title"/>
                             <field name="date"/>
-                            <field name="start_time"/>
-                            <field name="end_time"/> 
+                            <field name="start_time" widget='float_time'/>
+                            <field name="end_time" widget='float_time'/> 
                             <field name="teacher_id" />
                 </tree>
             </field>
