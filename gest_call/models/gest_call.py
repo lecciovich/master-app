@@ -125,8 +125,6 @@ class GestcalLesson(models.Model):
             logger.info("___________check_date________: %s  ",self.start_time > self.end_time)
             raise ValidationError (_("Start time must be greater than end time !")) 
     
-
-
 class GestcalEquipment(models.Model):
 
     _name = 'gestcal.equipment'
