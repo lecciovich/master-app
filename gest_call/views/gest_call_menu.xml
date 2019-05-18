@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+       
+        <!-- Menu items -->
+	<menuitem id="menu_gestcal_root" name="Gest Call" sequence="1" />
+	
+	<menuitem id="menu_gestcal_project" name="Project" parent="menu_gestcal_root"
+		action="action_gestcal_project_view" sequence="1" />
+		
+	<menuitem id="menu_gestcal_course" name="Course" parent="menu_gestcal_root"
+		action="action_gestcal_course_view" sequence="2" />
+		
+	<menuitem id="menu_gestcal_lesson" name="Lesson" parent="menu_gestcal_root"
+		action="action_gestcal_lesson_view" sequence="3" />
+		
+	<menuitem id="menu_gestcal_place" name="Place" parent="menu_gestcal_root"
+		action="action_gestcal_place_view" sequence="4" />
+		
+	<menuitem id="menu_gestcal_attachment" name="Attachment"
+		parent="menu_gestcal_root" action="action_gestcal_attachment_view"
+		sequence="5" />
+
+
+	<menuitem id="menu_gestcal_contact" name="Contact" parent="menu_gestcal_root"
+		sequence="6" />
+	<menuitem id="menu_gestcal_contact_students" name="Students"
+		parent="menu_gestcal_contact" action="gestcall_kanban_students_action"
+		sequence="1" />
+   <menuitem id="menu_gestcal_contact_teachers" name="Teachers"
+		parent="menu_gestcal_contact" action="gestcall_kanban_teacher_action"
+		sequence="2" />
+   <menuitem id="menu_gestcal_contact_operators" name="Operator"
+		parent="menu_gestcal_contact" action="gestcall_kanban_operator_action"
+		sequence="3" />
+
+</odoo>

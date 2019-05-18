@@ -38,13 +38,30 @@
                         </group>
                         
                           <group col="4" colspan="4"> 
-                            <field name="account_request"/>
-                            <field name="partner"/>
+                            <field name="account_request"/> 
                             <field name="deadline"/>
-                            <field name="courses" />
                            <!--  <field name="attachments"/> -->
                         </group>
-                        
+               <notebook colspan="4">
+                    <page string="Partner"> 
+                         <field name="partner" >
+								<tree string="Partner" editable="bottom">
+              						  <field name="name" />
+              						  <field name="street" />
+              						  <field name="company_type" /> 
+           						 </tree>
+           					 </field>
+                   </page>
+                   <page string="Courses"> 
+                         <field name="courses" >
+								<tree string="Partner" editable="bottom">
+              						  <field name="name" />
+              						  <field name="total_hours" /> 
+           						 </tree>
+           					 </field>
+                   </page>
+                   
+                </notebook>         
                     </sheet>
                 </form>
             </field>
@@ -63,13 +80,83 @@
                 </tree>
             </field>
         </record>
- 
+        
+      <record model="ir.ui.view" id="view_gestcal_project_kanban">
+            <field name="name">gestcal.project.kanban</field>
+            <field name="model">gestcal.project</field>
+            <field name="arch" type="xml">
+            <kanban class="oe_background_grey">
+
+                 <field name ="title"/>
+                 <field name="project_code" />
+                 <field name="found" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click" >
+                             
+                                <div class="oe_kanban_details">
+										<ul>
+											<li style="display:inherit;">
+												<strong style="font-size:20px;">
+													<field t-if="record.title.raw_value" name="title" />
+												</strong>
+											</li>
+											<li style="display:inherit;">
+												<strong style="font-size:15px;">
+													<field t-if="record.project_code.raw_value" name="project_code" />
+												</strong>
+											</li>
+											<li style="display:inherit;font-size:15px;">
+												<div t-if="record.found.raw_value">
+													<field name="found" />
+												</div>
+											</li>
+										
+										
+										</ul>
+                                </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+            </field>
+            </record>   
+            
+  <!--      <record model="ir.ui.view" id="view_gestcal_project_kanban">
+            <field name="name">gestcal.project.kanban</field>
+            <field name="model">gestcal.project</field>
+            <field name="arch" type="xml">
+                 <kanban>
+                <field name = "title"/>
+            <templates>
+                <t t-name="kanban-box">
+                 <div class="oe_kanban_global_click" >
+                    <div>
+                        <ul>
+                            <li t-if="record.title.raw_value">Project Title: <field name="title"/></li>
+                        </ul>
+                    </div>
+                    </div>
+                </t>
+            </templates>
+            </kanban>
+            </field>
+        </record> -->
+        
         <!-- Actions Of Form & Tree Views Of project Information -->
         <record id="action_gestcal_project_view" model="ir.actions.act_window">
             <field name="name">Project</field>
             <field name="res_model">gestcal.project</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
+                 <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new Project
+              </p> 
+              <p>
+                Project view Kanban description ....
+              </p>
+            </field>
         </record>
 
 
@@ -284,11 +371,5 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>         
-        <!-- Menu items -->
-        <menuitem id="menu_gestcal_root" name="Gest Call" sequence="1"/>
-        <menuitem id="menu_gestcal_project" name="Project" parent="menu_gestcal_root" action="action_gestcal_project_view" sequence="1"/>
-        <menuitem id="menu_gestcal_course" name="Course" parent="menu_gestcal_root" action="action_gestcal_course_view" sequence="2"/>
-        <menuitem id="menu_gestcal_lesson" name="Lesson" parent="menu_gestcal_root" action="action_gestcal_lesson_view" sequence="3"/>
-        <menuitem id="menu_gestcal_place" name="Place" parent="menu_gestcal_root" action="action_gestcal_place_view" sequence="4"/>
-         <menuitem id="menu_gestcal_attachment" name="Attachment" parent="menu_gestcal_root" action="action_gestcal_attachment_view" sequence="5"/>
+  
 </odoo>
