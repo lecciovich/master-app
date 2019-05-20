@@ -12,7 +12,10 @@
     'images': ['static/description/SchoolTimetable.png'],
     'depends': ['base','calendar','hr','contacts'],
     'data': ['security/ir.model.access.csv',
-             'views/gest_call_view.xml'], 
+             'views/gest_call_view.xml',
+             'views/res_partner.xml',
+             'views/gest_call_menu.xml',
+             ], 
     'installable': True,
     'application': True
 }
