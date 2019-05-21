@@ -20,6 +20,7 @@ class ResPartner(models.Model):
 class GestcalProject(models.Model):
  
     _name = 'gestcal.project'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _rec_name = 'title'
     _description = 'Gestcal project'
     
@@ -30,23 +31,43 @@ class GestcalProject(models.Model):
     total_lesson_hours = fields.Float('Total Lesson Hours') # TODO later on there have to be some non-blocking check that verifies that this value
                                                             # is equal to the sum of the hours of all courses related to the project
     call = fields.Char(string='Call')
-    submission = fields.Datetime(string='Submission')
-    admittance = fields.Datetime(string='Admittance')
-    agreement = fields.Datetime(string='Agreement')
-    account_request = fields.Datetime(string='Account Request')
+    submission = fields.Date(string='Submission')
+    admittance = fields.Date(string='Admittance')
+    agreement = fields.Date(string='Agreement')
+    account_request = fields.Date(string='Account Request')
     partner = fields.Many2many('res.partner','projects_ids', string='Partner')
     deadline = fields.Datetime(string='Deadline')
     courses = fields.Many2many('gestcal.course','courses_ids', string='Courses')
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('submitted', 'Submitted'),
+        ('active', 'Active'), 
+        ('completed','Completed'), 
+        ('accounted','Sent To Financial Director'), 
+        ('closed','Closed')
+        
+        ], string='Status', index=True, readonly=True, copy=False, default='draft', track_visibility='onchange')
 
+#     @api.multi
+#     def _track_subtype(self, init_values):
+#         self.ensure_one() 
+#         if 'state' in init_values:
+#             return 'gest_call.mt_state_change'  # Full external id
+#         return super(GestcalProject, self)._track_subtype(init_values)
 
     def _compute_attachment_count(self):
         for attachment in self: 
             attachment.attachment_count = len(attachment.attachments_ids)
             logger.info('___________count________: %s  ',attachment.attachment_count)
-
+            
+    @api.constrains('project_code','title')
+    def _check_name(self):
+        if self.title ==  self.project_code:
+            raise ValidationError(_('Two project Title and Project code can not be the same'))
+ 
     @api.multi
     def attachment_action_to_open(self):
         ''' This opens the xml view specified in xml_id for the current attachment '''
@@ -63,9 +84,29 @@ class GestcalProject(models.Model):
             logger.info('___________res________: %s  ',res)
             return res
             
-        
-        
         return False
+
+    @api.multi
+    def submitted_project(self):
+        return self.write({'state': 'submitted'})
+
+    @api.multi
+    def active_project(self):
+        return self.write({'state': 'active'})
+
+    @api.multi
+    def completed_project(self):
+        return self.write({'state': 'completed'})
+
+    @api.multi
+    def accounted_project(self):
+        return self.write({'state': 'accounted'})
+
+    @api.multi
+    def closed_project(self):
+        return self.write({'state': 'closed'})
+
+
 
 class HrEmployee(models.Model):
 
@@ -81,7 +122,7 @@ class GestcalLesson(models.Model):
     _description = 'Gestcal lesson'
 #     _inherit = 'calendar.event'
 
-    title = fields.Char(string='Title', required=True)
+    title = fields.Char(string='Title')
     date = fields.Date(string='Date', required=True)
     start_time = fields.Float('Start Time', required=True,
                               help='Time according to timeformat of 24 hours')
@@ -91,7 +132,7 @@ class GestcalLesson(models.Model):
     beneficiaries_id = fields.Many2many('res.partner','lesson_id', string='Beneficiaries') # shouldn't this be One2many? One lession has many beneficiaries (or recipients)
     course_id = fields.Many2one('gestcal.course', string='course', required=True)
     project_id = fields.Many2one('gestcal.project', string='Project')
-
+    place = fields.Many2one('gestcal.place', string='Place')
 
 #     @api.one 
 #     @api.constrains('date','start_time','end_time','teacher_id')
@@ -153,6 +194,12 @@ class GestcalPlace(models.Model):
     
     name = fields.Char(string='Name')
     adress = fields.Char(string='Adress') 
+    street = fields.Char()
+    street2 = fields.Char()
+    zip = fields.Char(change_default=True)
+    city = fields.Char()
+    state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict')
+    country_id = fields.Many2one('res.country', string='Country', ondelete='restrict')
     seats = fields.Integer (string='Seats')
     equipment = fields.One2many('gestcal.equipment','place_id' ,string='Equipment',
                               help='Related Course equipment') 
