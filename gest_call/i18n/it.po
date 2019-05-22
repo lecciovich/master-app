@@ -18,7 +18,7 @@ msgstr ""
 #. module: gest_call
 #: model:ir.model,name:gest_call.model_gestcal_course
 msgid " Gestcal Course"
-msgstr ""
+msgstr "Corsi Gestcal"
 
 #. module: gest_call
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_project_form
@@ -28,12 +28,12 @@ msgstr "Conto"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__account_request
 msgid "Account Request"
-msgstr ""
+msgstr "Richiesta Conto"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__message_needaction
 msgid "Action Needed"
-msgstr "Azione Necessaria"
+msgstr "Azione Richiesta"
 
 #. module: gest_call
 #: selection:gestcal.project,state:0
@@ -54,17 +54,17 @@ msgstr "Stato delle Attività"
 #. module: gest_call
 #: model_terms:ir.actions.act_window,help:gest_call.gestcall_kanban_operator_action
 msgid "Add Operator"
-msgstr ""
+msgstr "Aggiungi Operatore"
 
 #. module: gest_call
 #: model_terms:ir.actions.act_window,help:gest_call.gestcall_kanban_students_action
 msgid "Add Students"
-msgstr ""
+msgstr "Aggiungi Studente"
 
 #. module: gest_call
 #: model_terms:ir.actions.act_window,help:gest_call.gestcall_kanban_teacher_action
 msgid "Add Teacher"
-msgstr ""
+msgstr "Aggiungi Docente"
 
 #. module: gest_call
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_place_form
@@ -74,17 +74,17 @@ msgstr "Indirizzo"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__admittance
 msgid "Admittance"
-msgstr ""
+msgstr "Ammissione"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_place__adress
 msgid "Adress"
-msgstr ""
+msgstr "Indirizzo"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__agreement
 msgid "Agreement"
-msgstr ""
+msgstr "Accordo"
 
 #. module: gest_call
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_attachment_form
@@ -106,13 +106,13 @@ msgstr "Allegato"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__message_attachment_count
 msgid "Attachment Count"
-msgstr "Numero di allegati"
+msgstr "Numero allegati"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_course__attachment_count
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__attachment_count
 msgid "Attachment count"
-msgstr ""
+msgstr "Numero allegati"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__attachments
@@ -122,12 +122,12 @@ msgstr "Allegati"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson__beneficiaries_id
 msgid "Beneficiaries"
-msgstr ""
+msgstr "Destinatari"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__call
 msgid "Call"
-msgstr ""
+msgstr "Bando"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_place__city
@@ -139,17 +139,17 @@ msgstr "Città"
 #: selection:gestcal.project,state:0
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_project_form
 msgid "Closed"
-msgstr ""
+msgstr "Chiuso"
 
 #. module: gest_call
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_project_form
 msgid "Complet"
-msgstr ""
+msgstr "Completato"
 
 #. module: gest_call
 #: selection:gestcal.project,state:0
 msgid "Completed"
-msgstr ""
+msgstr "Completato"
 
 #. module: gest_call
 #: model:ir.model,name:gest_call.model_res_partner
@@ -168,18 +168,18 @@ msgstr "Nazione"
 #: model:ir.ui.menu,name:gest_call.menu_gestcal_course
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_course_form
 msgid "Course"
-msgstr ""
+msgstr "Corso"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__courses
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_project_form
 msgid "Courses"
-msgstr ""
+msgstr "Corsi"
 
 #. module: gest_call
 #: model_terms:ir.actions.act_window,help:gest_call.action_gestcal_project_view
 msgid "Create a new Project"
-msgstr ""
+msgstr "Crea un nuovo Progetto"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment__create_uid
@@ -209,7 +209,7 @@ msgstr "Data"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__deadline
 msgid "Deadline"
-msgstr ""
+msgstr "Scadenza"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment__display_name
@@ -224,7 +224,7 @@ msgstr "Nome visualizzato"
 #. module: gest_call
 #: selection:gestcal.project,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Bozza"
 
 #. module: gest_call
 #: model:ir.model,name:gest_call.model_hr_employee
@@ -234,22 +234,22 @@ msgstr "Impiegato"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson__end_time
 msgid "End Time"
-msgstr ""
+msgstr "Orario fine"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_place__equipment
 msgid "Equipment"
-msgstr ""
+msgstr "Dotazioni"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__financing_amount
 msgid "Financing Amount"
-msgstr ""
+msgstr "Ammontare del Finanziamento"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Followers"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__message_channel_ids
@@ -264,33 +264,33 @@ msgstr "Followers (Partner)"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__found
 msgid "Found"
-msgstr ""
+msgstr "Fondo"
 
 #. module: gest_call
 #: model:ir.ui.menu,name:gest_call.menu_gestcal_root
 #: model_terms:ir.ui.view,arch_db:gest_call.view_partner_form
 msgid "Gest Call"
-msgstr ""
+msgstr "Gestione Bandi"
 
 #. module: gest_call
 #: model:ir.model,name:gest_call.model_gestcal_equipment
 msgid "Gestcal Course equipment"
-msgstr ""
+msgstr "Gestcal Dotazione per Corsi"
 
 #. module: gest_call
 #: model:ir.model,name:gest_call.model_gestcal_place
 msgid "Gestcal Place"
-msgstr ""
+msgstr "Gestcal Aule"
 
 #. module: gest_call
 #: model:ir.model,name:gest_call.model_gestcal_lesson
 msgid "Gestcal lesson"
-msgstr ""
+msgstr "Gestcal Lezioni"
 
 #. module: gest_call
 #: model:ir.model,name:gest_call.model_gestcal_project
 msgid "Gestcal project"
-msgstr ""
+msgstr "Gestcal Progetto"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment__id
@@ -300,7 +300,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_place__id
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: gest_call
 #: model:ir.model.fields,help:gest_call.field_gestcal_project__message_unread
@@ -315,7 +315,7 @@ msgstr "Se selezionato, nuovi messaggi richiedono la tua attenzione"
 #. module: gest_call
 #: model:ir.model.fields,help:gest_call.field_gestcal_project__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "Se attivo, alcuni messaggi presentano un errore di consegna. "
+msgstr "Se attivo, alcuni messaggi presentano un errore di consegna."
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__message_is_follower
@@ -325,22 +325,22 @@ msgstr "È Follower"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_hr_employee__is_teacher
 msgid "Is Teacher"
-msgstr ""
+msgstr "È Docente"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_res_partner__is_operator
 msgid "Is a Operator?"
-msgstr ""
+msgstr "È Operatore?"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_res_partner__is_student
 msgid "Is a Student?"
-msgstr ""
+msgstr "È Studente?"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_res_partner__is_teacher
 msgid "Is a Teacher?"
-msgstr ""
+msgstr "È Docente?"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment____last_update
@@ -380,23 +380,23 @@ msgstr "Ultima modifica il"
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_lesson_form
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_lesson_tree
 msgid "Lesson"
-msgstr ""
+msgstr "Lezione"
 
 #. module: gest_call
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_place_form
 msgid "Lesson Place"
-msgstr ""
+msgstr "Aula Lezione"
 
 #. module: gest_call
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_course_tree
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_place_tree
 msgid "Lesson place"
-msgstr ""
+msgstr "Aula lezione"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__message_main_attachment_id
 msgid "Main Attachment"
-msgstr "Allegato principale"
+msgstr "Allegato Principale"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__message_has_error
@@ -466,35 +466,35 @@ msgstr "Numero di messaggi non letti"
 #: model:ir.actions.act_window,name:gest_call.gestcall_kanban_operator_action
 #: model:ir.ui.menu,name:gest_call.menu_gestcal_contact_operators
 msgid "Operator"
-msgstr ""
+msgstr "Operatore"
 
 #. module: gest_call
 #: selection:gestcal.project,activity_state:0
 msgid "Overdue"
-msgstr ""
+msgstr "Scaduto"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__partner
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_project_form
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: gest_call
 #: model:ir.actions.act_window,name:gest_call.action_gestcal_place_view
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson__place
 #: model:ir.ui.menu,name:gest_call.menu_gestcal_place
 msgid "Place"
-msgstr ""
+msgstr "Aula"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_equipment__place_id
 msgid "Placeid"
-msgstr ""
+msgstr "Aula id"
 
 #. module: gest_call
 #: selection:gestcal.project,activity_state:0
 msgid "Planned"
-msgstr ""
+msgstr "Pianificato"
 
 #. module: gest_call
 #: model:ir.actions.act_window,name:gest_call.action_gestcal_project_view
@@ -504,12 +504,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_project_tree
 #: model_terms:ir.ui.view,arch_db:gest_call.view_project_search_form
 msgid "Project"
-msgstr ""
+msgstr "Progetto"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__project_code
 msgid "Project code"
-msgstr ""
+msgstr "Codice progetto"
 
 #. module: gest_call
 #: model_terms:ir.actions.act_window,help:gest_call.action_gestcal_project_view
@@ -519,17 +519,17 @@ msgstr ""
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_place__referent
 msgid "Referent"
-msgstr ""
+msgstr "Referente"
 
 #. module: gest_call
 #: model:ir.model.fields,help:gest_call.field_gestcal_place__equipment
 msgid "Related Course equipment"
-msgstr ""
+msgstr "Dotazione relativa al Corso"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_course__repetition
 msgid "Repetition"
-msgstr ""
+msgstr "Edizione"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__activity_user_id
@@ -539,23 +539,23 @@ msgstr "Utente Responsabile"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_place__seats
 msgid "Seats"
-msgstr ""
+msgstr "Posti"
 
 #. module: gest_call
 #: selection:gestcal.project,state:0
 msgid "Sent To Financial Director"
-msgstr ""
+msgstr "Invia al Direttore Finanziario"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson__start_time
 msgid "Start Time"
-msgstr ""
+msgstr "Ora inizio"
 
 #. module: gest_call
 #: code:addons/gest_call/models/gest_call.py:176
 #, python-format
 msgid "Start time must be greater than end time !"
-msgstr ""
+msgstr "L'orario d'inizio deve essere maggiore dell'orario di fine"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_place__state_id
@@ -582,33 +582,33 @@ msgstr "Stato basato sulle attività:\n"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_place__street
 msgid "Street"
-msgstr "Strada/Via"
+msgstr "Via"
 
 #. module: gest_call
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_place_form
 msgid "Street 2..."
-msgstr "Strada/Via 2…"
+msgstr "Via 2..."
 
 #. module: gest_call
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_place_form
 msgid "Street..."
-msgstr "Strada/Via…"
+msgstr "Via..."
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_place__street2
 msgid "Street2"
-msgstr "Strada/Via2"
+msgstr "Via2"
 
 #. module: gest_call
 #: model:ir.actions.act_window,name:gest_call.gestcall_kanban_students_action
 #: model:ir.ui.menu,name:gest_call.menu_gestcal_contact_students
 msgid "Students"
-msgstr ""
+msgstr "Studenti"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__submission
 msgid "Submission"
-msgstr ""
+msgstr "Presentazione"
 
 #. module: gest_call
 #: model_terms:ir.ui.view,arch_db:gest_call.view_gestcal_project_form
@@ -618,31 +618,31 @@ msgstr "Sottoscrivi"
 #. module: gest_call
 #: selection:gestcal.project,state:0
 msgid "Submitted"
-msgstr ""
+msgstr "Presentato"
 
 #. module: gest_call
 #: model:ir.actions.act_window,name:gest_call.gestcall_kanban_teacher_action
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson__teacher_id
 msgid "Teacher"
-msgstr ""
+msgstr "Docente"
 
 #. module: gest_call
 #: model:ir.ui.menu,name:gest_call.menu_gestcal_contact_teachers
 msgid "Teachers"
-msgstr ""
+msgstr "Docenti"
 
 #. module: gest_call
 #: code:addons/gest_call/models/gest_call.py:170
 #, python-format
 msgid "This date already exists for the lesson"
-msgstr ""
+msgstr "Esiste già questa data per la lezione"
 
 #. module: gest_call
 #: model:ir.model.fields,help:gest_call.field_gestcal_lesson__end_time
 #: model:ir.model.fields,help:gest_call.field_gestcal_lesson__start_time
 #: model:ir.model.fields,help:gest_call.field_gestcal_place__referent
 msgid "Time according to timeformat of 24 hours"
-msgstr ""
+msgstr "Orario secondo il formato 24 ore"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson__title
@@ -653,28 +653,28 @@ msgstr "Titolo"
 #. module: gest_call
 #: selection:gestcal.project,activity_state:0
 msgid "Today"
-msgstr ""
+msgstr "Oggi"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_course__topics
 msgid "Topics"
-msgstr ""
+msgstr "Argomenti"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_course__total_hours
 msgid "Total Hours"
-msgstr ""
+msgstr "Ore totali"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__total_lesson_hours
 msgid "Total Lesson Hours"
-msgstr ""
+msgstr "Ore Totali Lezione"
 
 #. module: gest_call
 #: code:addons/gest_call/models/gest_call.py:69
 #, python-format
 msgid "Two project Title and Project code can not be the same"
-msgstr ""
+msgstr "Due Progetti non possono avere lo stesso titolo e codice"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment__type
@@ -694,7 +694,7 @@ msgstr "Contatore di messaggi non letti"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment__validity
 msgid "Validity"
-msgstr ""
+msgstr "Validità"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_project__website_message_ids
@@ -719,12 +719,12 @@ msgstr "CAP"
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson__course_id
 msgid "course"
-msgstr ""
+msgstr "corso"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_course__courses_ids
 msgid "courses"
-msgstr ""
+msgstr "corsi"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment__courses_id
@@ -740,12 +740,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:gest_call.field_hr_employee__lesson_id
 #: model:ir.model.fields,field_description:gest_call.field_res_partner__lesson_id
 msgid "lesson"
-msgstr ""
+msgstr "lezione"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_res_partner__projects_ids
 msgid "project"
-msgstr ""
+msgstr "progetto"
 
 #. module: gest_call
 #: model:ir.model.fields,field_description:gest_call.field_gestcal_attachment__projects_id
