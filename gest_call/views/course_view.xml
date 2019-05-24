@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 
+<!-- COURSE -->  
+<!-- Form View Of  place Information -->  
+     <record id="view_gestcal_course_form" model="ir.ui.view">
+            <field name="name">gestcal.course.form</field>
+            <field name="model">gestcal.course</field>
+            <field name="arch" type="xml">
+                <form string="Course">
+                    <sheet>
+                 <div class="oe_button_box" name="button_box">
+                       
+                         <button name="attachment_action_to_open"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-paperclip" 
+                            context="{'xml_id':'action_gestcal_attachment_view'}">
+                            <field string="Attachment" name="attachment_count" widget="statinfo" options="{'label_field': 'label_tasks'}"/>
+						</button>
+		           </div>
+                        <group col="4" colspan="4">
+                 
+							<field name="name" />
+							<field name="repetition" />
+							<field name="total_hours" />
+							<field name="topics" />
+							
+                        </group>
+                        <group>
+							 <field name="lesson_id"  mode="tree">
+							<!-- 		<form>
+										<group>
+											<group>
+												<field name="title" />
+												<field name="project_id" />
+												<field name="date" />
+											</group>
+											<group>
+												<field name="start_time" />
+												<field name="end_time" />
+												<field name="teacher_id" />
+												<field name="course_id" />
+											</group>
+										</group>
+										<group>
+											<field name="beneficiaries_id">
+												<tree string="Lesson" editable="bottom">
+													<field name="name" />
+													<field name="street" />
+													<field name="company_type" />
+												</tree>
+											</field>
+										</group>
+									</form>
+								 -->
+									<tree string="Lesson" create="false" delete="false">
+										<field name="title" />
+										<field name="date" />
+										<field name="start_time" />
+										<field name="end_time" />
+									</tree>
+								 
+								</field>
+                        </group>
+                      
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of course Information -->
+        <record id="view_gestcal_course_tree" model="ir.ui.view">
+            <field name="name">gestcal.course.tree</field>
+            <field name="model">gestcal.course</field>
+            <field name="arch" type="xml">
+                <tree string="Lesson place">
+                            <field name="name" />
+							<field name="repetition" />
+							<field name="total_hours" />
+							<field name="topics" />
+							<field name="lesson_id" />
+                </tree>
+            </field>
+        </record>
+ 
+        <!-- Actions Of Form & Tree Views Of course Information -->
+        <record id="action_gestcal_course_view" model="ir.actions.act_window">
+            <field name="name">Course</field>
+            <field name="res_model">gestcal.course</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>             
+</odoo>

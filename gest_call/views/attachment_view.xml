@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 
+<!-- ATTACHMENT -->  
+<!-- Form View Of attachment Information -->  
+     <record id="view_gestcal_attachment_form" model="ir.ui.view">
+            <field name="name">gestcal.attachment.form</field>
+            <field name="model">gestcal.attachment</field>
+            <field name="arch" type="xml">
+                <form string="Attachment">
+                    <sheet>
+                        <group col="4" colspan="4">
+                 
+							<field name="name" />
+							<field name="description" />
+							<field name="validity" />
+							<field name="type" />
+							<field name="attachment_ids" widget="many2many_binary" string="Attach a file"/>
+						 
+                        </group>
+                      
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of attachment Information -->
+        <record id="view_gestcal_attachment_tree" model="ir.ui.view">
+            <field name="name">gestcal.attachment.tree</field>
+            <field name="model">gestcal.attachment</field>
+            <field name="arch" type="xml">
+                <tree string="Attachment">
+                       		<field name="name" />
+							<field name="description" />
+							<field name="validity" />
+							<field name="type" />
+                </tree>
+            </field>
+        </record>
+ 
+        <!-- Actions Of Form & Tree Views Of attachment Information -->
+        <record id="action_gestcal_attachment_view" model="ir.actions.act_window">
+            <field name="name">Attachment</field>
+            <field name="res_model">gestcal.attachment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>         
+  
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 
+<!-- LESSON -->
+        <!-- Form View Of  lesson Information -->
+        <record id="view_gestcal_lesson_form" model="ir.ui.view">
+            <field name="name">gestcal.lesson.form</field>
+            <field name="model">gestcal.lesson</field>
+            <field name="arch" type="xml">
+                <form string="Lesson">
+                    <sheet>
+                        <group>
+                        
+                           <group>
+                            <field name="title"/>
+                            <field name="project_id" />
+                            <field name="date"/>
+		                    </group>
+		                        <group>
+		                           <field name="start_time" />
+		                            <field name="end_time" /> 
+		                            <field name="teacher_id"  domain="[('is_teacher','=',True)]"/>
+		                            <field name="course_id" />
+		                            <field name="place" />
+		                         </group>     
+                        </group>
+                        <group>
+                          <field name="beneficiaries_id" domain="[('is_student','=',True)]" context="{'form_view_ref' : 'gest_call.gestcall_kanban_students_action_form', 'default_is_student': 1}" >
+								<tree string="Lesson" editable="bottom">
+              						  <field name="name" />
+              						  <field name="street" />
+              						  <field name="company_type" /> 
+           						 </tree>
+           					 </field>
+                      </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Tree View Of lesson Information -->
+        <record id="view_gestcal_lesson_tree" model="ir.ui.view">
+            <field name="name">gestcal.lesson.tree</field>
+            <field name="model">gestcal.lesson</field>
+            <field name="arch" type="xml">
+                <tree string="Lesson">
+             			   <!--  <field name="title"/> -->
+                            <field name="date"/>
+                            <field name="start_time" widget='float_time'/>
+                            <field name="end_time" widget='float_time'/> 
+                            <field name="teacher_id" />
+                </tree>
+            </field>
+        </record>
+ 
+        <!-- Actions Of Form & Tree Views Of lesson Information -->
+        <record id="action_gestcal_lesson_view" model="ir.actions.act_window">
+            <field name="name">Lesson</field>
+            <field name="res_model">gestcal.lesson</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+</odoo>
+
