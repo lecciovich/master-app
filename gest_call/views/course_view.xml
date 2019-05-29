@@ -44,7 +44,7 @@
 											</group>
 										</group>
 										<group>
-											<field name="beneficiaries_id">
+											<field name="recipients_id">
 												<tree string="Lesson" editable="bottom">
 													<field name="name" />
 													<field name="street" />

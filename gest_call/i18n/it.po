@@ -120,8 +120,8 @@ msgid "Attachments"
 msgstr "Allegati"
 
 #. module: gest_call
-#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson__beneficiaries_id
-msgid "Beneficiaries"
+#: model:ir.model.fields,field_description:gest_call.field_gestcal_lesson__recipients_id
+msgid "Recipients"
 msgstr "Destinatari"
 
 #. module: gest_call

@@ -21,7 +21,7 @@ class GestcalLesson(models.Model):
     end_time = fields.Float('End Time', required=True,
                             help='Time according to timeformat of 24 hours')
     teacher_id = fields.Many2one('hr.employee', string='Teacher' , required=True) # each lession have only ONE teacher
-    beneficiaries_id = fields.Many2many('res.partner','lesson_id', string='Beneficiaries') # shouldn't this be One2many? One lession has many beneficiaries (or recipients)
+    recipients_id = fields.Many2many('res.partner','lesson_id', string='Recipients') 
     course_id = fields.Many2one('gestcal.course', string='course')
     project_id = fields.Many2one('gestcal.project', string='Project')
     place = fields.Many2one('gestcal.place', string='Place')
