@@ -12,7 +12,7 @@ class GestcalAttachment(models.Model):
     _rec_name = 'name'
     
     name = fields.Char(string='Name')
-    description = fields.Char(string='Name')
+    description = fields.Char(string='Description')
     validity = fields.Datetime(string='Validity')
     type = fields.Char(string='Type')
     attachment_ids = fields.Many2many('ir.attachment', string='Attachment')
