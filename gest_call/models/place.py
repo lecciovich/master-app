@@ -19,7 +19,7 @@ class GestcalPlace(models.Model):
     street2 = fields.Char()
     zip = fields.Char(change_default=True)
     city = fields.Char()
-    state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict')
+    state_id = fields.Many2one('res.country.state', string='State', ondelete='restrict')
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict')
     seats = fields.Integer (string='Seats')
     equipment = fields.One2many('gestcal.equipment','place_id' ,string='Equipment',
