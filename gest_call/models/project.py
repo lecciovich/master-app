@@ -15,10 +15,9 @@ class GestcalProject(models.Model):
     
     title = fields.Char(string='Title', required=True)
     project_code = fields.Char(string='Project code' ,required=True)
-    found = fields.Float('Found', required=True)                        # what's the difference between this an financing amount?
-    financing_amount = fields.Float('Financing Amount', required=True)  # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    total_lesson_hours = fields.Float('Total Lesson Hours') # TODO later on there have to be some non-blocking check that verifies that this value
-                                                            # is equal to the sum of the hours of all courses related to the project
+    # found = fields.Float('Found', required=True)
+    financing_amount = fields.Float('Financing Amount', required=True)
+    total_lesson_hours = fields.Float('Total Lesson Hours')
     call = fields.Char(string='Call')
     submission = fields.Date(string='Submission')
     admittance = fields.Date(string='Admittance')
