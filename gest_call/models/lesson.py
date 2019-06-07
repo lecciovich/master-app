@@ -16,9 +16,9 @@ class GestcalLesson(models.Model):
 
     title = fields.Char(string='Title')
     date = fields.Date(string='Date', required=True)
-    start_time = fields.Float('Start Time', required=True,
+    start_time = fields.Float(string='Start Time', required=True,
                               help='Time according to timeformat of 24 hours')
-    end_time = fields.Float('End Time', required=True,
+    end_time = fields.Float(string='End Time', required=True,
                             help='Time according to timeformat of 24 hours')
     teacher_id = fields.Many2one('hr.employee', string='Teacher' , required=True) # each lession have only ONE teacher
     recipients_id = fields.Many2many('res.partner','lesson_id', string='Recipients') 
