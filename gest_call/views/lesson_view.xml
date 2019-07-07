@@ -11,8 +11,7 @@
                     <sheet>
                         <group>
                         
-                           <group>
-                            <field name="title"/>
+                           <group> 
                             <field name="project_id" />
                             <field name="date"/>
 		                    </group>
@@ -42,8 +41,7 @@
             <field name="name">gestcal.lesson.tree</field>
             <field name="model">gestcal.lesson</field>
             <field name="arch" type="xml">
-                <tree string="Lesson">
-             			   <!--  <field name="title"/> -->
+                <tree string="Lesson"> 
                             <field name="date"/>
                             <field name="start_time" widget='float_time'/>
                             <field name="end_time" widget='float_time'/> 

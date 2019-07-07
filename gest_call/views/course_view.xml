@@ -8,6 +8,11 @@
             <field name="model">gestcal.course</field>
             <field name="arch" type="xml">
                 <form string="Course">
+                <header>
+                <button name="get_teachers" type="object" class="oe_stat_button" icon="fa-users">
+                                Teachers
+                            </button>
+                </header>
                     <sheet>
                  <div class="oe_button_box" name="button_box">
                        
@@ -22,11 +27,15 @@
                         <group col="4" colspan="4">
                  
 							<field name="name" />
+							<field name="project_id" />
 							<field name="repetition" />
 							<field name="total_hours" />
 							<field name="topics" />
 							
                         </group>
+                        
+                          <notebook colspan="4">
+                                 <page string="Lesson"> 
                         <group>
 							 <field name="lesson_id"  mode="tree">
 							<!-- 		<form>
@@ -55,7 +64,7 @@
 									</form>
 								 -->
 									<tree string="Lesson" create="false" delete="false">
-										<field name="title" />
+									
 										<field name="date" />
 										<field name="start_time" />
 										<field name="end_time" />
@@ -63,6 +72,22 @@
 								 
 								</field>
                         </group>
+                        </page> 
+                       
+                        <page string="Teacher"> 
+                        
+                    <field name="teacher_ids" mode="tree" >    
+                       			 <tree string="Teacher" create="false" delete="false">
+										<field name="teacher_name" />
+										<field name="lesson_id" /> 
+									</tree>
+				       </field>
+                      
+                        
+                        
+                        </page>
+                        
+                   </notebook>
                       
                     </sheet>
                 </form>
@@ -75,6 +100,7 @@
             <field name="arch" type="xml">
                 <tree string="Lesson place">
                             <field name="name" />
+                            <field name="project_id" />
 							<field name="repetition" />
 							<field name="total_hours" />
 							<field name="topics" />

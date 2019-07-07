@@ -10,11 +10,11 @@ logger=logging.getLogger('_______LOGGER B____________')
 class GestcalLesson(models.Model):
 
     _name = 'gestcal.lesson'
-    _rec_name = 'title'
+    _rec_name = 'date'
     _description = 'Gestcal lesson'
 #     _inherit = 'calendar.event'
 
-    title = fields.Char(string='Title')
+
     date = fields.Date(string='Date', required=True)
     start_time = fields.Float(string='Start Time', required=True,
                               help='Time according to timeformat of 24 hours')
@@ -23,29 +23,15 @@ class GestcalLesson(models.Model):
     teacher_id = fields.Many2one('hr.employee', string='Teacher' , required=True) # each lession have only ONE teacher
     recipients_id = fields.Many2many('res.partner','lesson_id', string='Recipients') 
     course_id = fields.Many2one('gestcal.course', string='course')
-    project_id = fields.Many2one('gestcal.project', string='Project')
+    project_id = fields.Many2one('gestcal.project', string='Project',  related='course_id.project_id')
     place = fields.Many2one('gestcal.place', string='Place')
 
-#     @api.one 
-#     @api.constrains('date','start_time','end_time','teacher_id')
-#     def _check_class_semestre_year(self):
-#         print ('const')
-#         cls=self.env['gestcal.lesson']
-#         start = self.start_time
-#         end = self.end_time
-#         print ('start',start)
-#         print ('end',end)
-#         check11=cls.search([('start_time','=',self.start_time)])
-#         print ('check11',check11)
-#         check=cls.search([('date','=',self.date),('start_time','=',self.start_time),('teacher_id','=',self.teacher_id.id)])
-#         print ('tt',check)
-#         if len(check)>1:
-#             raise ValidationError(_('This date already exists'))
 
     @api.constrains('date','start_time','end_time','teacher_id')
     def cheking_lesson(self): 
   
         for record in self:
+            logger.info('__________record________: %s  ',record)
             date = self.search([('date','=',record.date),('id','!=',record.id)])
             logger.info('___________date________: %s  ',date)
             
@@ -61,6 +47,7 @@ class GestcalLesson(models.Model):
             if date and date_st and date_ed and teacher: 
                 print(date,date_st,date_ed,teacher,self.title)
                 raise ValidationError(_('This date already exists for the lesson'))
+
 
     @api.constrains('start_time','end_time')
     def check_date(self):
