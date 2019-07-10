@@ -24,44 +24,24 @@ class GestcalCourse(models.Model):
     
     teacher_ids = fields.One2many('gestcal.course.teacher', 'course_id', string='Teacher')
 
-
-#     def get_teachers (self):
-#         lesson = self.env['gestcal.lesson'].search([])
-#         teacher_course = self.env['gestcal.course.teacher'].search([])
-#         
-#         teacher_list = [] 
-#         for rec in lesson:
-#             if rec.course_id.id == self.id  and  rec.teacher_id.id != teacher_course.teacher_name.id :
-#                 print('teacher',rec.teacher_id.name)
-# 
-#                 teacher_list.append([0,0,{
-#                                     'teacher_name':  rec.teacher_id.id,  
-#                                     'lesson_id': rec.id,
-#                                 }])
-#         print('teacher_list',teacher_list)
-#         self.teacher_ids = teacher_list
-#         return 
-
     def get_teachers (self):
         lesson = self.env['gestcal.lesson'].search([])
-        teacher_course = self.env['gestcal.course.teacher'].search([])
-        
+         
         teacher_list = [] 
+        value = {}
         for rec in lesson:
-            if rec.course_id.id == self.id  and  rec.teacher_id.id != teacher_course.teacher_name.id :
-                print('teacher',rec.teacher_id.name)
-
-                teacher_list.append(rec.teacher_id.id)
-        
-        teacher_vals ={
-                       'teacher_ids':[(6,0,teacher_list)]
-                       
-                       }
-        print('teacher_list',teacher_vals)
-        self.write({'teacher_ids':[(6,0,teacher_list or [])]})
+            if rec.course_id.id == self.id:
+                print(rec.teacher_id.name)
+ 
+                teacher_list.append([0,0,{
+                                    'teacher_name':  rec.teacher_id.id,  
+                                    'lesson_id': rec.id,
+                                }])
+        print('teacher_list',teacher_list)
+#         self.teacher_ids = teacher_list
+        self.write({'teacher_ids' : teacher_list})
         return  
-
-    
+ 
     def _compute_attachment_count(self):
         for attachment in self:
             attachment.attachment_count = len(attachment.attachments_ids)
@@ -97,5 +77,3 @@ class GestcalCourse_topics(models.Model):
     
     name = fields.Char(string='Name')
     text = fields.Text(string='Text') 
-    
-    
