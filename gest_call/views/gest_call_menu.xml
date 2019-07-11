@@ -2,7 +2,7 @@
 <odoo>
        
         <!-- Menu items -->
-	<menuitem id="menu_gestcal_root" name="Gest Call" sequence="1" />
+	<menuitem id="menu_gestcal_root" name="Student center" sequence="1" />
 	
 	<menuitem id="menu_gestcal_project" name="Project" parent="menu_gestcal_root"
 		action="action_gestcal_project_view" sequence="1" />

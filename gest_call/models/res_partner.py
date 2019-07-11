@@ -10,6 +10,8 @@ class ResPartner(models.Model):
     is_student = fields.Boolean(string='Is a Student?')
     is_teacher = fields.Boolean(string='Is a Teacher?')
     is_operator = fields.Boolean(string='Is a Operator?')
+    
+    gest_course_id = fields.Many2one('gestcal.course',string='gest cal id')
   
 
     

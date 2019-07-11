@@ -45,7 +45,6 @@ class GestcalLesson(models.Model):
             logger.info('___________teacher________: %s  ',teacher)
               
             if date and date_st and date_ed and teacher: 
-                print(date,date_st,date_ed,teacher,self.title)
                 raise ValidationError(_('This date already exists for the lesson'))
 
 

@@ -3,8 +3,13 @@ from datetime import datetime
 import time
 from odoo.exceptions import ValidationError
 import logging
+from mako.runtime import _inherit_from
 logger=logging.getLogger('_______LOGGER B____________')
 
+class hr_employee(models.Model):
+   _inherit = 'hr.employee'
+   
+   gest_course_id = fields.Many2one('gestcal.course',string='Gest cal id')
 
 class GestcalCourse(models.Model):
    
@@ -22,26 +27,33 @@ class GestcalCourse(models.Model):
     courses_ids =  fields.Many2one('gestcal.project', string='Courses') 
     project_id = fields.Many2one('gestcal.project', string='Project')
     
-    teacher_ids = fields.One2many('gestcal.course.teacher', 'course_id', string='Teacher')
+    teacher_ids = fields.One2many('hr.employee', 'gest_course_id', string='Teacher')
+    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients')
 
     def get_teachers (self):
-        lesson = self.env['gestcal.lesson'].search([])
-         
         teacher_list = [] 
         value = {}
-        for rec in lesson:
-            if rec.course_id.id == self.id:
-                print(rec.teacher_id.name)
- 
-                teacher_list.append([0,0,{
-                                    'teacher_name':  rec.teacher_id.id,  
-                                    'lesson_id': rec.id,
-                                }])
-        print('teacher_list',teacher_list)
-#         self.teacher_ids = teacher_list
-        self.write({'teacher_ids' : teacher_list})
+        for rec in self.lesson_id:
+            if rec.teacher_id.id not in teacher_list:
+                teacher_list.append(rec.teacher_id.id)
+
+        print('teacher_list',teacher_list) 
+        self.write({'teacher_ids' : [(6,0,teacher_list)]})
         return  
- 
+    
+    
+    def get_recipients (self):
+        teacher_list = [] 
+        value = {}
+        for rec in self.lesson_id:
+            if rec.teacher_id.id not in teacher_list:
+                teacher_list.append(rec.teacher_id.id)
+
+        print('teacher_list',teacher_list) 
+        self.write({'teacher_ids' : [(6,0,teacher_list)]})
+        return  
+    
+    
     def _compute_attachment_count(self):
         for attachment in self:
             attachment.attachment_count = len(attachment.attachments_ids)
@@ -63,13 +75,6 @@ class GestcalCourse(models.Model):
         
         return False
 
-class GestcalCourse_teacher(models.Model):
-   
-    _name = 'gestcal.course.teacher'
-    
-    teacher_name = fields.Many2one('hr.employee', string='Teacher')
-    lesson_id = fields.Many2one('gestcal.lesson', string='Lesson') 
-    course_id = fields.Many2one('gestcal.course', string='Courses') 
     
 class GestcalCourse_topics(models.Model):
    
@@ -77,3 +82,5 @@ class GestcalCourse_topics(models.Model):
     
     name = fields.Char(string='Name')
     text = fields.Text(string='Text') 
+    
+    
