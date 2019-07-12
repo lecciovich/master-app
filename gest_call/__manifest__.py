@@ -16,6 +16,7 @@
              'views/lesson_view.xml',
              'views/place_view.xml',
              'views/course_view.xml',
+             'views/seqence_gestcall.xml',
              'views/attachment_view.xml',
              'views/res_partner.xml',
              'views/hr_employee.xml',

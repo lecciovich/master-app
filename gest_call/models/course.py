@@ -18,7 +18,7 @@ class GestcalCourse(models.Model):
     _description = 'Gestcal Course'
     
     name = fields.Char(string='Name')
-    repetition = fields.Integer(string='Repetition')
+    repetition = fields.Char(string='Repetition')
     total_hours = fields.Float(string='Total Hours')
     topics = fields.Many2one('gestcal.course.topics',string='Topics')
     lesson_id = fields.One2many('gestcal.lesson','course_id', string='Lesson') 
@@ -30,30 +30,45 @@ class GestcalCourse(models.Model):
     teacher_ids = fields.One2many('hr.employee', 'gest_course_id', string='Teacher')
     recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients')
 
+
+    @api.one
+    @api.constrains('repetition')
+    def check_repetition(self):
+        for record in self:
+            repetition_course = self.search([('repetition','=',record.repetition),('id','!=',record.id)])
+            if repetition_course:
+                raise ValidationError(_("Number of repetition must be unique!"))
+        
+        
     def get_teachers (self):
         teacher_list = [] 
-        value = {}
         for rec in self.lesson_id:
             if rec.teacher_id.id not in teacher_list:
                 teacher_list.append(rec.teacher_id.id)
-
-        print('teacher_list',teacher_list) 
+        logger.info('__________teacher_list________: %s  ',teacher_list)
         self.write({'teacher_ids' : [(6,0,teacher_list)]})
         return  
     
     
     def get_recipients (self):
-        teacher_list = [] 
-        value = {}
+        recipients_list = [] 
         for rec in self.lesson_id:
-            if rec.teacher_id.id not in teacher_list:
-                teacher_list.append(rec.teacher_id.id)
+            for i in rec.recipients_id:
+                if i.id not in recipients_list:
+                    recipients_list.append(i.id)
 
-        print('teacher_list',teacher_list) 
-        self.write({'teacher_ids' : [(6,0,teacher_list)]})
+        print('recipients_list',recipients_list) 
+        self.write({'recipients_ids' : [(6,0,recipients_list)]})
         return  
     
     
+    @api.model
+    def create(self, vals):
+        seq = self.env['ir.sequence'].next_by_code('gestcal.course') or '/'
+        vals['repetition'] = seq 
+        return super(GestcalCourse, self).create(vals)
+
+ 
     def _compute_attachment_count(self):
         for attachment in self:
             attachment.attachment_count = len(attachment.attachments_ids)

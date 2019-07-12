@@ -18,7 +18,7 @@
 		                        <group>
 		                           <field name="start_time" />
 		                            <field name="end_time" /> 
-		                            <field name="teacher_id"  domain="[('is_teacher','=',True)]"/>
+		                            <field name="teacher_id"  domain="[('is_teacher','=',True)]"  context="{'default_is_teacher': 1}"/>
 		                            <field name="course_id" />
 		                            <field name="place" />
 		                         </group>     
