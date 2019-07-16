@@ -56,8 +56,7 @@ class GestcalCourse(models.Model):
             for i in rec.recipients_id:
                 if i.id not in recipients_list:
                     recipients_list.append(i.id)
-
-        print('recipients_list',recipients_list) 
+        logger.info('__________recipients_list________: %s  ',recipients_list)
         self.write({'recipients_ids' : [(6,0,recipients_list)]})
         return  
     
