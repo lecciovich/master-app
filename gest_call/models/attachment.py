@@ -9,6 +9,7 @@ logger=logging.getLogger('_______LOGGER B____________')
 class GestcalAttachment(models.Model):
    
     _name = 'gestcal.attachment'
+    _description = 'A model for a more detailed rich attachment'
     _rec_name = 'name'
     
     name = fields.Char(string='Name')

@@ -93,6 +93,7 @@ class GestcalCourse(models.Model):
 class GestcalCourse_topics(models.Model):
    
     _name = 'gestcal.course.topics'
+    _description = 'Topic for the Lessions'
     
     name = fields.Char(string='Name')
     text = fields.Text(string='Text') 
