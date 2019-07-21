@@ -27,8 +27,8 @@ class GestcalCourse(models.Model):
     courses_ids =  fields.Many2one('gestcal.project', string='Courses') 
     project_id = fields.Many2one('gestcal.project', string='Project')
     
-    teacher_ids = fields.One2many('hr.employee', 'gest_course_id', string='Teacher')
-    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients')
+    teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher')
+    recipients_ids = fields.One2many('res.partner', 'recipients_course_id', string='Recipients')
 
 
     @api.one

@@ -20,7 +20,7 @@ class GestcalLesson(models.Model):
                               help='Time according to timeformat of 24 hours')
     end_time = fields.Float(string='End Time', required=True,
                             help='Time according to timeformat of 24 hours')
-    teacher_id = fields.Many2one('hr.employee', string='Teacher' , required=True) # each lession have only ONE teacher
+    teacher_id = fields.Many2one('res.partner', string='Teacher' , required=True) # each lession have only ONE teacher
     recipients_id = fields.Many2many('res.partner','lesson_id', string='Recipients') 
     course_id = fields.Many2one('gestcal.course', string='course')
     project_id = fields.Many2one('gestcal.project', string='Project',  related='course_id.project_id')
