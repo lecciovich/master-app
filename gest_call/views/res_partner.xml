@@ -62,9 +62,9 @@
         
 
 <!--         Teacher action for gestcalls kanban -->
-        <record id="gestcall_kanban_teacher_action" model="ir.actions.act_window">
+         <record id="gestcall_kanban_teacher_action" model="ir.actions.act_window">
             <field name="name">Teacher</field>
-            <field name="res_model">hr.employee</field>
+            <field name="res_model">res.partner</field>
             <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form</field>
             <field name="domain">[('is_teacher','=',True)]</field>
@@ -78,19 +78,19 @@
         <record id="gestcall_kanban_teacher_action_kanban" model="ir.actions.act_window.view">
             <field name="sequence" eval="1" />
             <field name="view_mode">kanban</field>
-            <field name="view_id" ref="hr.hr_kanban_view_employees" />
+            <field name="view_id" ref="base.res_partner_kanban_view" />
             <field name="act_window_id" ref="gestcall_kanban_teacher_action" />
         </record>
         <record id="gestcall_kanban_teacher_action_tree" model="ir.actions.act_window.view">
             <field name="sequence" eval="2" />
             <field name="view_mode">tree</field>
-            <field name="view_id" ref="hr.view_employee_tree" />
+            <field name="view_id" ref="base.view_partner_tree" />
             <field name="act_window_id" ref="gestcall_kanban_teacher_action" />
         </record>
         <record id="gestcall_kanban_teacher_action_form" model="ir.actions.act_window.view">
             <field name="sequence" eval="3" />
             <field name="view_mode">form</field>
-            <field name="view_id" ref="hr.view_employee_form" />
+            <field name="view_id" ref="base.view_partner_form" />
             <field name="act_window_id" ref="gestcall_kanban_teacher_action" />
         </record>
         

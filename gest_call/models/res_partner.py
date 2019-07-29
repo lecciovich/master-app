@@ -12,6 +12,7 @@ class ResPartner(models.Model):
     is_operator = fields.Boolean(string='Is a Operator?')
     
     gest_course_id = fields.Many2one('gestcal.course',string='gest cal id')
+    recipients_course_id = fields.Many2one('gestcal.course',string='gest cal id')
   
 
     
