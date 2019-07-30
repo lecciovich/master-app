@@ -16,8 +16,8 @@
                             <field name="date"/>
 		                    </group>
 		                        <group>
-		                           <field name="start_time" />
-		                            <field name="end_time" /> 
+		                           <field name="start_time" widget="timepicker"/>
+		                            <field name="end_time" widget="timepicker"/> 
 		                            <field name="teacher_id"  domain="[('is_teacher','=',True)]"  context="{'default_is_teacher': 1}"/>
 		                            <field name="course_id" />
 		                            <field name="place" />

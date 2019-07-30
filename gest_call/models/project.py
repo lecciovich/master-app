@@ -39,12 +39,6 @@ class GestcalProject(models.Model):
         
         ], string='Status', index=True, readonly=True, copy=False, default='draft', track_visibility='onchange')
 
-#     @api.multi
-#     def _track_subtype(self, init_values):
-#         self.ensure_one() 
-#         if 'state' in init_values:
-#             return 'gest_call.mt_state_change'  # Full external id
-#         return super(GestcalProject, self)._track_subtype(init_values)
 
     def _compute_attachment_count(self):
         for attachment in self: 
