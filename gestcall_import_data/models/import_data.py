@@ -17,6 +17,7 @@ import subprocess
 import logging
 import math
 from docutils.nodes import address
+from odoo.exceptions import UserError,ValidationError
 logger=logging.getLogger('_______Boubaker____________')
  
 
@@ -60,22 +61,28 @@ class IMPORTDATA(models.Model):
                 if rowx < len_nr:
                     cols = sheet.row_values(rowx)
                     lesson_date_obj = cols[lesson_date] or ''
-                    start_obj = cols[start_date] or ''
-                    end_obj = cols[end_date] or ''
+                    start_obj = (cols[start_date]) * 24 or ''
+                    end_obj = (cols[end_date]) * 24 or ''
                     d0 = datetime.date(1900, 1, 1)
                     delta = datetime.timedelta(days=(lesson_date_obj -2))
                     date_lesson = d0 + delta
                     logger.info("_date_lesson______________: %s ",date_lesson)
 
                     if date_lesson:
-                        lesson_id = lesson_obj.search([('date', '=', date_lesson)])
+                        lesson_id = lesson_obj.search([('date', '=', date_lesson),
+                                                       ('start_time','!=',start_obj),
+                                                       ('end_time','!=',end_obj)])
+#                                                       , ('teacher_id','!=',record.id)
                         logger.info("_lesson_id______________: %s ",lesson_id)
+
+                        if lesson_id:
+                            raise UserError(_('This date already exists for the lesson!'))
 
                         if not lesson_id:
                             lesson_vals={
                                 'date': date_lesson,
-                                'start_time': start_obj * 24,
-                                'end_time': end_obj * 24,
+                                'start_time': start_obj,
+                                'end_time': end_obj,
                                 'teacher_id': 7,
                                 }    
                             logger.info("_lesson_vals______________: %s ",lesson_vals)

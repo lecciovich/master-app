@@ -14,6 +14,7 @@
     'data': ['security/ir.model.access.csv',
              'views/project_view.xml',
              'views/lesson_view.xml',
+             'views/plan_view.xml',
              'views/place_view.xml',
              'views/course_view.xml',
              'views/seqence_gestcall.xml',

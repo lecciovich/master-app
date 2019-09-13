@@ -2,6 +2,7 @@
 
 from . import res_partner
 from . import hr_employee
+from . import plan
 from . import project
 from . import course
 from . import lesson

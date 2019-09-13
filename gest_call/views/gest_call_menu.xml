@@ -4,17 +4,20 @@
         <!-- Menu items -->
 	<menuitem id="menu_gestcal_root" name="Calls management" sequence="1" />
 	
+	<menuitem id="menu_gestcal_plan" name="Plan" parent="menu_gestcal_root"
+		action="action_gestcal_plan_view" sequence="1" />
+		
 	<menuitem id="menu_gestcal_project" name="Project" parent="menu_gestcal_root"
-		action="action_gestcal_project_view" sequence="1" />
+		action="action_gestcal_project_view" sequence="2" />
 		
 	<menuitem id="menu_gestcal_course" name="Course" parent="menu_gestcal_root"
-		action="action_gestcal_course_view" sequence="2" />
+		action="action_gestcal_course_view" sequence="3" />
 		
 	<menuitem id="menu_gestcal_lesson" name="Lesson" parent="menu_gestcal_root"
-		action="action_gestcal_lesson_view" sequence="3" />
+		action="action_gestcal_lesson_view" sequence="4" />
 		
 	<menuitem id="menu_gestcal_place" name="Place" parent="menu_gestcal_root"
-		action="action_gestcal_place_view" sequence="4" />
+		action="action_gestcal_place_view" sequence="5" />
 		
 	<menuitem id="menu_gestcal_attachment" name="Attachment"
 		parent="menu_gestcal_root" action="action_gestcal_attachment_view"

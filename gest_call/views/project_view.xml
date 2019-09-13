@@ -9,7 +9,7 @@
             <field name="model">gestcal.project</field>
             <field name="arch" type="xml">
                 <form string="Project">
-            <header>
+<!--             <header>
                    <button name="submitted_project" type="object" string="Submit" states="draft" class="oe_highlight"/>
                     <button name="active_project" type="object" string="Active" states="submitted" class="oe_highlight"/>
                      <button name="completed_project" type="object" string="Complet" states="active" class="oe_highlight"/>
@@ -18,53 +18,21 @@
                 
                    <field name="state" widget="statusbar"/>
                  
-            </header>
+            </header> -->
                     <sheet>
-                    <!-- <div class="oe_button_box" name="button_box">
-                       
-                         <button name="attachment_action_to_open"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-paperclip" 
-                            context="{'xml_id':'action_gestcal_attachment_view'}">
-                            <field string="Attachment" name="attachment_count" widget="statinfo" options="{'label_field': 'label_tasks'}"/>
-						</button>
-		           </div> -->
-                    
                  <label for="title" class="oe_edit_only"/>
                 <h1>
                  <field name="title"/>
                	</h1>
                         <group col="4" colspan="4"> 
                             <field name="project_code"/>
-                            <!-- <field name="found"/> -->
-                            <field name="financing_amount"/>
-                            <field name="total_lesson_hours" />
                         </group>
-                      <group col="4" colspan="4"> 
-                            <field name="call"/>
-                            <field name="submission"/>
-                            <field name="admittance"/>
-                            <field name="agreement" />
-                        </group>
-                        
-                          <group col="4" colspan="4"> 
-                            <field name="account_request"/> 
-                            <field name="deadline"/>
-                           <!--  <field name="attachments"/> -->
-                        </group>
+                         
                <notebook colspan="4">
-                    <page string="Partner"> 
-                         <field name="partner" >
-								<tree string="Partner" editable="bottom">
-              						  <field name="name" />
-              						  <field name="city" /> 
-           						 </tree>
-           					 </field>
-                   </page>
+
                    <page string="Courses"> 
                          <field name="courses" >
-								<tree string="Partner" editable="bottom">
+								<tree string="courses" editable="bottom">
               						  <field name="name" />
               						  <field name="total_hours" /> 
            						 </tree>
@@ -90,10 +58,7 @@
             <field name="arch" type="xml">
                 <tree string="Project">
                    <field name="title"/>
-                          <field name="project_code"/>
-                            <!-- <field name="found"/> -->
-                            <field name="financing_amount"/>
-                            <field name="total_lesson_hours" />
+                      <field name="project_code"/> 
                 </tree>
             </field>
         </record>
@@ -122,14 +87,7 @@
 												<strong style="font-size:15px;">
 													<field t-if="record.project_code.raw_value" name="project_code" />
 												</strong>
-											</li>
-											<!-- <li style="display:inherit;font-size:15px;">
-												<div t-if="record.found.raw_value">
-													<field name="found" />
-												</div>
-											</li> -->
-										
-										
+											</li>								
 										</ul>
                                 </div>
                         </div>
@@ -138,34 +96,12 @@
             </kanban>
             </field>
             </record>   
-            
-  <!--      <record model="ir.ui.view" id="view_gestcal_project_kanban">
-            <field name="name">gestcal.project.kanban</field>
-            <field name="model">gestcal.project</field>
-            <field name="arch" type="xml">
-                 <kanban>
-                <field name = "title"/>
-            <templates>
-                <t t-name="kanban-box">
-                 <div class="oe_kanban_global_click" >
-                    <div>
-                        <ul>
-                            <li t-if="record.title.raw_value">Project Title: <field name="title"/></li>
-                        </ul>
-                    </div>
-                    </div>
-                </t>
-            </templates>
-            </kanban>
-            </field>
-        </record> -->
+ 
           <record id="view_project_search_form" model="ir.ui.view">
             <field name="name">gestcal.project</field>
             <field name="model">gestcal.project</field>
             <field name="arch" type="xml">
 			<search string="Project">
-			  <field name="call" />
-			   <!-- <field name="found" /> -->
 			    <field name="project_code" />
 				 
 			</search>

@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gestcal_plan,access_gestcal_plan,model_gestcal_plan,,1,1,1,1
 access_gestcal_project,access_gestcal_project,model_gestcal_project,,1,1,1,1
 access_gestcal_place,access_gestcal_place,model_gestcal_place,,1,1,1,1
 access_gestcal_course,access_gestcal_course,model_gestcal_course,,1,1,1,1
