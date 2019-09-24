@@ -13,8 +13,7 @@ class GestcalProject(models.Model):
     _rec_name = 'title'
     _description = 'Gestcal project'
     
-    title = fields.Char(string='Title', required=True)
-    project_code = fields.Char(string='Project code' ,required=True)
+    title = fields.Char(string='Title', required=True) 
     courses = fields.Many2many('gestcal.course','courses_ids', string='Courses')
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
@@ -28,7 +27,7 @@ class GestcalProject(models.Model):
         ('closed','Closed')
         
         ], string='Status', index=True, readonly=True, copy=False, default='draft', track_visibility='onchange')
-
+    project_ids =  fields.Many2one('gestcal.plan', string='Projects')
 
     def _compute_attachment_count(self):
         for attachment in self: 

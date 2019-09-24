@@ -50,11 +50,11 @@
            						 </tree>
            					 </field>
                    </page>
-                   <page string="Courses"> 
-                         <field name="courses" >
-								<tree string="Partner" editable="bottom">
-              						  <field name="name" />
-              						  <field name="total_hours" /> 
+                   <page string="projects"> 
+                         <field name="projects" >
+								<tree string="projects" editable="bottom">
+              						  <field name="title" />
+              						  <field name="state" /> 
            						 </tree>
            					 </field>
                    </page>

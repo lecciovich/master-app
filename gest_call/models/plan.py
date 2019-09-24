@@ -25,7 +25,7 @@ class GestcalPlan(models.Model):
     account_request = fields.Date(string='Account Request')
     partner = fields.Many2many('res.partner','projects_ids', string='Partner')
     deadline = fields.Datetime(string='Deadline')
-    courses = fields.Many2many('gestcal.course','courses_ids', string='Courses')
+    projects = fields.Many2many('gestcal.project','project_ids', string='Projects')
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')

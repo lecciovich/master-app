@@ -23,10 +23,7 @@
                  <label for="title" class="oe_edit_only"/>
                 <h1>
                  <field name="title"/>
-               	</h1>
-                        <group col="4" colspan="4"> 
-                            <field name="project_code"/>
-                        </group>
+               	</h1> 
                          
                <notebook colspan="4">
 
@@ -57,8 +54,7 @@
             <field name="model">gestcal.project</field>
             <field name="arch" type="xml">
                 <tree string="Project">
-                   <field name="title"/>
-                      <field name="project_code"/> 
+                   <field name="title"/> 
                 </tree>
             </field>
         </record>
@@ -69,8 +65,7 @@
             <field name="arch" type="xml">
             <kanban class="oe_background_grey">
 
-                 <field name ="title"/>
-                 <field name="project_code" />
+                 <field name ="title"/> 
                  <!-- <field name="found" /> -->
                 <templates>
                     <t t-name="kanban-box">
@@ -83,11 +78,7 @@
 													<field t-if="record.title.raw_value" name="title" />
 												</strong>
 											</li>
-											<li style="display:inherit;">
-												<strong style="font-size:15px;">
-													<field t-if="record.project_code.raw_value" name="project_code" />
-												</strong>
-											</li>								
+											 								
 										</ul>
                                 </div>
                         </div>
@@ -102,7 +93,7 @@
             <field name="model">gestcal.project</field>
             <field name="arch" type="xml">
 			<search string="Project">
-			    <field name="project_code" />
+			    <field name="title" />
 				 
 			</search>
 		 </field>
