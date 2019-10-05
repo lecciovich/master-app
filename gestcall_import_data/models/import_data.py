@@ -36,12 +36,12 @@ class IMPORTDATA(models.Model):
     _description = 'Import Data' 
     _order = 'id desc' 
     
-    name =  fields.Char('Nom de la pièce jointe')
-    description = fields.Text('Description de fichier')
-    data = fields.Binary('Fichier', required=True)
+    name =  fields.Char('Name for file')
+    description = fields.Text('Description')
+    data = fields.Binary('File', required=True)
     type = fields.Selection([('lesson', 'lesson'), ('partner', 'Partner')], 'Type', required=True)
-    filename = fields.Char('Nom fichier')
-    state = fields.Selection(AVAILABLE_STATES, 'Etat', readonly=True, default='draft')
+    filename = fields.Char('Name')
+    state = fields.Selection(AVAILABLE_STATES, 'State', readonly=True, default='draft')
     path = fields.Char('Path', default='')
 
              
