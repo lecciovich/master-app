@@ -24,8 +24,8 @@
 					<button name="import_employee_data" string="Import Employee Data" type="object"  
 					attrs="{'invisible': ['|',('state', '=', 'done'),('type', '!=', 'employee')]}" class="oe_highlight" /> 
 
-					<button name="import_lesson_data" string="Import Department Data" type="object"  
- 					 class="oe_highlight" /> 
+					<button name="import_lesson_data" string="Import Data" type="object"  
+ 					 class="oe_highlight" attrs="{'invisible': [('state', '=', 'done')]}" /> 
 							 <!--  <button name="import_employee_data" string="Import Employee Data" type="object"
                             attrs="{'invisible': ['|',('state', '=', 'done'),('type', '!=', 'employee')]}" class="oe_highlight" />	 -->
 						<field name="state" widget="statusbar" statusbar_visible="draft,failure,done" />
@@ -42,8 +42,8 @@
 							<group>
 							    <field name="name" required="1" string="Nom de l'import"/>
 							    <field name="type"/>
-								<field name="filename"/>
                                 <field name="data" filename="filename"/>
+								<field name="filename"/>
 								<field name="path"/>
 								
 							</group>

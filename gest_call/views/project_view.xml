@@ -24,7 +24,9 @@
                 <h1>
                  <field name="title"/>
                	</h1> 
-                         
+                   <group>
+                     <field name="project_id"/>
+	               </group>      
                <notebook colspan="4">
 
                    <page string="Courses"> 
@@ -53,7 +55,7 @@
             <field name="name">gestcal.project.tree</field>
             <field name="model">gestcal.project</field>
             <field name="arch" type="xml">
-                <tree string="Project">
+                <tree string="Project" import="false"> 
                    <field name="title"/> 
                 </tree>
             </field>
@@ -63,7 +65,7 @@
             <field name="name">gestcal.project.kanban</field>
             <field name="model">gestcal.project</field>
             <field name="arch" type="xml">
-            <kanban class="oe_background_grey">
+            <kanban class="oe_background_grey" import="false"> 
 
                  <field name ="title"/> 
                  <!-- <field name="found" /> -->

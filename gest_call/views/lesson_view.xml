@@ -55,7 +55,7 @@
             <field name="name">gestcal.lesson.tree</field>
             <field name="model">gestcal.lesson</field>
             <field name="arch" type="xml">
-                <tree string="Lesson"> 
+                <tree string="Lesson" import="false"> 
                             <field name="date"/>
                             <field name="start_time" widget='float_time'/>
                             <field name="end_time" widget='float_time'/> 

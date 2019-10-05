@@ -26,7 +26,7 @@ class GestcalCourse(models.Model):
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
     courses_ids =  fields.Many2one('gestcal.project', string='Courses') 
     project_id = fields.Many2one('gestcal.project', string='Project')
-    
+    course_id = fields.Char(string='Course id', required=True) 
     teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher')
     recipients_ids = fields.One2many('res.partner', 'recipients_course_id', string='Recipients')
 

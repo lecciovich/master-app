@@ -14,6 +14,7 @@ class GestcalProject(models.Model):
     _description = 'Gestcal project'
     
     title = fields.Char(string='Title', required=True) 
+    project_id = fields.Char(string='Project id', required=True) 
     courses = fields.Many2many('gestcal.course','courses_ids', string='Courses')
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
@@ -34,11 +35,11 @@ class GestcalProject(models.Model):
             attachment.attachment_count = len(attachment.attachments_ids)
             logger.info('___________count________: %s  ',attachment.attachment_count)
             
-    @api.constrains('project_code','title')
-    def _check_name(self):
-        if self.title ==  self.project_code:
-            raise ValidationError(_('Two project Title and Project code can not be the same'))
- 
+#     @api.constrains('project_id')
+#     def _check_name(self):
+#         if self.title ==  self.project_code:
+#             raise ValidationError(_('Two project Title and Project code can not be the same'))
+#  
     @api.multi
     def attachment_action_to_open(self):
         ''' This opens the xml view specified in xml_id for the current attachment '''

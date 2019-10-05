@@ -10,7 +10,7 @@
     'category': 'Calls activity management',
     'summary': '',
     'images': ['static/description/SchoolTimetable.png'],
-    'depends': ['base','calendar','hr','contacts','web_widget_timepicker'],
+    'depends': ['base','calendar','hr','contacts','web_widget_timepicker','display_import_button'],
     'data': ['security/ir.model.access.csv',
              'views/project_view.xml',
              'views/lesson_view.xml',

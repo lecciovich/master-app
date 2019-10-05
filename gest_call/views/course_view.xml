@@ -22,6 +22,7 @@
                         <group col="4" colspan="4">
                  
 							<field name="name" />
+							<field name="course_id" />
 							<field name="project_id" />
 							<field name="repetition" />
 							<field name="total_hours" />
@@ -100,7 +101,7 @@
             <field name="name">gestcal.course.tree</field>
             <field name="model">gestcal.course</field>
             <field name="arch" type="xml">
-                <tree string="Lesson place">
+                <tree string="Lesson place" import="false"> 
                             <field name="name" />
                             <field name="project_id" />
 							<field name="repetition" />
