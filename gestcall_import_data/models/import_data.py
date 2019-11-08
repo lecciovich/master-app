@@ -54,9 +54,9 @@ class IMPORTDATA(models.Model):
         place_obj = self.env['gestcal.place']
 #         dest_filename = self.path + self.filename
 #         workbook = xlrd.open_workbook(dest_filename)
-        file_path = sudo().tempfile.gettempdir()+ self.filename
+        file_path = tempfile.gettempdir()+ self.filename
         data = self.data
-        f = open(file_path,'wb')
+        f =  sudo().open(file_path,'wb')
         decode = base64.b64decode(data)
         logger.info("_decode______________: %s ",decode)
         f.write(decode)
