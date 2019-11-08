@@ -55,10 +55,12 @@ class IMPORTDATA(models.Model):
 #         dest_filename = self.path + self.filename
 #         workbook = xlrd.open_workbook(dest_filename)
         file_path = tempfile.gettempdir()+ self.filename
+        logger.info("_file_path______________: %s ",file_path)
         data = self.data
-        f =  sudo().open(file_path,'wb')
+        f =  open(file_path,'wb')
         decode = base64.b64decode(data)
         logger.info("_decode______________: %s ",decode)
+        logger.info("_file_path______________: %s ",file_path)
         f.write(decode)
         f.close()
         workbook = xlrd.open_workbook(file_path)
