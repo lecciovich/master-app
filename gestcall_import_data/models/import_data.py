@@ -18,7 +18,6 @@ import logging
 import math
 from docutils.nodes import address
 from odoo.exceptions import UserError,ValidationError
-from tempfile import TemporaryFile
 import tempfile
 logger=logging.getLogger('_______Boubaker____________')
  
@@ -54,7 +53,17 @@ class IMPORTDATA(models.Model):
         place_obj = self.env['gestcal.place']
 #         dest_filename = self.path + self.filename
 #         workbook = xlrd.open_workbook(dest_filename)
-        file_path = tempfile.gettempdir()+ self.filename
+        file_path = os.path.join(tempfile.gettempdir()+ self.filename)
+        try:
+            os.makedirs(file_path)
+        except Exception as e:
+            if os.path.isdir(file_path):
+              pass
+            else:
+              raise UserError(_(e))
+        else:
+            os.chmod(file_path, 0o777)
+        return file_path
         logger.info("_file_path______________: %s ",file_path)
         data = self.data
         f =  open(file_path,'wb')
