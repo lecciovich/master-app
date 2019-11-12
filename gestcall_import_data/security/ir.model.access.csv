@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_import_import_public,access_import_import_public,model_import_import,,1,1,1,1
+access_import_import_public,access_import_import_public,model_import_import,,1,1,1,1
