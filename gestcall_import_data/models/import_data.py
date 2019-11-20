@@ -53,7 +53,8 @@ class IMPORTDATA(models.Model):
         place_obj = self.env['gestcal.place']
 #         dest_filename = self.path + self.filename
 #         workbook = xlrd.open_workbook(dest_filename)
-        file_path = os.path.join(tempfile.gettempdir()+ self.filename)
+        file_path = os.path.join(tempfile.gettempdir()+'/'+self.filename)
+        logger.info("_file_path______________: %s ",file_path)
         try:
             os.makedirs(file_path)
         except Exception as e:
