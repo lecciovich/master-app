@@ -53,27 +53,17 @@ class IMPORTDATA(models.Model):
         place_obj = self.env['gestcal.place']
 #         dest_filename = self.path + self.filename
 #         workbook = xlrd.open_workbook(dest_filename)
-        file_path = os.path.join(tempfile.gettempdir()+ self.filename)
-        try:
-            os.makedirs(file_path)
-        except Exception as e:
-            if os.path.isdir(file_path):
-              pass
-            else:
-              raise UserError(_(e))
-        else:
-            os.chmod(file_path, 0o777)
-        return file_path
-        logger.info("_file_path______________: %s ",file_path)
+#         file_path = os.path.join(tempfile.gettempdir())+'/test'+ self.filename
         data = self.data
-        f =  open(file_path,'wb')
+#         f =  open(file_path,'wb+')
         decode = base64.b64decode(data)
-        logger.info("_decode______________: %s ",decode)
-        logger.info("_file_path______________: %s ",file_path)
-        f.write(decode)
-        f.close()
-        workbook = xlrd.open_workbook(file_path)
-        
+        with open('/tmp/' + self.filename, 'wb') as file:
+            file.write(data)
+        logger.info("_decode______________: %s ",decode)        
+#         f.write(decode)
+#         f.close()
+        workbook = xlrd.open_workbook(file.name)
+        logger.info("_workbook______________: %s ",workbook)
         for sheet in workbook.sheets():
             cols = sheet.row_values(0) 
             lesson_date = cols.index(u'date') 
