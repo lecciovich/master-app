@@ -39,7 +39,7 @@ class IMPORTDATA(models.Model):
     description = fields.Text('Description')
     data = fields.Binary('File', required=True)
     type = fields.Selection([('lesson', 'lesson'), ('partner', 'Partner')], 'Type', required=True)
-    filename = fields.Char('Name')
+    file_name = fields.Char('Name')
     state = fields.Selection(AVAILABLE_STATES, 'State', readonly=True, default='draft')
     path = fields.Char('Path', default='')
 
@@ -51,14 +51,15 @@ class IMPORTDATA(models.Model):
         project_obj = self.env['gestcal.project']
         course_obj = self.env['gestcal.course']
         place_obj = self.env['gestcal.place']
-#         dest_filename = self.path + self.filename
+#         dest_filename = self.path + self.file_name
 #         workbook = xlrd.open_workbook(dest_filename)
-#         file_path = os.path.join(tempfile.gettempdir())+'/test'+ self.filename
+#         file_path = os.path.join(tempfile.gettempdir())+'/test'+ self.file_name
         data = self.data
 #         f =  open(file_path,'wb+')
         decode = base64.b64decode(data)
-        with open('/tmp/' + self.filename, 'wb') as file:
-            file.write(data)
+        with open('C:/Users/pc/workspace_hayet/' + self.file_name, 'wb') as file:
+            file.write(decode) 
+            file.close()           
         logger.info("_decode______________: %s ",decode)        
 #         f.write(decode)
 #         f.close()

@@ -11,7 +11,7 @@
     'author': 'Boubaker Abdallah',
     'website': '',
     'images' : [],
-    'depends' : ['web','base','mail'],
+    'depends' : ['web','base','mail','gest_call'],
     'css':[ ],
 
     'data': [

@@ -42,8 +42,8 @@
 							<group>
 							    <field name="name" required="1" string="Nom de l'import"/>
 							    <field name="type"/>
-                                <field name="data" filename="filename"/>
-								<field name="filename" readonly ="1" invisible="1"/>
+                                <field name="data" filename="file_name"/>
+								<field name="file_name" invisible="1"/>
 								<field name="path" invisible="1"/>
 								
 							</group>
