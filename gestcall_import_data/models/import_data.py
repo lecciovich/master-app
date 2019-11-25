@@ -57,7 +57,7 @@ class IMPORTDATA(models.Model):
         data = self.data
 #         f =  open(file_path,'wb+')
         decode = base64.b64decode(data)
-        with open('C:/Users/pc/workspace_hayet/' + self.file_name, 'wb') as file:
+        with open('/tmp/' + self.file_name, 'wb') as file:
             file.write(decode) 
             file.close()           
         logger.info("_decode______________: %s ",decode)        
