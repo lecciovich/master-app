@@ -17,18 +17,22 @@ class GestcalPlan(models.Model):
     plan_code = fields.Char(string='Plan code' ,required=True)
     # found = fields.Float('Found', required=True)
     financing_amount = fields.Float('Financing Amount', required=True)
-    total_lesson_hours = fields.Float('Total Lesson Hours')
-    call = fields.Char(string='Call')
+    total_lesson_hours = fields.Integer('Total Lesson Hours')
+    call = fields.Char(string='Call name')
     submission = fields.Date(string='Submission')
     admittance = fields.Date(string='Admittance')
     agreement = fields.Date(string='Agreement')
     account_request = fields.Date(string='Account Request')
-    partner = fields.Many2many('res.partner','projects_ids', string='Partner')
+    partner = fields.Many2many('res.partner','projects_ids', string='Partner',store=True)
     deadline = fields.Datetime(string='Deadline')
     projects = fields.Many2many('gestcal.project','project_ids', string='Projects')
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
+    plan_host = fields.Many2one('res.partner', string='Plan host')
+    plan_actuator = fields.Many2one('res.partner', string='Plan actuator')
+    plan_handler = fields.Many2one('res.partner', string='Plan handler', domain=[('is_operator', '=', True)])
+    total_recipients = fields.Integer('Total recipients')
     state = fields.Selection([
         ('draft', 'Draft'),
         ('submitted', 'Submitted'),
@@ -44,12 +48,17 @@ class GestcalPlan(models.Model):
         for attachment in self: 
             attachment.attachment_count = len(attachment.attachments_ids)
             logger.info('___________count________: %s  ',attachment.attachment_count)
+
+    @api.one
+    @api.constrains('plan_code')
+    def _check_plan_code(self):
+        title = self.title
+        for record in self:
+            code_plan = self.search([('plan_code','=',record.plan_code),('id','!=',record.id)])
+            lenplan = len(code_plan) + 1
+            if code_plan:
+                self.title = str(title) + '(' + (str(lenplan))+')'
             
-    @api.constrains('plan_code','title')
-    def _check_name(self):
-        if self.title ==  self.plan_code:
-            raise ValidationError(_('Two project Title and Project code can not be the same'))
- 
     @api.multi
     def submitted_plan(self):
         return self.write({'state': 'submitted'})

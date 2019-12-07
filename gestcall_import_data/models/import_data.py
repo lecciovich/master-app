@@ -38,7 +38,7 @@ class IMPORTDATA(models.Model):
     name =  fields.Char('Name for file')
     description = fields.Text('Description')
     data = fields.Binary('File', required=True)
-    type = fields.Selection([('lesson', 'lesson'), ('partner', 'Partner')], 'Type', required=True)
+    type = fields.Selection([('partner', 'Partner')], 'Type', required=True)
     file_name = fields.Char('Name')
     state = fields.Selection(AVAILABLE_STATES, 'State', readonly=True, default='draft')
     path = fields.Char('Path', default='')

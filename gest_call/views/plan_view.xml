@@ -27,7 +27,13 @@
                         <group col="4" colspan="4"> 
                             <field name="plan_code"/> 
                             <field name="financing_amount"/>
-                            <field name="total_lesson_hours" />
+                            <field name="total_lesson_hours" widget="char"/>
+                            <field name="total_recipients" widget="char"/>
+                        </group>
+                        <group col="4" colspan="4"> 
+                            <field name="plan_host"/>
+                            <field name="plan_actuator"/>
+                            <field name="plan_handler"/>
                         </group>
                       <group col="4" colspan="4"> 
                             <field name="call"/>
@@ -43,8 +49,8 @@
                         </group>
                <notebook colspan="4">
                     <page string="Partner"> 
-                         <field name="partner" >
-								<tree string="Partner" editable="bottom">
+                         <field name="partner" context="{'search_default_type_company':'company'}">
+								<tree string="Partner">
               						  <field name="name" />
               						  <field name="city" /> 
            						 </tree>

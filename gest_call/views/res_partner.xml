@@ -27,105 +27,55 @@
             </field>
         </record> 
  
-<!--         Student action for gestcalls kanban -->
-        <record id="gestcall_kanban_students_action" model="ir.actions.act_window">
-            <field name="name">Students</field>
+<!--         Contact action for gestcalls -->
+ <record id="view_search_gestcall_contact_form" model="ir.ui.view">
+            <field name="name">res.partner.search.form</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+			<search string="Contact">
+				<field name="is_student" />
+				<field name="is_teacher" />
+				<field name="is_operator" />
+				<filter string="Companies" name="type_company" domain="[('is_company','=',1)]"/>
+				<group expand="0" string="Group By">
+					<filter name="is_student" string="Students" domain="[('is_student','=',True)]"/>
+					<filter name="is_teacher" string="Teachers" domain="[('is_teacher','=',True)]"/>
+					<filter name="is_operator" string="Operator" domain="[('is_operator','=',True)]"/>
+				</group>
+			</search>
+		 </field>
+</record>	 
+        <record id="gestcall_contact_action" model="ir.actions.act_window">
+            <field name="name">Contact</field>
             <field name="res_model">res.partner</field>
             <field name="view_type">form</field>
             <field name="view_mode">kanban,tree,form</field>
-            <field name="domain">[('is_student','=',True)]</field>
-            <field name="context">{'default_is_student': True}</field>
+            <field name="search_view_id" ref="view_search_gestcall_contact_form"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
-                    Add Students
+                    Add Contact
                 </p>
             </field>
         </record>
-        <record id="gestcall_kanban_students_action_kanban" model="ir.actions.act_window.view">
-            <field name="sequence" eval="1" />
-            <field name="view_mode">kanban</field>
-            <field name="view_id" ref="base.res_partner_kanban_view" />
-            <field name="act_window_id" ref="gestcall_kanban_students_action" />
-        </record>
-        <record id="gestcall_kanban_students_action_tree" model="ir.actions.act_window.view">
-            <field name="sequence" eval="2" />
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="base.view_partner_tree" />
-            <field name="act_window_id" ref="gestcall_kanban_students_action" />
-        </record>
-        <record id="gestcall_kanban_students_action_form" model="ir.actions.act_window.view">
-            <field name="sequence" eval="3" />
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="base.view_partner_form" />
-            <field name="act_window_id" ref="gestcall_kanban_students_action" />
-        </record>
-        
+       
 
-<!--         Teacher action for gestcalls kanban -->
-         <record id="gestcall_kanban_teacher_action" model="ir.actions.act_window">
-            <field name="name">Teacher</field>
-            <field name="res_model">res.partner</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban,tree,form</field>
-            <field name="domain">[('is_teacher','=',True)]</field>
-            <field name="context">{'default_is_teacher': True}</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                    Add Teacher
-                </p>
-            </field>
-        </record>
-        <record id="gestcall_kanban_teacher_action_kanban" model="ir.actions.act_window.view">
+        <record id="gestcall_kanban_contact_action_kanban" model="ir.actions.act_window.view">
             <field name="sequence" eval="1" />
             <field name="view_mode">kanban</field>
             <field name="view_id" ref="base.res_partner_kanban_view" />
-            <field name="act_window_id" ref="gestcall_kanban_teacher_action" />
+            <field name="act_window_id" ref="gestcall_contact_action" />
         </record>
-        <record id="gestcall_kanban_teacher_action_tree" model="ir.actions.act_window.view">
+        <record id="gestcall_kanban_contact_action_tree" model="ir.actions.act_window.view">
             <field name="sequence" eval="2" />
             <field name="view_mode">tree</field>
             <field name="view_id" ref="base.view_partner_tree" />
-            <field name="act_window_id" ref="gestcall_kanban_teacher_action" />
+            <field name="act_window_id" ref="gestcall_contact_action" />
         </record>
-        <record id="gestcall_kanban_teacher_action_form" model="ir.actions.act_window.view">
+        <record id="gestcall_kanban_contact_action_form" model="ir.actions.act_window.view">
             <field name="sequence" eval="3" />
             <field name="view_mode">form</field>
             <field name="view_id" ref="base.view_partner_form" />
-            <field name="act_window_id" ref="gestcall_kanban_teacher_action" />
+            <field name="act_window_id" ref="gestcall_contact_action" />
         </record>
         
-        
-        <!--         Teacher Operator for gestcalls kanban -->
-        <record id="gestcall_kanban_operator_action" model="ir.actions.act_window">
-            <field name="name">Operator</field>
-            <field name="res_model">res.partner</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban,tree,form</field>
-            <field name="domain">[('is_operator','=',True)]</field>
-            <field name="context">{'default_is_operator': True}</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                    Add Operator
-                </p>
-            </field>
-        </record>
-        <record id="gestcall_kanban_operator_action_kanban" model="ir.actions.act_window.view">
-            <field name="sequence" eval="1" />
-            <field name="view_mode">kanban</field>
-            <field name="view_id" ref="base.res_partner_kanban_view" />
-            <field name="act_window_id" ref="gestcall_kanban_operator_action" />
-        </record>
-        <record id="gestcall_kanban_operator_action_tree" model="ir.actions.act_window.view">
-            <field name="sequence" eval="2" />
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="base.view_partner_tree" />
-            <field name="act_window_id" ref="gestcall_kanban_operator_action" />
-        </record>
-        <record id="gestcall_kanban_operator_action_form" model="ir.actions.act_window.view">
-            <field name="sequence" eval="3" />
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="base.view_partner_form" />
-            <field name="act_window_id" ref="gestcall_kanban_operator_action" />
-        </record> 
- 
  </odoo>
