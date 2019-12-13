@@ -27,8 +27,8 @@
                         <group col="4" colspan="4"> 
                             <field name="plan_code"/> 
                             <field name="financing_amount"/>
-                            <field name="total_lesson_hours" widget="char"/>
-                            <field name="total_recipients" widget="char"/>
+                            <field name="total_lesson_hours" widget="integer"/>
+                            <field name="total_recipients" widget="integer"/>
                         </group>
                         <group col="4" colspan="4"> 
                             <field name="plan_host"/>
