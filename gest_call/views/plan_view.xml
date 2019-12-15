@@ -11,10 +11,15 @@
                 <form string="Plan">
             <header>
                    <button name="submitted_plan" type="object" string="Submit" states="draft" class="oe_highlight"/>
-                    <button name="active_plan" type="object" string="Active" states="submitted" class="oe_highlight"/>
-                     <button name="completed_plan" type="object" string="Complet" states="active" class="oe_highlight"/>
-                      <button name="accounted_plan" type="object" string="Account" states="completed" class="oe_highlight"/>
-                       <button name="closed_plan" type="object" string="Closed" states="accounted" class="oe_highlight"/>
+                   <button name="draft_plan" type="object" string="Revert" states="submitted" class="oe_highlight"/>
+                   <button name="active_plan" type="object" string="Active" states="submitted" class="oe_highlight"/>
+                   <button name="submitted_plan" type="object" string="Revert" states="active" class="oe_highlight"/>
+                   <button name="completed_plan" type="object" string="Complet" states="active" class="oe_highlight"/>
+                   <button name="active_plan" type="object" string="Revert" states="completed" class="oe_highlight"/>
+                   <button name="accounted_plan" type="object" string="Account" states="completed" class="oe_highlight"/>
+                   <button name="completed_plan" type="object" string="Revert" states="accounted" class="oe_highlight"/>
+                   <button name="closed_plan" type="object" string="Closed" states="accounted" class="oe_highlight"/>
+                   <button name="accounted_plan" type="object" string="Revert" states="closed" class="oe_highlight"/>
                 
                    <field name="state" widget="statusbar"/>
                  
@@ -27,11 +32,11 @@
                         <group col="4" colspan="4"> 
                             <field name="plan_code"/> 
                             <field name="financing_amount"/>
-                            <field name="total_lesson_hours" widget="integer"/>
-                            <field name="total_recipients" widget="integer"/>
+                            <field name="total_lesson_hours"/>
+                            <field name="total_recipients"/>
                         </group>
                         <group col="4" colspan="4"> 
-                            <field name="plan_host"/>
+                            <field name="plan_host" />
                             <field name="plan_actuator"/>
                             <field name="plan_handler"/>
                         </group>
@@ -44,7 +49,7 @@
                         
                           <group col="4" colspan="4"> 
                             <field name="account_request"/> 
-                            <field name="deadline"/>
+                          <!--   <field name="deadline"/> -->
                            <!--  <field name="attachments"/> -->
                         </group>
                <notebook colspan="4">

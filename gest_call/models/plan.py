@@ -29,8 +29,8 @@ class GestcalPlan(models.Model):
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
-    plan_host = fields.Many2one('res.partner', string='Plan host')
-    plan_actuator = fields.Many2one('res.partner', string='Plan actuator')
+    plan_host = fields.Many2one('res.partner', string='Plan host', domain=[('is_company', '=', True)])
+    plan_actuator = fields.Many2one('res.partner', string='Plan actuator', domain=[('is_company', '=', True)])
     plan_handler = fields.Many2one('res.partner', string='Plan handler', domain=[('is_operator', '=', True)])
     total_recipients = fields.Integer('Total recipients')
     state = fields.Selection([
@@ -58,7 +58,11 @@ class GestcalPlan(models.Model):
             lenplan = len(code_plan) + 1
             if code_plan:
                 self.title = str(title) + '(' + (str(lenplan))+')'
-            
+ 
+    @api.multi
+    def draft_plan(self):
+        return self.write({'state': 'draft'})
+                
     @api.multi
     def submitted_plan(self):
         return self.write({'state': 'submitted'})

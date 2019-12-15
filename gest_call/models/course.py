@@ -3,7 +3,6 @@ from datetime import datetime
 import time
 from odoo.exceptions import ValidationError
 import logging
-from mako.runtime import _inherit_from
 logger=logging.getLogger('_______LOGGER B____________')
 
 class hr_employee(models.Model):
