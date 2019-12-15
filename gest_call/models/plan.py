@@ -23,7 +23,7 @@ class GestcalPlan(models.Model):
     admittance = fields.Date(string='Admittance')
     agreement = fields.Date(string='Agreement')
     account_request = fields.Date(string='Account Request')
-    partner = fields.Many2many('res.partner','projects_ids', string='Partner',store=True)
+    partner = fields.Many2many('res.partner','partner_plan_rel', 'plan_id', 'partner_id', string='Partner',store=True)
     deadline = fields.Datetime(string='Deadline')
     projects = fields.Many2many('gestcal.project','project_ids', string='Projects')
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')

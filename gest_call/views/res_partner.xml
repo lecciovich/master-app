@@ -20,7 +20,15 @@
                       <field name="is_teacher"/>
                       <field name="is_operator"/> 
                     </group>  
-                
+		               <group>
+		               <field name="plan_ids">
+								<tree string="Plan">
+              						  <field name="title" />
+              						  <field name="plan_code" />
+              						  <field name="total_lesson_hours" /> 
+           						 </tree>
+           					 </field>
+		               </group>
                     </page>
             
             </xpath>

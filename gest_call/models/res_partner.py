@@ -13,6 +13,7 @@ class ResPartner(models.Model):
     
     gest_course_id = fields.Many2one('gestcal.course',string='gest cal id')
     recipients_course_id = fields.Many2one('gestcal.course',string='gest cal id')
+    plan_ids = fields.Many2many('gestcal.plan','partner_plan_rel', 'partner_id', 'plan_id', string='Plan',store=True)
   
 
     
