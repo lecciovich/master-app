@@ -108,7 +108,7 @@
 							<field name="total_hours" />
 							<field name="topics" />
 							<field name="lesson_id" />
-                </tree>
+				</tree>
             </field>
         </record>
  
@@ -118,5 +118,5 @@
             <field name="res_model">gestcal.course</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
-        </record>             
+        </record>
 </odoo>

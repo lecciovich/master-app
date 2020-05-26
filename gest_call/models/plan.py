@@ -33,6 +33,9 @@ class GestcalPlan(models.Model):
     plan_actuator = fields.Many2one('res.partner', string='Plan actuator', domain=[('is_company', '=', True)])
     plan_handler = fields.Many2one('res.partner', string='Plan handler', domain=[('is_operator', '=', True)])
     total_recipients = fields.Integer('Total recipients')
+    plan_director = fields.Char(string='Plan Director')
+    beneficiary_representative = fields.Char(string='Beneficiary Representative')
+
     state = fields.Selection([
         ('draft', 'Draft'),
         ('submitted', 'Submitted'),

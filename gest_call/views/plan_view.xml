@@ -89,10 +89,13 @@
             <field name="arch" type="xml">
                 <tree string="Plan">
                    <field name="title"/>
-                          <field name="plan_code"/>
+                    <field name="plan_code"/>
                             <!-- <field name="found"/> -->
-                            <field name="financing_amount"/>
-                            <field name="total_lesson_hours" />
+                    <field name="financing_amount"/>
+                    <field name="total_lesson_hours" />
+    				<field name="plan_director" />
+					<field name="beneficiary_representative" />
+
                 </tree>
             </field>
         </record>
