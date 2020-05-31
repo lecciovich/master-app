@@ -11,8 +11,13 @@
              <xpath expr="//page[@name='hr_settings']" position="before">   
                
                     <page string="Gest Call"> 
-                    <group> 
-                      <field name="is_teacher"/>
+                    <group>
+                        <field name="is_teacher" position="attribute"/>
+                        <field name="topics" attrs="{'invisible':[('is_teacher', '==', False)]}" />
+<!--                            <field name="topic" position="attribute">-->
+<!--                                <attribute name="invisible">1</attribute>-->
+<!--                            </field>-->
+<!--                        </field>-->
                     </group>  
                 
                     </page>
