@@ -14,7 +14,7 @@ class GestcalPlan(models.Model):
     _description = 'Gestcal Plan'
     
     title = fields.Char(string='Title', required=True)
-    plan_code = fields.Char(string='Plan code' ,required=True)
+    plan_code = fields.Char(string='Plan code', required=True)
     # found = fields.Float('Found', required=True)
     financing_amount = fields.Float('Financing Amount', required=True)
     total_lesson_hours = fields.Integer('Total Lesson Hours')
@@ -33,8 +33,8 @@ class GestcalPlan(models.Model):
     plan_actuator = fields.Many2one('res.partner', string='Plan actuator', domain=[('is_company', '=', True)])
     plan_handler = fields.Many2one('res.partner', string='Plan handler', domain=[('is_operator', '=', True)])
     total_recipients = fields.Integer('Total recipients')
-    plan_director = fields.Char(string='Plan Director')
-    beneficiary_representative = fields.Char(string='Beneficiary Representative')
+    plan_director = fields.Many2one('res.partner', string='Plan Director', domain=[('is_company', '=', False)])
+    beneficiary_representative = fields.Many2one('res.partner', string='Beneficiary Representative', domain=[('is_company', '=', False)])
 
     state = fields.Selection([
         ('draft', 'Draft'),

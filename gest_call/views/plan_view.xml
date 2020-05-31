@@ -40,15 +40,20 @@
                             <field name="plan_actuator"/>
                             <field name="plan_handler"/>
                         </group>
-                      <group col="4" colspan="4"> 
+                        <group col="4" colspan="4">
                             <field name="call"/>
                             <field name="submission"/>
                             <field name="admittance"/>
                             <field name="agreement" />
                         </group>
-                        
-                          <group col="4" colspan="4"> 
-                            <field name="account_request"/> 
+                        <group col="4" colspan="4">
+                            <field name="plan_director" />
+                            <field name="beneficiary_representative" />
+                            <field name="account_request"/>
+                        </group>
+
+                        <group col="4" colspan="4">
+<!--                            <field name="account_request"/> -->
                           <!--   <field name="deadline"/> -->
                            <!--  <field name="attachments"/> -->
                         </group>
