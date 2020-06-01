@@ -13,11 +13,9 @@
                     <page string="Gest Call"> 
                     <group>
                         <field name="is_teacher" position="attribute"/>
-                        <field name="topics" attrs="{'invisible':[('is_teacher', '==', False)]}" />
-<!--                            <field name="topic" position="attribute">-->
-<!--                                <attribute name="invisible">1</attribute>-->
-<!--                            </field>-->
-<!--                        </field>-->
+                        <!-- attribute required doesn't work. Employee creation bypass requirements. -->
+<!--                        required="1" -->
+                        <field name="topics" attrs="{'invisible':[('is_teacher', '=', False)], 'required':[('is_teacher','=', True)]}" />
                     </group>  
                 
                     </page>

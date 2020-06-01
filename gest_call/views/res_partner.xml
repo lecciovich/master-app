@@ -16,10 +16,11 @@
                
                     <page string="Gest Call"> 
                     <group>
-                      <field name="is_student"/>
-                      <field name="is_teacher"/>
-                      <field name="is_operator"/> 
-                    </group>  
+                        <field name="is_student"/>
+                        <field name="is_teacher"/>
+                        <field name="is_operator"/>
+                        <field name="topics" position="attribute" attrs="{'invisible':[('is_teacher','=',False)]}"/>
+                    </group>
 		               <group>
 		               <field name="plan_ids">
 								<tree string="Plan">
