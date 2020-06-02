@@ -18,13 +18,16 @@ class GestcalPlan(models.Model):
     # found = fields.Float('Found', required=True)
     financing_amount = fields.Float('Financing Amount', required=True)
     total_lesson_hours = fields.Integer('Total Lesson Hours')
-    call = fields.Char(string='Call name')
+    call = fields.Many2one('gestcal.call', string='Call title')
     submission = fields.Date(string='Submission')
     admittance = fields.Date(string='Admittance')
     agreement = fields.Date(string='Agreement')
-    account_request = fields.Date(string='Account Request')
-    partner = fields.Many2many('res.partner','partner_plan_rel', 'plan_id', 'partner_id', string='Partner',store=True)
     deadline = fields.Datetime(string='Deadline')
+    lessons_start = fields.Date(string='Lesson start')
+    report_submission = fields.Date(string='Report Submission')
+    # account_request = fields.Date(string='Account Request')
+    partner = fields.Many2many('res.partner','partner_plan_rel', 'plan_id', 'partner_id', string='Partner',store=True)
+    operative_partner = fields.Many2many('res.partner','partner_plan_rel', 'plan_id', 'partner_id', string='Operative Partner',store=True)
     projects = fields.Many2many('gestcal.project','project_ids', string='Projects')
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
@@ -35,6 +38,8 @@ class GestcalPlan(models.Model):
     total_recipients = fields.Integer('Total recipients')
     plan_director = fields.Many2one('res.partner', string='Plan Director', domain=[('is_company', '=', False)])
     beneficiary_representative = fields.Many2one('res.partner', string='Beneficiary Representative', domain=[('is_company', '=', False)])
+    plan_assistant = fields.Many2one('res.partner', string= 'Plan assistent', domain=[('is_company', '=', False),('is_operator', '=', True)])
+    auditor = fields.Many2one('res.partner', string='Unique Auditor', domain=[('is_company', '=', False)])
 
     state = fields.Selection([
         ('draft', 'Draft'),
@@ -46,6 +51,12 @@ class GestcalPlan(models.Model):
         
         ], string='Status', index=True, readonly=True, copy=False, default='draft', track_visibility='onchange')
 
+class Call(models.Model):
+    _name = 'gestcal.call'
+    _rec_name = 'title'
+    _description = 'Gestcal Call'
+
+    title = fields.Char(string='Call title')
 
     def _compute_attachment_count(self):
         for attachment in self: 

@@ -49,30 +49,37 @@
                         <group col="4" colspan="4">
                             <field name="plan_director" />
                             <field name="beneficiary_representative" />
-                            <field name="account_request"/>
+                            <field name="plan_assistant"/>
+                            <field name="auditor"/>
                         </group>
 
                         <group col="4" colspan="4">
-<!--                            <field name="account_request"/> -->
-                          <!--   <field name="deadline"/> -->
-                           <!--  <field name="attachments"/> -->
+<!--                            <field name="account_request"/>-->
                         </group>
                <notebook colspan="4">
-                    <page string="Partner"> 
+                   <page string="Partner">
                          <field name="partner" context="{'search_default_type_company':'company'}">
 								<tree string="Partner">
               						  <field name="name" />
               						  <field name="city" /> 
            						 </tree>
-           					 </field>
+                         </field>
                    </page>
-                   <page string="projects"> 
+                   <page string="Projects">
                          <field name="projects" >
 								<tree string="projects" editable="bottom">
               						  <field name="title" />
               						  <field name="state" /> 
            						 </tree>
-           					 </field>
+                         </field>
+                   </page>
+                   <page string="Web partner">
+                         <field name="operative_partner" context="{'search_default_type_company':'company'}">
+								<tree string="Operative Partner">
+              						  <field name="name" />
+              						  <field name="city" />
+           						 </tree>
+                         </field>
                    </page>
                    
                 </notebook>         
@@ -93,13 +100,20 @@
             <field name="model">gestcal.plan</field>
             <field name="arch" type="xml">
                 <tree string="Plan">
+                   <field name="plan_code"/>
                    <field name="title"/>
-                    <field name="plan_code"/>
                             <!-- <field name="found"/> -->
-                    <field name="financing_amount"/>
-                    <field name="total_lesson_hours" />
-    				<field name="plan_director" />
-					<field name="beneficiary_representative" />
+<!--                    <field name="financing_amount"/>-->
+<!--                    <field name="total_lesson_hours" />-->
+<!--    				<field name="plan_director" />-->
+<!--					<field name="beneficiary_representative" />-->
+                    <field name="agreement"/>
+                    <field name="submission"/>
+                    <field name="admittance"/>
+                    <field name="lessons_start"/>
+                    <field name="deadline"/>
+                    <field name="report_submission"/>
+
 
                 </tree>
             </field>
@@ -144,10 +158,9 @@
             <field name="model">gestcal.plan</field>
             <field name="arch" type="xml">
 			<search string="Project">
-			  <field name="call" />
-			   <!-- <field name="found" /> -->
-			    <field name="plan_code" />
-				 
+                <field name="call" />
+                <!-- <field name="found" /> -->
+                <field name="plan_code" />
 			</search>
 		 </field>
 </record>
