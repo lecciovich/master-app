@@ -15,8 +15,10 @@
                         <field name="is_teacher" position="attribute"/>
                         <!-- attribute required doesn't work. Employee creation bypass requirements. -->
 <!--                        required="1" -->
-                        <field name="topics" attrs="{'invisible':[('is_teacher', '=', False)], 'required':[('is_teacher','=', True)]}" />
-                    </group>  
+<!--                        <field name="topics" attrs="{'invisible':[('is_teacher', '=', False)], 'required':[('is_teacher','=', True)]}" />-->
+                        <field name="topics" position="attribute" attrs="{'invisible':[('is_teacher','=',False)]}"/>
+
+                    </group>
                 
                     </page>
             
