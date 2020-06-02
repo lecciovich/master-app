@@ -19,7 +19,7 @@ class GestcalCourse(models.Model):
     name = fields.Char(string='Name')
     repetition = fields.Char(string='Repetition')
     total_hours = fields.Float(string='Total Hours')
-    topics = fields.Many2one('gestcal.course.topics',string='Topics')
+    topics = fields.Many2one('gestcal.course.topics',string='Theme Areas', store=True)
     lesson_id = fields.One2many('gestcal.lesson','course_id', string='Lesson') 
     attachments_ids = fields.One2many('gestcal.attachment', 'courses_id', string='Attachment')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
@@ -93,8 +93,10 @@ class GestcalCourse_topics(models.Model):
    
     _name = 'gestcal.course.topics'
     _description = 'Topic for the Lessions'
+    _rec_name = 'name'
     
     name = fields.Char(string='Name')
-    text = fields.Text(string='Text') 
+    text = fields.Text(string='Text')
+
     
     
