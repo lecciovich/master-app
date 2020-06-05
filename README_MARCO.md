@@ -15,9 +15,9 @@ I got some problem trying to run `pip install -r requirements.txt` however it co
 
 
 ## Install Modules
-To install this app you have to install correctly apps either in the default list of oddo APPS section then on custom app path.
-
-###Deault App section apps  
+To install this app you have to install correctly apps either in the default list of oddo APPS section then on custom app path.  
+  
+### Deault App section apps  
 App name | Tecnical name | Notes
 -------- | ------------- | -----
 Invoicing | account |
@@ -25,8 +25,8 @@ Employees | hr |
 Contacts | contacts | 
 Discuss | mail | 
 Calendar | calendar |
-Italy accounting | l10n -italy | solves problem about contact creation
-###other Module to install (if not done yet)  
+Italy accounting | l10n -italy | solves problem about contact creation  
+### Other Module to install (if not done yet)  
 Module name | Tecnical name | Notes
 -------- | ------------- | -----
 Remove import button | display imort button | module get by 3rd party devs to remove from dashboards the import button
