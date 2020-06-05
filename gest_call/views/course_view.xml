@@ -9,17 +9,17 @@
             <field name="arch" type="xml">
                 <form string="Course">
                     <sheet>
-                 <div class="oe_button_box" name="button_box">
-                       
-                         <button name="attachment_action_to_open"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-paperclip" 
-                            context="{'xml_id':'action_gestcal_attachment_view'}">
-                            <field string="Attachment" name="attachment_count" widget="statinfo" options="{'label_field': 'label_tasks'}"/>
-						</button>
-		           </div>
-                        <group col="4" colspan="4">
+						<div class="oe_button_box" name="button_box">
+
+							<button name="attachment_action_to_open"
+									type="object"
+									class="oe_stat_button"
+									icon="fa-paperclip"
+									context="{'xml_id':'action_gestcal_attachment_view'}">
+								<field string="Attachment" name="attachment_count" widget="statinfo" options="{'label_field': 'label_tasks'}"/>
+							</button>
+						</div>
+						<group col="4" colspan="4">
                  
 							<field name="name" />
 							<field name="course_id" />
@@ -29,38 +29,11 @@
 							<field name="topics" />
 							
                         </group>
-                        
-                          <notebook colspan="4">
-                    <page string="Lesson"> 
-                        <group>
-							 <field name="lesson_id"  mode="tree">
-							<!-- 		<form>
-										<group>
-											<group>
-												<field name="title" />
-												<field name="project_id" />
-												<field name="date" />
-											</group>
-											<group>
-												<field name="start_time" />
-												<field name="end_time" />
-												<field name="teacher_id" />
-												<field name="course_id" />
-											</group>
-										</group>
-										<group>
-											<field name="recipients_id">
-												<tree string="Lesson" editable="bottom">
-													<field name="name" />
-													<field name="street" />
-													<field name="company_type" />
-												</tree>
-											</field>
-										</group>
-									</form>
-								 -->
-									<tree string="Lesson" create="false" delete="false">
-									
+						<notebook colspan="4">
+							<page string="Lesson">
+								<group>
+									<field name="lesson_id"  mode="tree">
+										<tree string="Lesson" create="false" delete="false">
 										<field name="date" />
 										<field name="start_time" />
 										<field name="end_time" />
@@ -69,28 +42,24 @@
 								</field>
                         </group>
 					 </page>
-							
-								<page string="Teacher">
-									<button name="get_teachers" type="object" string="Actualize Teacher" icon="fa-exchange"  style="background-color:#f8f8f1;"/>
-									
-									<field name="teacher_ids" mode="tree">
-										<tree string="Teacher" create="false" delete="false">
-											<field name="name" />
-										</tree>
-									</field>
-							
-								</page>
-								<page string="Recipients">
-									<button name="get_recipients" type="object" string="Actualize Recipients" icon="fa-exchange" style="background-color:#f8f8f8;"/>
-									<field name="recipients_ids" mode="tree">
-										<tree string="Recipients" create="false" delete="false">
-											<field name="name" />
-										</tree>
-									</field>
-							
-								</page>
-                        
-                   </notebook>
+							<page string="Teacher">
+								<button name="get_teachers" type="object" string="Actualize Teacher" icon="fa-exchange"  style="background-color:#f8f8f1;"/>
+								<field name="teacher_ids" mode="tree">
+									<tree string="Teacher" create="false" delete="false">
+										<field name="name"/>
+										<field name="topics"/>
+									</tree>
+								</field>
+							</page>
+							<page string="Recipients">
+								<button name="get_recipients" type="object" string="Actualize Recipients" icon="fa-exchange" style="background-color:#f8f8f8;"/>
+								<field name="recipients_ids" mode="tree">
+									<tree string="Recipients" create="false" delete="false">
+										<field name="name" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
                       
                     </sheet>
                 </form>
