@@ -3,7 +3,7 @@
 To install Odoo to develop more modules you have to dollow the video below. <br>
 ###### How to Configure Odoo With Pycharm - Odoo Mates <br>
 https://www.youtube.com/watch?v=p7SJW36lqVE <br>
-####Issues with odoo configuration <br>
+#### Issues with odoo configuration <br>
 In the tutorial you have to get from zip or git clone the Repository of Odoo (https://github.com/odoo/odoo/). <br>
 First of all keep attention to select from github page the branch of correct odoo version (in our case 12.0 https://github.com/odoo/odoo/tree/12.0). <br>
 After this unzip the content and open with pycharm the folder extracted. <br>
