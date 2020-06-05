@@ -1,23 +1,23 @@
-# Install procedures
-## Install dev version Odoo
-To install Odoo to develop more modules you have to dollow the video below.
-###### How to Configure Odoo With Pycharm - Odoo Mates
-https://www.youtube.com/watch?v=p7SJW36lqVE
-####Issues with odoo configuration
-In the tutorial you have to get from zip or git clone the Repository of Odoo (https://github.com/odoo/odoo/).  
-First of all keep attention to select from github page the branch of correct odoo version (in our case 12.0 https://github.com/odoo/odoo/tree/12.0).  
-After this unzip the content and open with pycharm the folder extracted.
+# Install procedures <br>
+## Install dev version Odoo <br>
+To install Odoo to develop more modules you have to dollow the video below. <br>
+###### How to Configure Odoo With Pycharm - Odoo Mates <br>
+https://www.youtube.com/watch?v=p7SJW36lqVE <br>
+####Issues with odoo configuration <br>
+In the tutorial you have to get from zip or git clone the Repository of Odoo (https://github.com/odoo/odoo/). <br>
+First of all keep attention to select from github page the branch of correct odoo version (in our case 12.0 https://github.com/odoo/odoo/tree/12.0). <br>
+After this unzip the content and open with pycharm the folder extracted. <br>
 
-## Install this application 
-First of all you need to install postgresql as shown in video.
-You now need to install python libraries dependencies.  
-I got some problem trying to run `pip install -r requirements.txt` however it could be useful this discussion about it https://stackoverflow.com/questions/41457612/how-to-use-requirements-txt-to-install-all-dependencies-in-a-python-project.
+## Install this application <br>
+First of all you need to install postgresql as shown in video. <br>
+You now need to install python libraries dependencies. <br>
+I got some problem trying to run `pip install -r requirements.txt` however it could be useful this discussion about it https://stackoverflow.com/questions/41457612/how-to-use-requirements-txt-to-install-all-dependencies-in-a-python-project. <br>
 
 
-## Install Modules
-To install this app you have to install correctly apps either in the default list of oddo APPS section then on custom app path.  
+## Install Modules <br>
+To install this app you have to install correctly apps either in the default list of oddo APPS section then on custom app path. <br>
   
-### Deault App section apps  
+### Deault App section apps <br>
 App name | Tecnical name | Notes
 -------- | ------------- | -----
 Invoicing | account |
@@ -25,8 +25,8 @@ Employees | hr |
 Contacts | contacts | 
 Discuss | mail | 
 Calendar | calendar |
-Italy accounting | l10n -italy | solves problem about contact creation  
-### Other Module to install (if not done yet)  
+Italy accounting | l10n -italy | solves problem about contact creation <br>
+### Other Module to install (if not done yet) <br>
 Module name | Tecnical name | Notes
 -------- | ------------- | -----
 Remove import button | display imort button | module get by 3rd party devs to remove from dashboards the import button
@@ -68,4 +68,4 @@ Tours | web_tour | Odoo Web tours.
 Unsplash Image Library | web_unsplash | Find free high-resolution images from Unsplash
 Web Timepicker Widget | web_widget_timepicker | This module provides a timepicker widget for float fields. It can be used as a replacement for the standard float_time widget in form views. https://github.com/OCA/web/
 Customer Portal | portal | This module adds required base code for a fully integrated customer portal. It contains the base controller class and base templates. Business addons will add their specific templates and controllers to extend the customer portal. This module contains most code coming from odoo v10 website_portal. Purpose of this module is to allow the display of a customer portal without having a dependency towards website edition and customization capabilities.
-Web Routing | http_routing | Proposes advanced routing options not available in web or base to keep base modules simple.
+Web Routing | http_routing | Proposes advanced routing options not available in web or base to keep base modules simple. <br>
