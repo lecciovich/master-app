@@ -18,6 +18,8 @@ class ResPartner(models.Model):
     topics = fields.Many2many('gestcal.course.topics',string='Topics')
 
     participation_hour = fields.Float(string='Participation hours', compute='get_participation_hours')
+    tot_inserted_hours= fields.Float(string='Total Inserted Hours', compute='get_inserted_hours')
+
 
     @api.one
     @api.depends('recipients_course_id')
@@ -29,3 +31,11 @@ class ResPartner(models.Model):
                     tot_participation_hours+=(lesson.end_time-lesson.start_time)
         self.participation_hour=tot_participation_hours
 
+    @api.one
+    @api.depends('recipients_course_id')
+    def get_inserted_hours(self):
+        tot_hours=0
+        for course in self.recipients_course_id:
+            for lesson in course.lesson_ids:
+                tot_hours+=(lesson.end_time-lesson.start_time)
+        self.tot_inserted_hours=tot_hours
