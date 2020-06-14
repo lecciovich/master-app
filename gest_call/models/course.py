@@ -20,14 +20,14 @@ class GestcalCourse(models.Model):
     repetition = fields.Char(string='Repetition')
     total_hours = fields.Float(string='Total Hours')
     topics = fields.Many2many('gestcal.course.topics', 'name', string='Theme Areas',readonly=False)#, store=True
-    lesson_id = fields.One2many('gestcal.lesson','course_id', string='Lesson') 
+    lesson_ids = fields.One2many('gestcal.lesson', 'course_id', string='Lesson')
     attachments_ids = fields.One2many('gestcal.attachment', 'courses_id', string='Attachment')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
     courses_ids =  fields.Many2one('gestcal.project', string='Courses') 
     project_id = fields.Many2one('gestcal.project', string='Project')
     course_id = fields.Char(string='Course id', required=True) 
     teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher')
-    # teacher_skills = fields.Many2many('res.partner', 'topics', string='Thematic Areas')
+    teacher_skills = fields.Many2many('gestcal.course.teacher_ids', 'topics', string='Thematic Areas')
     recipients_ids = fields.One2many('res.partner', 'recipients_course_id', string='Recipients')
 
 
@@ -42,7 +42,7 @@ class GestcalCourse(models.Model):
         
     def get_teachers (self):
         teacher_list = [] 
-        for rec in self.lesson_id:
+        for rec in self.lesson_ids:
             if rec.teacher_id.id not in teacher_list:
                 teacher_list.append(rec.teacher_id.id)
         logger.info('__________teacher_list________: %s  ',teacher_list)
@@ -52,7 +52,7 @@ class GestcalCourse(models.Model):
     
     def get_recipients (self):
         recipients_list = [] 
-        for rec in self.lesson_id:
+        for rec in self.lesson_ids:
             for i in rec.recipients_id:
                 if i.id not in recipients_list:
                     recipients_list.append(i.id)
@@ -96,7 +96,7 @@ class GestcalCourse_topics(models.Model):
     _description = 'Topic for the Lessions'
     _rec_name = 'name'
     
-    name = fields.Char(string='Name')
+    name = fields.Char(string='Name', required=True)
     text = fields.Text(string='Text')
 
     
