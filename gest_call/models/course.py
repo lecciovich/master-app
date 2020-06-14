@@ -19,7 +19,7 @@ class GestcalCourse(models.Model):
     name = fields.Char(string='Name')
     repetition = fields.Char(string='Repetition')
     total_hours = fields.Float(string='Total Hours')
-    topics = fields.Many2many('gestcal.course.topics', 'name', string='Theme Areas',readonly=False)#, store=True
+    topics = fields.Many2many('gestcal.course.topics', 'name', string='Theme Areas', readonly=False)#, store=True
     lesson_ids = fields.One2many('gestcal.lesson', 'course_id', string='Lesson')
     attachments_ids = fields.One2many('gestcal.attachment', 'courses_id', string='Attachment')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
@@ -45,7 +45,7 @@ class GestcalCourse(models.Model):
         for rec in self.lesson_ids:
             if rec.teacher_id.id not in teacher_list:
                 teacher_list.append(rec.teacher_id.id)
-        logger.info('__________teacher_list________: %s  ',teacher_list)
+            logger.info('__________teacher_list________: %s  ',teacher_list)
         self.write({'teacher_ids' : [(6,0,teacher_list)]})
         return  
     
@@ -93,7 +93,7 @@ class GestcalCourse(models.Model):
 class GestcalCourse_topics(models.Model):
    
     _name = 'gestcal.course.topics'
-    _description = 'Topic for the Lessions'
+    _description = 'Topic for the Lesson'
     _rec_name = 'name'
     
     name = fields.Char(string='Name', required=True)

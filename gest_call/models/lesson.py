@@ -70,6 +70,8 @@ class GestcalLesson(models.Model):
         print(current_date,current_hour)
         date_check=datetime.now().date()>=self.date
         hour_chek=current_hour+timezone>self.end_time
+        logger.info('___________check_past_date________: %s  ', date_check)
+        logger.info('___________check_part_hour________: %s  ', hour_chek)
         print("date", date_check, "hour", hour_chek)
         return date_check and hour_chek
     

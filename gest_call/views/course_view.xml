@@ -47,7 +47,10 @@
 								<field name="teacher_ids" mode="tree">
 									<tree string="Teacher" create="true" delete="false">
 										<field name="name"/>
-										<field name="topics" widget="many2many_tags"/>
+										<field name="topics" widget='many2many_tags' options="{'no_create_edit': False}">
+											<attribute name="editable">top</attribute>
+										</field>
+<!--										 widget="many2many_tags" options="{'no_create': False, 'no_create_edit':False}"-->
 <!--										<field name="teacher_skills" widget="many2many_tags">-->
 <!--											<tree>-->
 <!--												<field name="name"/>-->
@@ -61,7 +64,8 @@
 								<button name="get_recipients" type="object" string="Actualize Recipients" icon="fa-exchange" style="background-color:#f8f8f8;"/>
 								<field name="recipients_ids" mode="tree">
 									<tree string="Recipients" create="false" delete="false">
-										<field name="name" />
+										<field name="name"/>
+										<field name="participation_hour"/>
 									</tree>
 								</field>
 							</page>

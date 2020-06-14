@@ -97,6 +97,7 @@ class GestcalPlan(models.Model):
                 for lesson in course.lesson_ids:
                     if(lesson.check_done()):
                         done_lesson_hours+=(lesson.end_time-lesson.start_time)
+                        logger.info('__________done_lesson_hours_list________: %s  ', done_lesson_hours)
         if (done_lesson_hours>=self.total_lesson_hours):
             return self.write({'state': 'completed'})
         else:
