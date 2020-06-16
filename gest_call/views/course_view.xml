@@ -30,7 +30,7 @@
 							<field name="course_id" />
 							<field name="project_id" />
 							<field name="repetition" />
-							<field name="total_hours" decoration-danger="total_hours &gt; 0"/>
+							<field name="total_hours" decoration-danger="total_hours &gt; 0" />
 							<field name="topics" widget="many2many_tags"/>
 
                         </group>
@@ -96,9 +96,7 @@
                     <field name="project_id" />
 					<field name="repetition" />
 					<field name="total_hours" />
-					<field name="topics">
-						<tree editable="bottom" edit="True" create="True"></tree>
-					</field>
+					<field name="topics" widget="many2many_tags"/>
 <!--							<field name="topics"/>-->
 <!--					<field name="topics" widget="many2many_tags"/>-->
 <!--						   options="{'no_create': True, 'no_create_edit':True}">-->
