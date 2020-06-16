@@ -19,6 +19,11 @@ class ResPartner(models.Model):
 
     participation_hour = fields.Float(string='Participation hours', compute='get_participation_hours')
     tot_inserted_hours= fields.Float(string='Total Inserted Hours', compute='get_inserted_hours')
+    recipient_state = fields.Selection([
+        ('active', 'Active'),
+        ('withdrawed', 'Withdrawed')
+    ], string='Recipient_Status', index=True, readonly=True, copy=False, default='active', track_visibility='onchange')
+
 
 
     @api.one
@@ -39,3 +44,7 @@ class ResPartner(models.Model):
             for lesson in course.lesson_ids:
                 tot_hours+=(lesson.end_time-lesson.start_time)
         self.tot_inserted_hours=tot_hours
+
+    # @api.multi
+    # @api.constrains('recipients_course_id')
+    # def course_withdraw(self):

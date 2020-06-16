@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
- 
+
+    <template id="assets_backend" name="Technical Service Assets" inherit_id="web.assets_backend">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" href="gest_call/static/src/css/styles.css"/>
+        </xpath>
+    </template>
 <!-- COURSE -->  
 <!-- Form View Of  place Information -->  
      <record id="view_gestcal_course_form" model="ir.ui.view">
@@ -19,15 +24,15 @@
 								<field string="Attachment" name="attachment_count" widget="statinfo" options="{'label_field': 'label_tasks'}"/>
 							</button>
 						</div>
-						<group col="4" colspan="4">
+						<group col="4" colspan="4" >
                  
 							<field name="name" />
 							<field name="course_id" />
 							<field name="project_id" />
 							<field name="repetition" />
-							<field name="total_hours" />
-							<field name="topics"/>
-							
+							<field name="total_hours" decoration-danger="total_hours &gt; 0"/>
+							<field name="topics" widget="many2many_tags"/>
+
                         </group>
 						<notebook colspan="4">
 							<page string="Lesson">
@@ -45,11 +50,14 @@
 							<page string="Teacher">
 								<button name="get_teachers" type="object" string="Actualize Teacher" icon="fa-exchange"  style="background-color:#f8f8f1;"/>
 								<field name="teacher_ids" mode="tree">
-									<tree string="Teacher" create="true" delete="false">
-										<field name="name"/>
-										<field name="topics" widget='many2many_tags' options="{'no_create_edit': False}">
-											<attribute name="editable">top</attribute>
+									<tree string="Teacher" create="true" delete="false" editable="bottom">
+										<field name="name" options="{'no_create_edit': True}" readonly="True"/>
+<!--										<group>-->
+
+										<field name="topics" widget="many2many_tags" >
+<!--												<attribute name="editable">top</attribute>-->
 										</field>
+<!--										</group>-->
 <!--										 widget="many2many_tags" options="{'no_create': False, 'no_create_edit':False}"-->
 <!--										<field name="teacher_skills" widget="many2many_tags">-->
 <!--											<tree>-->
@@ -63,10 +71,12 @@
 							<page string="Recipients">
 								<button name="get_recipients" type="object" string="Actualize Recipients" icon="fa-exchange" style="background-color:#f8f8f8;"/>
 								<field name="recipients_ids" mode="tree">
-									<tree string="Recipients" create="false" delete="false">
+									<tree string="Recipients" create="false" delete="false" >
 										<field name="name"/>
 										<field name="participation_hour"/>
 										<field name="tot_inserted_hours"/>
+										<field name="participation_hour" string="Total done hours" options='{"fg_color": "red:participation_hour &gt; 70/100*tot_inserted_hours"}'/>
+<!--										colors="green:True" class="opt_required" decoration-warning="participation_hour == participation_hour" decoration-danger="name=='student 1'"-->
 									</tree>
 								</field>
 							</page>
@@ -81,19 +91,21 @@
             <field name="name">gestcal.course.tree</field>
             <field name="model">gestcal.course</field>
             <field name="arch" type="xml">
-                <tree string="Lesson place" import="false">
+                <tree string="Lesson place" import="false" decoration-success="name=='course 1'">
 					<field name="name" />
                     <field name="project_id" />
 					<field name="repetition" />
 					<field name="total_hours" />
+					<field name="topics">
+						<tree editable="bottom" edit="True" create="True"></tree>
+					</field>
 <!--							<field name="topics"/>-->
-					<field name="topics" widget="many2many_tags">
+<!--					<field name="topics" widget="many2many_tags"/>-->
 <!--						   options="{'no_create': True, 'no_create_edit':True}">-->
 <!--						<tree string="Thematic Areas">-->
 <!--							<field name="name"/>-->
 <!--							<field name="text"/>-->
 <!--						</tree>-->
-					</field>
 <!--					<field name="lesson_ids"/> &lt;!&ndash; widget="one2many"&ndash;&gt;-->
 					<field name="lesson_ids" widget="many2many_tags"><!--widget="one2many" options="{'no_create': True, 'no_create_edit':True}"-->
 						<tree string="Lessons"  create="false" delete="false">

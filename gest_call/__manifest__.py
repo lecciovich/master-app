@@ -22,7 +22,8 @@
              'views/res_partner.xml',
              'views/hr_employee.xml',
              'views/gest_call_menu.xml',
-             ], 
+             ],
+    'css': ['static/src/css/styles.css'],
     'installable': True,
     'application': True
 }
