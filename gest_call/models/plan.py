@@ -81,7 +81,7 @@ class GestcalPlan(models.Model):
 
     @api.multi
     def active_plan(self):
-        return self.write({'state': 'active'})
+            return self.write({'state': 'active'})
 
     @api.multi
     @api.constrains('projects')

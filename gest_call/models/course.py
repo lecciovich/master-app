@@ -16,6 +16,7 @@ class GestcalCourse(models.Model):
     _rec_name = 'name'
     _description = 'Gestcal Course'
     
+    course_id = fields.Char(string='Course id', required=True)
     name = fields.Char(string='Name')
     repetition = fields.Char(string='Repetition')
     total_hours = fields.Float(string='Total Hours')
@@ -25,10 +26,9 @@ class GestcalCourse(models.Model):
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
     courses_ids =  fields.Many2one('gestcal.project', string='Courses') 
     project_id = fields.Many2one('gestcal.project', string='Project')
-    course_id = fields.Char(string='Course id', required=True) 
     teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher')
     teacher_skills = fields.Many2many('gestcal.course.teacher_ids', 'topics', string='Thematic Areas')
-    recipients_ids = fields.One2many('res.partner', 'recipients_course_id', string='Recipients')
+    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients')
 
 
     @api.one
