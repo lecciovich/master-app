@@ -22,7 +22,7 @@ class ResPartner(models.Model):
     recipient_state = fields.Selection([
         ('active', 'Active'),
         ('withdrawed', 'Withdrawed')
-    ], string='Recipient_Status', index=True, readonly=True, default='active') #, track_visibility='onchange'copy=False,
+    ], string='Recipient_Status', index=True, copy=False, readonly=True, default='active', track_visibility='onchange') #, track_visibility='onchange'copy=False,
 
 
 
@@ -52,5 +52,8 @@ class ResPartner(models.Model):
 
     @api.one
     def course_withdraw(self):
+        return self.write({'recipient_state': 'withdrawed'})
 
-        return self.write({'state': 'withdrawed'})
+    @api.one
+    def course_rejoin(self):
+        return self.write({'recipient_state': 'active'})

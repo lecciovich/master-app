@@ -12,6 +12,9 @@
 
                 <header>
 
+                    <button name="course_withdraw" type="object" string="Withdraw" recipient_state="active" class="oe_highlight"/>
+                    <button name="course_rejoin" type="object" string="Rejoin" recipient_state="withdrawed" class="oe_highlight"/>
+
                     <field name="recipient_state" widget="statusbar"/>
 
                 </header>
@@ -24,7 +27,7 @@
 
                     <!--                    <button name="draft_plan" type="object" string="Revert" states="submitted" class="oe_highlight"/>-->
 
-
+<!-- states="active" -->
 
             <xpath expr="//field[@name='category_id']" position="after">
 
