@@ -22,12 +22,12 @@ class ResPartner(models.Model):
     recipient_state = fields.Selection([
         ('active', 'Active'),
         ('withdrawed', 'Withdrawed')
-    ], string='Recipient_Status', index=True, readonly=True, copy=False, default='active', track_visibility='onchange')
+    ], string='Recipient_Status', index=True, readonly=True, default='active') #, track_visibility='onchange'copy=False,
 
 
 
     @api.one
-    @api.constrains('gest_course_id')
+    @api.depends('gest_course_id')
     def get_participation_hours(self):
         tot_participation_hours = 0
         for course in self.gest_course_id:
@@ -42,7 +42,7 @@ class ResPartner(models.Model):
             pass
 
     @api.one
-    @api.constrains('gest_course_id')
+    @api.depends('gest_course_id')
     def get_inserted_hours(self):
         tot_hours=0
         for course in self.gest_course_id:
@@ -50,8 +50,7 @@ class ResPartner(models.Model):
                 tot_hours+=(lesson.end_time-lesson.start_time)
         self.tot_inserted_hours=tot_hours
 
-    @api.multi
-    @api.constrains('gest_course_id')
+    @api.one
     def course_withdraw(self):
 
         return self.write({'state': 'withdrawed'})

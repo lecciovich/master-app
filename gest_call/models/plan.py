@@ -75,7 +75,7 @@ class GestcalPlan(models.Model):
     def draft_plan(self):
         return self.write({'state': 'draft'})
                 
-    # @api.multi
+    @api.multi
     def submitted_plan(self):
         return self.write({'state': 'submitted'})
 
@@ -84,7 +84,7 @@ class GestcalPlan(models.Model):
             return self.write({'state': 'active'})
 
     @api.multi
-    @api.constrains('projects')
+    # @api.depends('projects')
     def completed_plan(self):
         # Questo stage scatta se e solo se la somma delle ore dei corsi coincide con la  dkj
         # ciclo sui record di lesson e sui lesson_id di self e se coincidono addo oggetto a lista

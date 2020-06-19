@@ -2,46 +2,66 @@
 <odoo>
 
 <!-- partner -->        
-            <record id="view_partner_form" model="ir.ui.view">
-            <field name="name">res.partner.form</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/> 
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='category_id']" position="after">
-                    
-                   <field name="lesson_id"/>
-                    
-                </xpath>
-             <xpath expr="//page[@name='internal_notes']" position="before">   
-               
-                    <page string="Gest Call"> 
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//form" position="inside">
+
+                <header>
+
+                    <field name="recipient_state" widget="statusbar"/>
+
+                </header>
+            </xpath>
+            <!--                 field[@name='state']" position="replace"<button name="submitted_plan" type="object" string="Withdraw" states="draft" class="oe_highlight"/>-->
+            <!--                 <button name="draft_plan" type="object" string="Revert" states="submitted" class="oe_highlight"/>-->
+            <!--                    <field name="recipient_state" widget="statusbar" statusbar_visible="active,withdrawed" colspan="2"/>-->
+
+            <!--                    <button name="course_withdraw" type="object" string="Withdraw" states="active" class="oe_highlight"/>-->
+
+                    <!--                    <button name="draft_plan" type="object" string="Revert" states="submitted" class="oe_highlight"/>-->
+
+
+
+            <xpath expr="//field[@name='category_id']" position="after">
+
+                <field name="lesson_id"/>
+
+            </xpath>
+
+            <xpath expr="//page[@name='internal_notes']" position="before">
+
+                <page string="Gest Call">
                     <group>
                         <field name="is_student"/>
                         <field name="is_teacher"/>
                         <field name="is_operator"/>
                         <field name="topics" position="attribute" attrs="{'invisible':[('is_teacher','=',False)]}"/>
                     </group>
-		               <group>
-		               <field name="plan_ids">
-								<tree string="Plan">
-              						  <field name="title" />
-              						  <field name="plan_code" />
-              						  <field name="total_lesson_hours" /> 
-           						 </tree>
-           					 </field>
-		               </group>
-                    </page>
-            
+                    <group>
+                        <field name="plan_ids">
+                            <tree string="Plan">
+                                <field name="title" />
+                                <field name="plan_code" />
+                                <field name="total_lesson_hours" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+
             </xpath>
-            </field>
-        </record> 
+        </field>
+    </record>
  
 <!--         Contact action for gestcalls -->
- <record id="view_search_gestcall_contact_form" model="ir.ui.view">
-            <field name="name">res.partner.search.form</field>
-            <field name="model">res.partner</field>
-            <field name="arch" type="xml">
-			<search string="Contact">
+    <record id="view_search_gestcall_contact_form" model="ir.ui.view">
+        <field name="name">res.partner.search.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <search string="Contact">
 				<field name="is_student" />
 				<field name="is_teacher" />
 				<field name="is_operator" />
@@ -53,38 +73,40 @@
 				</group>
 			</search>
 		 </field>
-</record>	 
-        <record id="gestcall_contact_action" model="ir.actions.act_window">
-            <field name="name">Contact</field>
-            <field name="res_model">res.partner</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban,tree,form</field>
-            <field name="search_view_id" ref="view_search_gestcall_contact_form"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                    Add Contact
-                </p>
-            </field>
-        </record>
+    </record>
+
+    <record id="gestcall_contact_action" model="ir.actions.act_window">
+
+        <field name="name">Contact</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="view_search_gestcall_contact_form"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Add Contact
+            </p>
+        </field>
+    </record>
        
 
-        <record id="gestcall_kanban_contact_action_kanban" model="ir.actions.act_window.view">
-            <field name="sequence" eval="1" />
-            <field name="view_mode">kanban</field>
-            <field name="view_id" ref="base.res_partner_kanban_view" />
-            <field name="act_window_id" ref="gestcall_contact_action" />
-        </record>
-        <record id="gestcall_kanban_contact_action_tree" model="ir.actions.act_window.view">
-            <field name="sequence" eval="2" />
-            <field name="view_mode">tree</field>
-            <field name="view_id" ref="base.view_partner_tree" />
-            <field name="act_window_id" ref="gestcall_contact_action" />
-        </record>
-        <record id="gestcall_kanban_contact_action_form" model="ir.actions.act_window.view">
-            <field name="sequence" eval="3" />
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="base.view_partner_form" />
-            <field name="act_window_id" ref="gestcall_contact_action" />
-        </record>
+    <record id="gestcall_kanban_contact_action_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="base.res_partner_kanban_view" />
+        <field name="act_window_id" ref="gestcall_contact_action" />
+    </record>
+    <record id="gestcall_kanban_contact_action_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="base.view_partner_tree" />
+        <field name="act_window_id" ref="gestcall_contact_action" />
+    </record>
+    <record id="gestcall_kanban_contact_action_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="base.view_partner_form" />
+        <field name="act_window_id" ref="gestcall_contact_action" />
+    </record>
         
  </odoo>
