@@ -3,121 +3,126 @@
 <odoo>
 
 <!-- PROJECT -->
-        <!-- Form View Of project Information -->
-        <record id="view_gestcal_project_form" model="ir.ui.view">
-            <field name="name">gestcal.project.form</field>
-            <field name="model">gestcal.project</field>
-            <field name="arch" type="xml">
-                <form string="Project">
+    <!-- Form View Of project Information -->
+    <record id="view_gestcal_project_form" model="ir.ui.view">
+        <field name="name">gestcal.project.form</field>
+        <field name="model">gestcal.project</field>
+        <field name="arch" type="xml">
+            <form string="Project">
 <!--             <header>
-                   <button name="submitted_project" type="object" string="Submit" states="draft" class="oe_highlight"/>
-                    <button name="active_project" type="object" string="Active" states="submitted" class="oe_highlight"/>
-                     <button name="completed_project" type="object" string="Complet" states="active" class="oe_highlight"/>
-                      <button name="accounted_project" type="object" string="Account" states="completed" class="oe_highlight"/>
-                       <button name="closed_project" type="object" string="Closed" states="accounted" class="oe_highlight"/>
-                
-                   <field name="state" widget="statusbar"/>
-                 
-            </header> -->
-                    <sheet>
-                 <label for="title" class="oe_edit_only"/>
-                <h1>
-                 <field name="title"/>
-               	</h1> 
-                   <group>
+               <button name="submitted_project" type="object" string="Submit" states="draft" class="oe_highlight"/>
+                <button name="active_project" type="object" string="Active" states="submitted" class="oe_highlight"/>
+                 <button name="completed_project" type="object" string="Complet" states="active" class="oe_highlight"/>
+                  <button name="accounted_project" type="object" string="Account" states="completed" class="oe_highlight"/>
+                   <button name="closed_project" type="object" string="Closed" states="accounted" class="oe_highlight"/>
+
+               <field name="state" widget="statusbar"/>
+
+        </header> -->
+                <sheet>
+                    <label for="title" class="oe_edit_only"/>
+                    <h1>
+                        <field name="title"/>
+                    </h1>
                     <group>
-                     <field name="project_id"/>
-                      <field name="plan_id"/>
-	               </group>
-	               </group>      
-               <notebook colspan="4">
+                        <group>
+                            <field name="project_id"/>
+                            <field name="plan_id"/>
+                        </group>
+                    </group>
 
-                   <page string="Courses"> 
-                         <field name="courses" >
-								<tree string="courses" editable="bottom">
-              						  <field name="name" />
-              						  <field name="total_hours" /> 
-           						 </tree>
-           					 </field>
-                   </page>
-                   
-                </notebook>         
-                    </sheet>
-                               <div class="oe_chatter">
-				                    <field name="message_follower_ids" widget="mail_followers"/>
-				                    <field name="activity_ids" widget="mail_activity"/>
-				                    <field name="message_ids" widget="mail_thread"/>
-				                </div>
-                    
-                    
-                </form>
-            </field>
-        </record>
-        <!-- Tree View Of project Information -->
-        <record id="view_gestcal_project_tree" model="ir.ui.view">
-            <field name="name">gestcal.project.tree</field>
-            <field name="model">gestcal.project</field>
-            <field name="arch" type="xml">
-                <tree string="Project" import="false"> 
-                   <field name="title"/> 
-                </tree>
-            </field>
-        </record>
+                    <notebook colspan="4">
+                        <page string="Courses">
+                            <field name="courses" >
+                                <tree string="courses" editable="bottom">
+                                    <field name="name" />
+                                    <field name="total_hours" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+            </form>
+        </field>
+    </record>
+    <!-- Tree View Of project Information -->
+    <record id="view_gestcal_project_tree" model="ir.ui.view">
+        <field name="name">gestcal.project.tree</field>
+        <field name="model">gestcal.project</field>
+        <field name="arch" type="xml">
+            <tree string="Project" import="false">
+               <field name="title"/>
+            </tree>
+        </field>
+    </record>
         
-      <record model="ir.ui.view" id="view_gestcal_project_kanban">
-            <field name="name">gestcal.project.kanban</field>
-            <field name="model">gestcal.project</field>
-            <field name="arch" type="xml">
-            <kanban class="oe_background_grey" import="false"> 
+    <record model="ir.ui.view" id="view_gestcal_project_kanban">
+        <field name="name">gestcal.project.kanban</field>
+        <field name="model">gestcal.project</field>
+        <field name="arch" type="xml">
 
-                 <field name ="title"/> 
-                 <!-- <field name="found" /> -->
+            <kanban class="oe_background_grey" import="false">
+                <field name ="title"/>
+         <!-- <field name="found" /> -->
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click" >
-                             
-                                <div class="oe_kanban_details">
-										<ul>
-											<li style="display:inherit;">
-												<strong style="font-size:20px;">
-													<field t-if="record.title.raw_value" name="title" />
-												</strong>
-											</li>
-											 								
-										</ul>
-                                </div>
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li style="display:inherit;">
+                                        <strong style="font-size:20px;">
+                                            <field t-if="record.title.raw_value" name="title" />
+                                        </strong>
+                                    </li>
+
+                                </ul>
+                            </div>
                         </div>
                     </t>
                 </templates>
             </kanban>
-            </field>
-            </record>   
+        </field>
+    </record>
  
-          <record id="view_project_search_form" model="ir.ui.view">
-            <field name="name">gestcal.project</field>
-            <field name="model">gestcal.project</field>
-            <field name="arch" type="xml">
-			<search string="Project">
-			    <field name="title" />
-				 
-			</search>
-		 </field>
-</record>
+    <record id="view_project_search_form" model="ir.ui.view">
+        <field name="name">gestcal.project</field>
+        <field name="model">gestcal.project</field>
+        <field name="arch" type="xml">
+            <search string="Project">
+                <field name="title" />
+                <field name="project_id"/>
+                <field name="courses"/>
+                <field name="attachments_ids"/>
+                <field name="attachments"/>
+                <field name="attachment_count"/>
+                <field name="plan_id"/>
+                <field name="project_ids"/>
+                <field name="state"/>
+            </search>
+        </field>
+    </record>
         
         <!-- Actions Of Form & Tree Views Of project Information -->
-        <record id="action_gestcal_project_view" model="ir.actions.act_window">
-            <field name="name">Project</field>
-            <field name="res_model">gestcal.project</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban,tree,form</field>
-                 <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
+    <record id="action_gestcal_project_view" model="ir.actions.act_window">
+        <field name="name">Project</field>
+        <field name="res_model">gestcal.project</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
                 Create a new Project
-              </p> 
-              <p>
+            </p>
+            <p>
                 Project view Kanban description ....
-              </p>
-            </field>
-        </record>
+            </p>
+        </field>
+    </record>
 
 </odoo>

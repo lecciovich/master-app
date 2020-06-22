@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<!-- partner -->        
+<!-- PARTNER -->
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.form</field>
         <field name="model">res.partner</field>
@@ -12,13 +12,10 @@
 
                 <header>
 
-                    <button name="course_withdraw" type="object" string="Withdraw" states="active" class="oe_highlight">
-
-                    </button>
+                    <button name="course_withdraw" type="object" string="Withdraw" states="active" class="oe_highlight"/>
                     <button name="course_rejoin" type="object" string="Rejoin" states="withdrawed" class="oe_highlight"/>
 
                     <field name="state" widget="statusbar"/>
-
                 </header>
             </xpath>
             <!--  recipient_state               field[@name='state']" position="replace"<button name="submitted_plan" type="object" string="Withdraw" states="draft" class="oe_highlight"/>-->
@@ -32,9 +29,7 @@
 <!-- states="active" -->
 
             <xpath expr="//field[@name='category_id']" position="after">
-
                 <field name="lesson_id"/>
-
             </xpath>
 
             <xpath expr="//page[@name='internal_notes']" position="before">
@@ -60,13 +55,28 @@
             </xpath>
         </field>
     </record>
- 
-<!--         Contact action for gestcalls -->
+
+<!--                <field name="name">res.partner.view.search.inherit.mail</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="inherit_id" ref="base.view_res_partner_filter"/>-->
+
+<!--         Contact search for gestcalls -->
     <record id="view_search_gestcall_contact_form" model="ir.ui.view">
         <field name="name">res.partner.search.form</field>
         <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
         <field name="arch" type="xml">
-            <search string="Contact">
+            <xpath expr="//field[@name='name']" position="after">
+
+<!--                <field name="name"/>-->
+                <field name="lesson_id"/>
+                <field name="projects_ids"/>
+                <field name="gest_course_id"/>
+                <field name="plan_ids"/>
+                <field name="topics"/>
+                <field name="participation_hour"/>
+                <field name="tot_inserted_hours"/>
+                <field name="state"/>
 				<field name="is_student" />
 				<field name="is_teacher" />
 				<field name="is_operator" />
@@ -76,12 +86,32 @@
 					<filter name="is_teacher" string="Teachers" domain="[('is_teacher','=',True)]"/>
 					<filter name="is_operator" string="Operator" domain="[('is_operator','=',True)]"/>
 				</group>
-			</search>
+            </xpath>
+
+<!--            <search string="Contact">-->
+<!--                <field name="name"/>-->
+<!--                <field name="course_id"/>-->
+<!--                <field name="repetition"/>-->
+<!--                <field name="total_hours"/>-->
+<!--                <field name="topics"/>-->
+<!--                <field name="lesson_ids"/>-->
+<!--                <field name="attachments_ids"/>-->
+<!--                <field name="attachment_count"/>-->
+<!--				<field name="is_student" />-->
+<!--				<field name="is_teacher" />-->
+<!--				<field name="is_operator" />-->
+<!--				<filter string="Companies" name="type_company" domain="[('is_company','=',1)]"/>-->
+<!--				<group expand="0" string="Group By">-->
+<!--					<filter name="is_student" string="Students" domain="[('is_student','=',True)]"/>-->
+<!--					<filter name="is_teacher" string="Teachers" domain="[('is_teacher','=',True)]"/>-->
+<!--					<filter name="is_operator" string="Operator" domain="[('is_operator','=',True)]"/>-->
+<!--				</group>-->
+<!--			</search>-->
 		 </field>
     </record>
 
+<!--         Contact action for gestcalls -->
     <record id="gestcall_contact_action" model="ir.actions.act_window">
-
         <field name="name">Contact</field>
         <field name="res_model">res.partner</field>
         <field name="view_type">form</field>

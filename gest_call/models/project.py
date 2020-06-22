@@ -20,6 +20,8 @@ class GestcalProject(models.Model):
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
     plan_id = fields.Many2one('gestcal.plan', string='Plan')
+    project_ids = fields.Many2one('gestcal.plan', string='Projects')
+
     state = fields.Selection([
         ('draft', 'Draft'),
         ('submitted', 'Submitted'),
@@ -29,7 +31,6 @@ class GestcalProject(models.Model):
         ('closed','Closed')
         
         ], string='Status', index=True, readonly=True, copy=False, default='draft', track_visibility='onchange')
-    project_ids =  fields.Many2one('gestcal.plan', string='Projects')
 
     def _compute_attachment_count(self):
         for attachment in self: 

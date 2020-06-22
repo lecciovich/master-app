@@ -14,11 +14,10 @@ class ResPartner(models.Model):
     gest_course_id = fields.Many2one('gestcal.course', string='gest cal id')
     #gest_course_id = fields.Many2one('gestcal.course', string='gest cal id') #'recipients_ids',
     plan_ids = fields.Many2many('gestcal.plan', 'partner_plan_rel', 'partner_id', 'plan_id', string='Plan', store=True)
-
     topics = fields.Many2many('gestcal.course.topics', string='Topics')
-
     participation_hour = fields.Float(string='Participation hours', compute='get_participation_hours')
     tot_inserted_hours = fields.Float(string='Total Inserted Hours', compute='get_inserted_hours')
+
     state = fields.Selection([
         ('active', 'Active'),
         ('withdrawed', 'Withdrawed')
