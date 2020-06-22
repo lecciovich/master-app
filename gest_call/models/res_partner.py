@@ -18,11 +18,11 @@ class ResPartner(models.Model):
     topics = fields.Many2many('gestcal.course.topics', string='Topics')
 
     participation_hour = fields.Float(string='Participation hours', compute='get_participation_hours')
-    tot_inserted_hours= fields.Float(string='Total Inserted Hours', compute='get_inserted_hours')
-    recipient_state = fields.Selection([
+    tot_inserted_hours = fields.Float(string='Total Inserted Hours', compute='get_inserted_hours')
+    state = fields.Selection([
         ('active', 'Active'),
         ('withdrawed', 'Withdrawed')
-    ], string='Recipient_Status', index=True, copy=False, readonly=True, default='active', track_visibility='onchange') #, track_visibility='onchange'copy=False,
+    ], oldname='recipient_state', string='Recipient_Status', index=True, copy=False, readonly=True, default='active', track_visibility='onchange') #, track_visibility='onchange'copy=False, index=True,
 
 
 
@@ -34,9 +34,9 @@ class ResPartner(models.Model):
             for lesson in course.lesson_ids:
                 if lesson.check_done():
                     tot_participation_hours += (lesson.end_time - lesson.start_time)
-        print(dict(self._fields['recipient_state'].selection).get(self.recipient_state))
-        # dict(self._fields['recipient_state'].selection).get(self.recipient_state)
-        if self.recipient_state == 'active':
+        print(dict(self._fields['state'].selection).get(self.state))
+
+        if self.state == 'active':
             self.participation_hour = tot_participation_hours
         else:
             pass
@@ -44,16 +44,16 @@ class ResPartner(models.Model):
     @api.one
     @api.depends('gest_course_id')
     def get_inserted_hours(self):
-        tot_hours=0
+        tot_hours = 0
         for course in self.gest_course_id:
             for lesson in course.lesson_ids:
-                tot_hours+=(lesson.end_time-lesson.start_time)
-        self.tot_inserted_hours=tot_hours
+                tot_hours += (lesson.end_time-lesson.start_time)
+        self.tot_inserted_hours = tot_hours
 
     @api.one
     def course_withdraw(self):
-        return self.write({'recipient_state': 'withdrawed'})
+        return self.write({'state': 'withdrawed'})
 
     @api.one
     def course_rejoin(self):
-        return self.write({'recipient_state': 'active'})
+        return self.write({'state': 'active'})

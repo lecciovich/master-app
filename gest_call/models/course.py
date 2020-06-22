@@ -3,12 +3,12 @@ from datetime import datetime
 import time
 from odoo.exceptions import ValidationError
 import logging
-logger=logging.getLogger('_______LOGGER B____________')
+logger = logging.getLogger('_______LOGGER B____________')
 
 class hr_employee(models.Model):
    _inherit = 'hr.employee'
    
-   gest_course_id = fields.Many2one('gestcal.course',string='Gest cal id')
+   gest_course_id = fields.Many2one('gestcal.course', string='Gest cal id')
 
 class GestcalCourse(models.Model):
    
@@ -24,40 +24,41 @@ class GestcalCourse(models.Model):
     lesson_ids = fields.One2many('gestcal.lesson', 'course_id', string='Lesson')
     attachments_ids = fields.One2many('gestcal.attachment', 'courses_id', string='Attachment')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
-    courses_ids =  fields.Many2one('gestcal.project', string='Courses') 
+    # courses_ids = fields.Many2one('gestcal.project', string='Courses')
     project_id = fields.Many2one('gestcal.project', string='Project')
     teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher')
     teacher_skills = fields.Many2many('gestcal.course.teacher_ids', 'topics', string='Thematic Areas')
-    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients')
+    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients', domain=[('state', '=', 'active')])
 
 
     @api.one
     @api.constrains('repetition')
     def check_repetition(self):
         for record in self:
-            repetition_course = self.search([('repetition','=',record.repetition),('id','!=',record.id)])
+            repetition_course = self.search([('repetition', '=', record.repetition), ('id', '!=', record.id)])
             if repetition_course:
                 raise ValidationError(_("Number of repetition must be unique!"))
         
-        
-    def get_teachers (self):
+
+    @api.constrains('teacher_ids.id')
+    def get_teachers(self):
         teacher_list = [] 
         for rec in self.lesson_ids:
             if rec.teacher_id.id not in teacher_list:
                 teacher_list.append(rec.teacher_id.id)
-            logger.info('__________teacher_list________: %s  ',teacher_list)
-        self.write({'teacher_ids' : [(6,0,teacher_list)]})
+            logger.info('__________teacher_list________: %s  ', teacher_list)
+        self.write({'teacher_ids': [(6, 0, teacher_list)]})
         return  
-    
-    
-    def get_recipients (self):
+
+    @api.one
+    def get_recipients(self):
         recipients_list = [] 
         for rec in self.lesson_ids:
             for i in rec.recipients_id:
                 if i.id not in recipients_list:
                     recipients_list.append(i.id)
-        logger.info('__________recipients_list________: %s  ',recipients_list)
-        self.write({'recipients_ids' : [(6,0,recipients_list)]})
+        logger.info('__________recipients_list________: %s  ', recipients_list)
+        self.write({'recipients_ids': [(6, 0, recipients_list)]})
         return  
     
     
@@ -99,5 +100,3 @@ class GestcalCourse_topics(models.Model):
     name = fields.Char(string='Name', required=True)
     text = fields.Text(string='Text')
 
-    
-    

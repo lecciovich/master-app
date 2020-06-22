@@ -45,9 +45,9 @@ class GestcalPlan(models.Model):
         ('draft', 'Draft'),
         ('submitted', 'Submitted'),
         ('active', 'Active'), 
-        ('completed','Completed'), 
-        ('accounted','Sent To Financial Director'), 
-        ('closed','Closed')
+        ('completed', 'Completed'),
+        ('accounted', 'Sent To Financial Director'),
+        ('closed', 'Closed')
         
         ], string='Status', index=True, readonly=True, copy=False, default='draft', track_visibility='onchange')
 

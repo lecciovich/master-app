@@ -2,28 +2,56 @@
 <odoo>
 
 <!-- employee inherit -->        
-            <record id="view_hr_employee_form" model="ir.ui.view">
-            <field name="name">hr.employee.form</field>
-            <field name="model">hr.employee</field>
-            <field name="inherit_id" ref="hr.view_employee_form"/> 
-            <field name="arch" type="xml">
-     
-             <xpath expr="//page[@name='hr_settings']" position="before">   
-               
-                    <page string="Gest Call"> 
+    <record id="view_hr_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='hr_settings']" position="before">
+                <page string="Gest Call">
                     <group>
                         <field name="is_teacher" position="attribute"/>
-                        <!-- attribute required doesn't work. Employee creation bypass requirements. -->
+                <!-- attribute required doesn't work. Employee creation bypass requirements. -->
 <!--                        required="1" -->
 <!--                        <field name="topics" attrs="{'invisible':[('is_teacher', '=', False)], 'required':[('is_teacher','=', True)]}" />-->
                         <field name="topics" position="attribute" attrs="{'invisible':[('is_teacher','=',False)]}"/>
-
                     </group>
-                
-                    </page>
-            
+                </page>
             </xpath>
-            </field>
-        </record> 
-  
+        </field>
+    </record>
+<!-- employee inherit -->
+    <record id="hr_employee_view_search" model="ir.ui.view">
+        <field name="name">hr.employee.search.view.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='department_id']" position="after">
+<!--                <filter name="is_absent_totay" string="Absent Today" domain="[('is_absent_totay', '=', True)]"/>-->
+                <field name="lesson_id"/>
+                <field name="is_teacher"/>
+                <field name="topics"/>
+            </xpath>
+
+
+<!--            <xpath expr="//page[@name='hr_settings']" position="before">-->
+
+<!--                <page string="Gest Call">-->
+<!--                    <group>-->
+<!--                        <field name="is_teacher" position="attribute"/>-->
+<!--                    &lt;!&ndash; attribute required doesn't work. Employee creation bypass requirements. &ndash;&gt;-->
+<!--&lt;!&ndash;                        required="1" &ndash;&gt;-->
+<!--&lt;!&ndash;                        <field name="topics" attrs="{'invisible':[('is_teacher', '=', False)], 'required':[('is_teacher','=', True)]}" />&ndash;&gt;-->
+<!--                        <field name="topics" position="attribute" attrs="{'invisible':[('is_teacher','=',False)]}"/>-->
+
+<!--                </group>-->
+
+<!--                </page>-->
+
+<!--        </xpath>-->
+        </field>
+    </record>
+
+
  </odoo>

@@ -2,62 +2,81 @@
 <odoo>
  
 <!-- PLACE -->  
-<!-- Form View Of  place Information -->  
-     <record id="view_gestcal_place_form" model="ir.ui.view">
-            <field name="name">gestcal.place.form</field>
-            <field name="model">gestcal.place</field>
-            <field name="arch" type="xml">
-                <form string="Lesson Place">
-                    <sheet>
-                        <group col="4" colspan="4">
-                            <field name="name"/>
+<!-- Form View Of  place Information -->
+    <record id="view_gestcal_place_form" model="ir.ui.view">
+           <field name="name">gestcal.place.form</field>
+           <field name="model">gestcal.place</field>
+           <field name="arch" type="xml">
+               <form string="Lesson Place">
+                   <sheet>
+                       <group col="4" colspan="4">
+                           <field name="name"/>
+                           <label for="street" string="Address"/>
+                           <div class="o_address_format">
+                               <field name="street" placeholder="Street..." class="o_address_street"/>
+                               <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                               <field name="city" placeholder="City" class="o_address_city"/>
+                               <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                               <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                               <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                           </div>
 
-							<label for="street" string="Address"/>
-	                            <div class="o_address_format">
-                                <field name="street" placeholder="Street..." class="o_address_street"/>
-                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                                <field name="city" placeholder="City" class="o_address_city"/>
-                                <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
-                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
-                            </div>                           
-
-
-
-                            <field name="seats"/> 
-                            <field name="referent" />
-                        <field name="equipment">
- 							<tree editable="bottom">
-								<field name="number" />  
-								<field name="name"/>  
-							</tree>
-						</field>
-                        </group>
+                           <field name="seats"/>
+                           <field name="referent" />
+                           <field name="equipment">
+                               <tree editable="bottom">
+                                   <field name="number" />
+                                   <field name="name"/>
+                               </tree>
+                           </field>
+                       </group>
                       
-                    </sheet>
-                </form>
-            </field>
-        </record>
-        <!-- Tree View Of lesson Information -->
-        <record id="view_gestcal_place_tree" model="ir.ui.view">
-            <field name="name">gestcal.place.tree</field>
-            <field name="model">gestcal.place</field>
-            <field name="arch" type="xml">
-                <tree string="Lesson place">
-                            <field name="name"/>
-                            <field name="adress"/>
-                            <field name="seats"/> 
-                            <field name="referent" />
-                </tree>
-            </field>
-        </record>
- 
-        <!-- Actions Of Form & Tree Views Of place Information -->
-        <record id="action_gestcal_place_view" model="ir.actions.act_window">
-            <field name="name">Place</field>
-            <field name="res_model">gestcal.place</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-        </record>     
+                   </sheet>
+               </form>
+           </field>
+    </record>
+    <!-- Tree View Of lesson Information -->
+    <record id="view_gestcal_place_tree" model="ir.ui.view">
+        <field name="name">gestcal.place.tree</field>
+        <field name="model">gestcal.place</field>
+        <field name="arch" type="xml">
+            <tree string="Lesson place">
+                <field name="name"/>
+                <field name="address"/>
+                <field name="seats"/>
+                <field name="referent" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search in Course fields -->
+    <record id="view_gestcal_place_search" model="ir.ui.view">
+        <field name="name">gestcal.place.search</field>
+        <field name="model">gestcal.place</field>
+        <field name="arch" type="xml">
+            <search string="Search Place">
+                <field name="name"/>
+                <field name="address"/>
+                <field name="street"/>
+                <field name="street2"/>
+                <field name="zip"/>
+                <field name="city"/>
+                <field name="state_id"/>
+                <field name="country_id"/>
+                <field name="seats"/>
+                <field name="equipment"/>
+                <field name="referent"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- Actions Of Form & Tree Views Of place Information -->
+    <record id="action_gestcal_place_view" model="ir.actions.act_window">
+        <field name="name">Place</field>
+        <field name="res_model">gestcal.place</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
         
  </odoo>

@@ -9,7 +9,7 @@
     'license': "AGPL-3",
     'category': 'Calls activity management',
     'summary': '',
-    'images': ['static/description/SchoolTimetable.png'],
+    'images': ['/home/odoovm/Odoo/odoo-12.0/master-app/gest_call/static/src/img/import.png'],
     'depends': ['base','calendar','hr','contacts','web_widget_timepicker','display_import_button'],
     'data': ['security/ir.model.access.csv',
              'views/project_view.xml',
@@ -23,7 +23,7 @@
              'views/hr_employee.xml',
              'views/gest_call_menu.xml',
              ],
-    'css': ['static/src/css/styles.css'],
+    'css': ['/home/odoovm/Odoo/odoo-12.0/master-app/gest_call/static/src/css/styles.css'],
     'installable': True,
     'application': True
 }

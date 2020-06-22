@@ -2,74 +2,93 @@
 <odoo>
  
 <!-- LESSON -->
-        <!-- Form View Of  lesson Information -->
-        <record id="view_gestcal_lesson_form" model="ir.ui.view">
-            <field name="name">gestcal.lesson.form</field>
-            <field name="model">gestcal.lesson</field>
-            <field name="arch" type="xml">
-                <form string="Lesson">
-                    <sheet>
-                        <group>
-                        
-                           <group> 
-                            <field name="project_id" />
-                            <field name="date"/>
-		                    </group>
-		                        <group>
-		                           <field name="start_time" widget="timepicker"/>
-		                            <field name="end_time" widget="timepicker"/> 
-		                            <field name="teacher_id"  domain="[('is_teacher','=',True)]"  context="{'default_is_teacher': 1}"/>
-		                            <field name="course_id" />
-		                            <field name="place" />
-		                         </group>     
+    <!-- Form View Of  lesson Information -->
+    <record id="view_gestcal_lesson_form" model="ir.ui.view">
+        <field name="name">gestcal.lesson.form</field>
+        <field name="model">gestcal.lesson</field>
+        <field name="arch" type="xml">
+            <form string="Lesson">
+                <sheet>
+                    <group>
+
+                       <group>
+                        <field name="project_id" />
+                        <field name="date"/>
                         </group>
-                        <group>
-                          <field name="recipients_id" domain="[('is_student','=',True)]" context="{'form_view_ref' : 'gest_call.gestcall_kanban_students_action_form', 'default_is_student': 1}" >
-								<tree string="Lesson" editable="bottom">
-              						  <field name="name" />
-              						  <field name="street" />
-              						  <field name="company_type" /> 
-           						 </tree>
-           					 </field>
-                      </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+                            <group>
+                               <field name="start_time" widget="timepicker"/>
+                                <field name="end_time" widget="timepicker"/>
+                                <field name="teacher_id"  domain="[('is_teacher','=',True)]"  context="{'default_is_teacher': 1}"/>
+                                <field name="course_id" />
+                                <field name="place" />
+                             </group>
+                    </group>
+                    <group>
+                      <field name="recipients_id" domain="[('is_student','=',True)]" context="{'form_view_ref' : 'gest_call.gestcall_kanban_students_action_form', 'default_is_student': 1}" >
+                            <tree string="Lesson" editable="bottom">
+                                  <field name="name" />
+                                  <field name="street" />
+                                  <field name="company_type" />
+                             </tree>
+                         </field>
+                  </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
         
-        
- <record id="action_gestcal_calendar_view" model="ir.ui.view">
-    <field name="name">gestcal.lesson.calendar</field>
-    <field name="model">gestcal.lesson</field>
-    <field name="priority" eval="2"/>
-    <field name="arch" type="xml">
-        <calendar string="Lessons" date_start="date" event_open_popup="true" event_limit="5" color="course_id">
-            <field name="date"/>
-            <field name="course_id"/>
-        </calendar>
-    </field>
-</record>   
+
+    <record id="action_gestcal_calendar_view" model="ir.ui.view">
+        <field name="name">gestcal.lesson.calendar</field>
+        <field name="model">gestcal.lesson</field>
+        <field name="priority" eval="2"/>
+        <field name="arch" type="xml">
+            <calendar string="Lessons" date_start="date" event_open_popup="true" event_limit="5" color="course_id">
+                <field name="date"/>
+                <field name="course_id"/>
+            </calendar>
+        </field>
+    </record>
   
-        <!-- Tree View Of lesson Information -->
-        <record id="view_gestcal_lesson_tree" model="ir.ui.view">
-            <field name="name">gestcal.lesson.tree</field>
-            <field name="model">gestcal.lesson</field>
-            <field name="arch" type="xml">
-                <tree string="Lesson" import="false"> 
-                            <field name="date"/>
-                            <field name="start_time" widget='float_time'/>
-                            <field name="end_time" widget='float_time'/> 
-                            <field name="teacher_id" />
-                </tree>
-            </field>
-        </record>
+    <!-- Tree View Of lesson Information -->
+    <record id="view_gestcal_lesson_tree" model="ir.ui.view">
+        <field name="name">gestcal.lesson.tree</field>
+        <field name="model">gestcal.lesson</field>
+        <field name="arch" type="xml">
+            <tree string="Lesson" import="false">
+                        <field name="date"/>
+                        <field name="start_time" widget='float_time'/>
+                        <field name="end_time" widget='float_time'/>
+                        <field name="teacher_id" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search in Course fields -->
+    <record id="view_gestcal_lesson_search" model="ir.ui.view">
+        <field name="name">gestcal.lesson.search</field>
+        <field name="model">gestcal.lesson</field>
+        <field name="arch" type="xml">
+            <search string="Search Lesson">
+                <field name="date"/>
+                <field name="start_time"/>
+                <field name="end_time"/>
+                <field name="teacher_id"/>
+                <field name="recipients_id"/>
+                <field name="course_id"/>
+                <field name="project_id"/>
+                <field name="place"/>
+            </search>
+        </field>
+    </record>
  
-        <!-- Actions Of Form & Tree Views Of lesson Information -->
-        <record id="action_gestcal_lesson_view" model="ir.actions.act_window">
-            <field name="name">Lesson</field>
-            <field name="res_model">gestcal.lesson</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">calendar,tree,form</field>
-        </record>
+    <!-- Actions Of Form & Tree Views Of lesson Information -->
+    <record id="action_gestcal_lesson_view" model="ir.actions.act_window">
+        <field name="name">Lesson</field>
+        <field name="res_model">gestcal.lesson</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">calendar,tree,form</field>
+    </record>
+
 </odoo>
 
