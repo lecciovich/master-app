@@ -26,9 +26,10 @@ class GestcalCourse(models.Model):
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
     # courses_ids = fields.Many2one('gestcal.project', string='Courses')
     project_id = fields.Many2one('gestcal.project', string='Project')
-    teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher')
+    teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher', domain=[('is_teacher', '=', True)])
     teacher_skills = fields.Many2many('gestcal.course.teacher_ids', 'topics', string='Thematic Areas')
-    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients', domain=[('state', '=', 'active')])
+    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients',
+                                     domain=[('state', '=', 'active'), ('is_student', '=', True)])
 
 
     @api.one
