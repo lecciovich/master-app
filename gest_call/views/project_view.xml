@@ -33,8 +33,9 @@
 
                     <notebook colspan="4">
                         <page string="Courses">
-                            <field name="courses" >
-                                <tree string="courses" editable="bottom">
+                            <field name="courses" domain="[('project_id.project_id', '=', project_id)]">
+<!--                                filter_domain="[('project_id.project_id', 'ilike', project_id)]"-->
+                                <tree string="courses" editable="bottom" >
                                     <field name="name" />
                                     <field name="total_hours" />
                                 </tree>
@@ -105,6 +106,9 @@
                 <field name="plan_id"/>
                 <field name="project_ids"/>
                 <field name="state"/>
+                <separator />
+<!--                <filter string="" name="type_company" domain="[('is_company','=',1)]"/>-->
+
             </search>
         </field>
     </record>
