@@ -51,6 +51,7 @@ class ResPartner(models.Model):
 
     @api.one
     def course_withdraw(self):
+#        self.get_participation_hours()
         return self.write({'state': 'withdrawed'})
 
     @api.one
