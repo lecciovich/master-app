@@ -24,15 +24,15 @@
                              </group>
                     </group>
                     <group>
-<!--                    domain="[('is_student','=',True)]"   'form_view_ref': 'gest_call.gestcall_kanban_students_action_form',-->
-                      <field name="recipients_id" context="{'search_default_type_student': 1}" >
+    <!--                    domain="[('is_student','=',True)]"   'form_view_ref': 'gest_call.gestcall_kanban_students_action_form',-->
+                        <field name="recipients_id" context="{'search_default_type_student': 1}">
                             <tree string="Lesson" editable="bottom">
-                                  <field name="name" />
-                                  <field name="street" />
-                                  <field name="company_type" />
-                             </tree>
-                         </field>
-                  </group>
+                                <field name="name" />
+                                <field name="street" />
+                                <field name="company_type" />
+                            </tree>
+                        </field>
+                    </group>
                 </sheet>
             </form>
         </field>

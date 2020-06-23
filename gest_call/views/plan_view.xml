@@ -13,7 +13,7 @@
                     <button name="submitted_plan" type="object" string="Submit" states="draft" class="oe_highlight"/>
                     <button name="draft_plan" type="object" string="Revert" states="submitted" class="oe_highlight"/>
                     <button name="active_plan" type="object" string="Active" states="submitted" class="oe_highlight"/>
-                    <button name="submitted_plan" type="object" string="Revert" states="active" class="oe_highlight"/>
+                    <button name="revertToSubmitted_plan" type="object" string="Revert" states="active" class="oe_highlight"/>
                     <button name="completed_plan" type="object" string="Complet" states="active" class="oe_highlight"/>
                     <button name="active_plan" type="object" string="Revert" states="completed" class="oe_highlight"/>
                     <button name="accounted_plan" type="object" string="Account" states="completed" class="oe_highlight"/>
@@ -30,30 +30,33 @@
                     <group col="4" colspan="4">
                         <field name="plan_code"/>
                         <field name="financing_amount"/>
+                        <field name="call"/>
                         <field name="total_lesson_hours"/>
-                        <field name="total_recipients"/>
                     </group>
                     <group col="4" colspan="4">
+                        <field name="total_recipients"/>
                         <field name="plan_host" />
                         <field name="plan_actuator"/>
                         <field name="plan_handler"/>
                     </group>
-                    <group col="4" colspan="4">
-                        <field name="call"/>
+                    <group col="6" colspan="6">
                         <field name="submission"/>
                         <field name="admittance"/>
                         <field name="agreement" />
+                        <field name="lessons_start"/>
+                        <field name="deadline"/>
+                        <field name="report_submission"/>
                     </group>
+<!--                    <group col="4" colspan="4">-->
+<!--                    </group>-->
+<!--&lt;!&ndash;                            <field name="account_request"/>&ndash;&gt;-->
+
                     <group col="4" colspan="4">
                         <field name="plan_director" options="{'no_create': True, 'no_create_edit':True}"/>
                         <field name="beneficiary_representative" options="{'no_create': True, 'no_create_edit':True}"/>
                         <field name="plan_assistant" options="{'no_create': True, 'no_create_edit':True}"/>
                         <field name="auditor" options="{'no_create': True, 'no_create_edit':True}"/>
                     </group>
-
-<!--                    <group col="4" colspan="4">-->
-<!--&lt;!&ndash;                            <field name="account_request"/>&ndash;&gt;-->
-<!--                    </group>-->
                     <notebook colspan="4">
                         <page string="Partner">
                             <field name="partner" context="{'search_default_type_company':'company'}">

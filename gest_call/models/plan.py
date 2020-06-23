@@ -23,7 +23,7 @@ class GestcalPlan(models.Model):
     submission = fields.Date(string='Submission', default=lambda * a: time.strftime('%Y-%m-%d'))
     admittance = fields.Date(string='Admittance', default=lambda * a: time.strftime('%Y-%m-%d'))
     lessons_start = fields.Date(string='Lesson start', default=lambda * a: time.strftime('%Y-%m-%d'))
-    deadline = fields.Datetime(string='Deadline', default=lambda * a: time.strftime('%Y-%m-%d'))
+    deadline = fields.Date(string='Deadline', default=lambda * a: time.strftime('%Y-%m-%d'))#Datetime
     report_submission = fields.Date(string='Report Submission', default=lambda * a: time.strftime('%Y-%m-%d'))
     # account_request = fields.Date(string='Account Request')
     partner = fields.Many2many('res.partner','partner_plan_rel', 'plan_id', 'partner_id', string='Partner',store=True)
@@ -80,7 +80,12 @@ class GestcalPlan(models.Model):
         current_date = str(datetime.now().date())
         self.search([('agreement', '=', current_date)]).write({'state': 'submitted'})
         return True
-            # return self.write({'state': 'submitted'})
+        # return self.write({'state': 'submitted'})
+
+    @api.multi
+    def revertToSubmitted_plan(self):
+        return self.write({'state': 'submitted'})
+
 
     @api.multi
     def active_plan(self):
