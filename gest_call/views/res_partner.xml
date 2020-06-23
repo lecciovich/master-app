@@ -11,9 +11,9 @@
             <xpath expr="//form" position="inside">
 
                 <header>
-
-                    <button name="course_withdraw" type="object" string="Withdraw" states="active" class="oe_highlight"/>
-                    <button name="course_rejoin" type="object" string="Rejoin" states="withdrawed" class="oe_highlight"/>
+<!--attrs="{'invisible':[('is_student','=',False)]}"   invisible="[('is_student', '=', 0)]"   position="attribute" states="active"  states="withdrawed" attrs="{'invisible':['|',('filed_name_1','=',False),('fieled_name_2','=',False)]}"-->
+                    <button name="course_withdraw" type="object" string="Withdraw" class="oe_highlight" attrs="{'invisible':['|',('is_student','=',False),('state','==','withdrawed')]}"/>
+                    <button name="course_rejoin" type="object" string="Rejoin" class="oe_highlight" attrs="{'invisible':['|',('is_student','=',False),('state','==','active')]}"/>
 
                     <field name="state" widget="statusbar"/>
                 </header>
