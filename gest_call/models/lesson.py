@@ -114,8 +114,14 @@ class GestcalLesson(models.Model):
         logger.info('___________current_date_hour_from_minute________: %s  ', datetime_time.minute//60)
         logger.info('___________current_date_minute________: %s  ', datetime_time.minute - datetime_time.minute//60)
         float_hour = datetime_time.hour + datetime_time.minute // 60
-        float_min = (datetime_time.minute - 60 * datetime_time.minute // 60) / 100
+        float_min = (datetime_time.minute - 60 * (datetime_time.minute // 60)) / 100
         float_time = float_hour + float_min
         return float_time
 
+    def sum_duration(self, duration1, duration2):
+        sum_minutes = duration1 * 100 + duration2 * 100
+        float_hour = sum_minutes // 60
+        float_min = (sum_minutes - 60 * float_hour) / 100
+        sum_time = float_hour + float_min
+        return sum_time
     

@@ -16,7 +16,7 @@ class ResPartner(models.Model):
     plan_ids = fields.Many2many('gestcal.plan', 'partner_plan_rel', 'partner_id', 'plan_id', string='Plan', store=True)
     topics = fields.Many2many('gestcal.course.topics', string='Topics')
     participation_hour = fields.Float(string='Participation hours', compute='get_participation_hours', digits=(2, 2),
-                                      help='Time according to timeformat of 24 hours')
+                                      help='Time according to timeformat of 24 hours', store=True)
     tot_inserted_hours = fields.Float(string='Total Inserted Hours', compute='get_inserted_hours', digits=(2, 2),
                                       help='Time according to timeformat of 24 hours')
     # participation_hour = fields.Float(compute='', string='Participation Hour')
@@ -36,9 +36,10 @@ class ResPartner(models.Model):
         for course in self.gest_course_id:
             for lesson in course.lesson_ids:
                 if lesson.check_done():
-                    tot_participation_hours += (lesson.end_time - lesson.start_time)
+                    tot_participation_hours = self.sum_duration(
+                        tot_participation_hours, self.sub_duration(lesson.end_time, lesson.start_time))
         print(dict(self._fields['state'].selection).get(self.state))
-
+        #provo con self.search
         if self.state == 'active':
             self.participation_hour = tot_participation_hours
         else:
@@ -50,14 +51,31 @@ class ResPartner(models.Model):
         tot_hours = 0
         for course in self.gest_course_id:
             for lesson in course.lesson_ids:
-                tot_hours += (lesson.end_time-lesson.start_time)
+                tot_hours = self.sum_duration(tot_hours,
+                                              self.sub_duration(lesson.end_time, lesson.start_time))
         self.tot_inserted_hours = tot_hours
 
     @api.one
     def course_withdraw(self):
-#        self.get_participation_hours()
+        # self.get_participation_hours()
         return self.write({'state': 'withdrawed'})
 
     @api.one
     def course_rejoin(self):
         return self.write({'state': 'active'})
+
+    def sum_duration(self, duration1, duration2):
+        [min_of_hour1, min_of_hour2] = [duration1 // 1 * 60, duration2 // 1 * 60]
+        sum_minutes = (min_of_hour1 + (duration1-duration1 // 1) * 100) + (min_of_hour2 + (duration2-duration2 // 1) * 100)
+        float_hour = sum_minutes // 60
+        float_min = (sum_minutes - 60 * float_hour) / 100
+        sum_time = float_hour + float_min
+        return sum_time
+
+    def sub_duration(self, duration1, duration2):
+        [min_of_hour1, min_of_hour2] = [duration1 // 1 * 60, duration2 // 1 * 60]
+        sub_minutes = (min_of_hour1 + (duration1-duration1 // 1) * 100) - (min_of_hour2 + (duration2-duration2 // 1) * 100)
+        float_hour = sub_minutes // 60
+        float_min = (sub_minutes - 60 * float_hour) / 100
+        sum_time = float_hour + float_min
+        return sum_time

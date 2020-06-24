@@ -91,6 +91,7 @@ class GestcalCourse(models.Model):
         
         return False
 
+
     
 class GestcalCourse_topics(models.Model):
    
