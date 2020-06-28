@@ -24,7 +24,10 @@ class GestcalLesson(models.Model):
     end_time = fields.Float(string='End Time', required=True, digits=(2, 2),
                             help='Time according to timeformat of 24 hours')
     teacher_id = fields.Many2one('res.partner', string='Teacher', required=True, domain=[('is_teacher', '=', True)]) # each lession have only ONE teacher
-    recipients_id = fields.Many2many('res.partner', 'lesson_id', string='Recipients', domain=[('is_student', '=', True)])#
+    # recipients_id = fields.Many2many('res.partner', 'lesson_id', string='Recipients', domain=[('is_student', '=', True)])#
+    recipients_id = fields.Many2many('res.partner', string='Recipients',
+                                     domain=[('is_student', '=', True)], related='course_id.recipients_ids')#, store=True
+    # 'gestcal.lesson', 'recipients_ids'
     course_id = fields.Many2one('gestcal.course', string='course')
     project_id = fields.Many2one('gestcal.project', string='Project',  related='course_id.project_id')
     place = fields.Many2one('gestcal.place', string='Place')

@@ -26,10 +26,11 @@ class GestcalCourse(models.Model):
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
     # courses_ids = fields.Many2one('gestcal.project', string='Courses')
     project_id = fields.Many2one('gestcal.project', string='Project')
-    teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher', domain=[('is_teacher', '=', True)])
+    teacher_ids = fields.Many2many('res.partner', string='Teacher', domain=[('is_teacher', '=', True)]) #, 'gest_course_id',##  'gestcal.lesson', 'course_id', 'teacher_ids', 'teacher_id', One2many
     teacher_skills = fields.Many2many('gestcal.course.teacher_ids', 'topics', string='Thematic Areas')
-    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients',
+    recipients_ids = fields.Many2many('res.partner', string='Recipients',
                                      domain=[('state', '=', 'active'), ('is_student', '=', True)])
+    #One2many   'gest_course_id',
 
 
     @api.one
@@ -40,28 +41,95 @@ class GestcalCourse(models.Model):
             if repetition_course:
                 raise ValidationError(_("Number of repetition must be unique!"))
         
-
+    @api.one
     @api.constrains('teacher_ids.id')
     def get_teachers(self):
-        teacher_list = [] 
+        teacher_list = []
         for rec in self.lesson_ids:
-            if rec.teacher_id.id not in teacher_list:
-                teacher_list.append(rec.teacher_id.id)
-            logger.info('__________teacher_list________: %s  ', teacher_list)
-        self.write({'teacher_ids': [(6, 0, teacher_list)]})
+            for teacher in rec.teacher_id:
+                if teacher.id not in teacher_list:
+                    teacher_list.append(rec.teacher_id.id)
+        logger.info('__________teacher_list________: %s  ', teacher_list)
+        self.write({'teacher_ids': [(6, 0, [teacher_list])]})
+        # self.write(6, 0, [11, 10])
+        # dictionary = {'teacher_ids': [(6, 0, [teacher_list])]}
+        # dictionary = {'teacher_ids': [(6, 0, (11, 10))]}
+        # logger.info('__________dictionary________: %s  ', dictionary.items())
+        # self.write(dictionary.get('teacher_ids'))
         return  
+
+    # @api.one
+    # def get_recipients(self, context):
+    #     recipients_list = []
+    #     for rec in self.lesson_ids:
+    #         for i in rec.recipients_id:
+    #             courses = []
+    #             courses.append(context['course_id'])
+    #             for i_course_id in i.gest_course_id:
+    #                 courses.append(i_course_id)
+    #             courses.append(self.get_courses_id_list(i, context['course_id']))#get_course_from_id(context['course_id'])
+    #             i.write({'gest_course_id': [(6, 0, courses)]})
+    #             if i.id not in recipients_list:
+    #                 recipients_list.append(i.id)
+    #     logger.info('__________recipients_list________: %s  ', recipients_list)
+    #     self.write({'recipients_ids': [(6, 0, recipients_list)]})
+    #     return
 
     @api.one
     def get_recipients(self):
-        recipients_list = [] 
+        recipients_list = []
         for rec in self.lesson_ids:
             for i in rec.recipients_id:
                 if i.id not in recipients_list:
                     recipients_list.append(i.id)
         logger.info('__________recipients_list________: %s  ', recipients_list)
         self.write({'recipients_ids': [(6, 0, recipients_list)]})
-        return  
-    
+        self.set_course()
+        return
+
+    @api.one
+    def set_course(self):
+        course_list = []
+        # for index in self.ids:
+        #     course_list.append(index)
+        course_list.append(self.id)
+        for rec in self.recipients_ids:
+            for course in rec.gest_course_id:
+                if course.id not in course_list:
+                    course_list.append(course.id)
+            rec.write({'gest_course_id': [(6, 0, course_list)]}) #self.env['res.partner'].
+        #         course_list.append(rec.id)
+        # logger.info('__________course_list________: %s  ', course_list)
+        # self.write({'': [(6, 0, course_list)]})
+        return
+
+        # def get_course_from_id(self, str_course_id):
+    #     for rec in self:
+    #         if rec.course_id == str_course_id:
+    #             logger.info('__________rec.course_id________: %s  ', rec.course_id)
+    #             return rec
+
+    def get_courses_id_list(self, str_course_id, recipient):
+        # recipient
+        courses_id = []
+        courses_id.append(str_course_id)
+        for i_course_id in recipient.gest_course_id:
+            courses_id.append(i_course_id)
+        return courses_id
+            # if rec.course_id == str_course_id:
+            #     logger.info('__________rec.course_id________: %s  ', rec.course_id)
+            #     return rec
+
+
+    def get_teachers(self):
+        teacher_list = []
+        for rec in self.lesson_ids:
+            if rec.teacher_id.id not in teacher_list:
+                teacher_list.append(rec.teacher_id.id)
+            logger.info('__________teacher_list________: %s  ', teacher_list)
+        self.write({'teacher_ids': [(6, 0, teacher_list)]})
+        return
+
     
     @api.model
     def create(self, vals):

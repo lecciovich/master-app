@@ -11,7 +11,7 @@ class ResPartner(models.Model):
     is_teacher = fields.Boolean(string='Is a Teacher?')
     is_operator = fields.Boolean(string='Is a Operator?')
     
-    gest_course_id = fields.Many2one('gestcal.course', string='gest cal id')
+    gest_course_id = fields.Many2many('gestcal.course', string='gest cal id') #, compute='get_courses', 'recipients_id', , compute='get_courses'
     #gest_course_id = fields.Many2one('gestcal.course', string='gest cal id') #'recipients_ids',
     plan_ids = fields.Many2many('gestcal.plan', 'partner_plan_rel', 'partner_id', 'plan_id', string='Plan', store=True)
     topics = fields.Many2many('gestcal.course.topics', string='Topics')
@@ -27,6 +27,25 @@ class ResPartner(models.Model):
         ('withdrawed', 'Withdrawed')
     ], oldname='recipient_state', string='Recipient_Status', index=True, copy=False, readonly=True, default='active', track_visibility='onchange') #, track_visibility='onchange'copy=False, index=True,
 
+    # @api.one
+    # def get_courses(self):
+    #     for record in self:
+    #         course_list = []
+    #         # for rec in gestcal.course:
+    #         #     if rec. not in teacher_list:
+    #         #         teacher_list.append(rec.teacher_id.id)
+    #         #     logger.info('__________teacher_list________: %s  ', teacher_list)
+    #         course_list = self.env['gestcal.course'].search([[record, 'in', 'recipients_ids'], ['customer', '=', True]])
+    #         record.write({'gest_course_id': [(6, 0, course_list)]})
+    #     return
+
+    # domain = [(, 'is in', 'recipients_ids')]
+    # @api.depends('')
+    # def get_courses(self):
+    #     for rec in self:
+    #         if rec.is_student:
+    #             for course in self.env['gestcal.course'].search([(rec, 'in', 'recipients_ids')]):
+    #                 self.write({'gest_course_id': course})
 
 
     @api.one
@@ -45,6 +64,18 @@ class ResPartner(models.Model):
         else:
             pass
 
+    # @api.one
+    # @api.depends('gest_course_id')
+    # def get_inserted_hours(self):
+    #     tot_hours = 0
+    #
+    #     self.gest_course_id.write(context['course_id'])
+    #     # for course in self.gest_course_id:
+    #     #     if context['course_id'] == course.course_id:
+    #     for lesson in self.gest_course_id.lesson_ids:
+    #         tot_hours = self.sum_duration(tot_hours,
+    #                                       self.sub_duration(lesson.end_time, lesson.start_time))
+    #     self.tot_inserted_hours = tot_hours
     @api.one
     @api.depends('gest_course_id')
     def get_inserted_hours(self):
