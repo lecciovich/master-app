@@ -29,11 +29,13 @@
                     </group>
                     <group>
     <!--                    domain="[('is_student','=',True)]"   'form_view_ref': 'gest_call.gestcall_kanban_students_action_form',-->
-                        <field name="recipients_id" context="{'search_default_type_student': 1}">
+                        <button name="get_recipients" type="object" string="Actualize Recipients" icon="fa-exchange"  style="background-color:#f8f8f1;"/>
+                        <field name="recipients_id" context="{'search_default_type_student': 1}" readonly="False">
                             <tree string="Lesson" editable="bottom">
                                 <field name="name" />
                                 <field name="street" />
                                 <field name="company_type" />
+                                <field name="participation_hour" sum="Total participation hours"/>
                             </tree>
                         </field>
                     </group>

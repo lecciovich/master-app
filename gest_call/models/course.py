@@ -41,22 +41,22 @@ class GestcalCourse(models.Model):
             if repetition_course:
                 raise ValidationError(_("Number of repetition must be unique!"))
         
-    @api.one
-    @api.constrains('teacher_ids.id')
-    def get_teachers(self):
-        teacher_list = []
-        for rec in self.lesson_ids:
-            for teacher in rec.teacher_id:
-                if teacher.id not in teacher_list:
-                    teacher_list.append(rec.teacher_id.id)
-        logger.info('__________teacher_list________: %s  ', teacher_list)
-        self.write({'teacher_ids': [(6, 0, [teacher_list])]})
-        # self.write(6, 0, [11, 10])
-        # dictionary = {'teacher_ids': [(6, 0, [teacher_list])]}
-        # dictionary = {'teacher_ids': [(6, 0, (11, 10))]}
-        # logger.info('__________dictionary________: %s  ', dictionary.items())
-        # self.write(dictionary.get('teacher_ids'))
-        return  
+    # @api.one
+    # @api.constrains('teacher_ids.id')
+    # def get_teachers(self):
+    #     teacher_list = []
+    #     for rec in self.lesson_ids:
+    #         for teacher in rec.teacher_id:
+    #             if teacher.id not in teacher_list:
+    #                 teacher_list.append(rec.teacher_id.id)
+    #     logger.info('__________teacher_list________: %s  ', teacher_list)
+    #     self.write({'teacher_ids': [(6, 0, [teacher_list])]})
+    #     # self.write(6, 0, [11, 10])
+    #     # dictionary = {'teacher_ids': [(6, 0, [teacher_list])]}
+    #     # dictionary = {'teacher_ids': [(6, 0, (11, 10))]}
+    #     # logger.info('__________dictionary________: %s  ', dictionary.items())
+    #     # self.write(dictionary.get('teacher_ids'))
+    #     return
 
     # @api.one
     # def get_recipients(self, context):
@@ -78,6 +78,10 @@ class GestcalCourse(models.Model):
     @api.one
     def get_recipients(self):
         recipients_list = []
+        for recipient in self.recipients_ids:
+            recipients_list.append(recipient.id)
+        # recipients_list = self.recipients_ids
+        # recipients_list = []
         for rec in self.lesson_ids:
             for i in rec.recipients_id:
                 if i.id not in recipients_list:
@@ -97,7 +101,7 @@ class GestcalCourse(models.Model):
             for course in rec.gest_course_id:
                 if course.id not in course_list:
                     course_list.append(course.id)
-            rec.write({'gest_course_id': [(6, 0, course_list)]}) #self.env['res.partner'].
+            print(self.env['res.partner'].write({'gest_course_id': [(6, 0, course_list)]})) #self.env['res.partner'].  rec.
         #         course_list.append(rec.id)
         # logger.info('__________course_list________: %s  ', course_list)
         # self.write({'': [(6, 0, course_list)]})

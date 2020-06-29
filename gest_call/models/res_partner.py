@@ -1,6 +1,9 @@
 # See LICENSE file for full copyright and licensing details.
 
 from odoo import models, fields, api, _
+import logging
+logger = logging.getLogger('_______LOGGER B____________')
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -50,13 +53,17 @@ class ResPartner(models.Model):
 
     @api.one
     @api.depends('gest_course_id')
-    def get_participation_hours(self):
+    def get_participation_hours(self):#, cr, uid, ids, context=None
         tot_participation_hours = 0
+        logger.info('__________courseid_context________: %s  ', self.env.context.get('course_id'))
+        course_id_sel = self.env.context.get('course_id')
+        logger.info('__________course_id_sel________: %s  ', course_id_sel)
         for course in self.gest_course_id:
-            for lesson in course.lesson_ids:
-                if lesson.check_done():
-                    tot_participation_hours = self.sum_duration(
-                        tot_participation_hours, self.sub_duration(lesson.end_time, lesson.start_time))
+            if course_id_sel == course.course_id:
+                for lesson in course.lesson_ids:
+                    if lesson.check_done():
+                        tot_participation_hours = self.sum_duration(
+                            tot_participation_hours, self.sub_duration(lesson.end_time, lesson.start_time))
         print(dict(self._fields['state'].selection).get(self.state))
         #provo con self.search
         if self.state == 'active':
@@ -80,10 +87,14 @@ class ResPartner(models.Model):
     @api.depends('gest_course_id')
     def get_inserted_hours(self):
         tot_hours = 0
+        logger.info('__________courseid_context________: %s  ', self.env.context.get('course_id'))
+        course_id_sel = self.env.context.get('course_id')
+        logger.info('__________course_id_sel________: %s  ', course_id_sel)
         for course in self.gest_course_id:
-            for lesson in course.lesson_ids:
-                tot_hours = self.sum_duration(tot_hours,
-                                              self.sub_duration(lesson.end_time, lesson.start_time))
+            if course_id_sel == course.course_id:
+                for lesson in course.lesson_ids:
+                    tot_hours = self.sum_duration(tot_hours,
+                                                  self.sub_duration(lesson.end_time, lesson.start_time))
         self.tot_inserted_hours = tot_hours
 
     @api.one
@@ -110,3 +121,5 @@ class ResPartner(models.Model):
         float_min = (sub_minutes - 60 * float_hour) / 100
         sum_time = float_hour + float_min
         return sum_time
+
+

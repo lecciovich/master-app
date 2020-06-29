@@ -25,12 +25,29 @@ class GestcalLesson(models.Model):
                             help='Time according to timeformat of 24 hours')
     teacher_id = fields.Many2one('res.partner', string='Teacher', required=True, domain=[('is_teacher', '=', True)]) # each lession have only ONE teacher
     # recipients_id = fields.Many2many('res.partner', 'lesson_id', string='Recipients', domain=[('is_student', '=', True)])#
-    recipients_id = fields.Many2many('res.partner', string='Recipients',
-                                     domain=[('is_student', '=', True)], related='course_id.recipients_ids')#, store=True
+    recipients_id = fields.Many2many('res.partner', string='Recipients', domain=[('is_student', '=', True)],
+                                     copy=True, readonly=False)#, store=True##, store=True ##related='course_id.recipients_ids',
     # 'gestcal.lesson', 'recipients_ids'
     course_id = fields.Many2one('gestcal.course', string='course')
     project_id = fields.Many2one('gestcal.project', string='Project',  related='course_id.project_id')
     place = fields.Many2one('gestcal.place', string='Place')
+    # presences = fields.Many2many('gestcal.lesson.presence', string='Students Presence')#, store=True , readonly=False, store=True
+
+
+    @api.one
+    def get_recipients(self):
+        recipients_list = []#self.recipients_id.id#self.recipients_id.read(self.recipients_id)
+        # for course in self.course_id:
+        for recipient in self.recipients_id:
+            recipients_list.append(recipient.id)
+        course = self.course_id
+        for recipient in self.course_id.recipients_ids:
+            if recipient.id not in recipients_list:
+                recipients_list.append(recipient.id)
+        logger.info('__________recipients_list________: %s  ', recipients_list)
+        self.write({'recipients_id': [(6, 0, recipients_list)]})
+        return
+
 
     @api.one
     @api.depends('date', 'start_time')
@@ -252,3 +269,35 @@ class GestcalLesson(models.Model):
         local_datetime = datetime.strptime(TZ_datetime.strftime(fmt), fmt)
         result_utc_datetime = local_datetime + UTC_OFFSET_TIMEDELTA
         return result_utc_datetime
+
+# class GestcalResPartner_Presence(models.Model):
+#     _name = 'gestcal.lesson.presence'
+#     _description = 'Lesson student presence attributes'
+#     _rec_name = 'presence'
+#
+#     student = fields.Many2one(string='Student', required=True)
+#     time_of_presence = fields.Float(string='Text', compute='get_time_of_presence')
+#     withdraw = fields.Char(string='Future withdraw attribute')
+#     start_time = fields.Float('gestcal.lesson.start_time', string='Start Time', required=True, digits=(2, 2),
+#                               help='Time according to timeformat of 24 hours')
+#     end_time = fields.Float('gestcal.lesson.end_time', string='End Time', required=True, digits=(2, 2),
+#                               help='Time according to timeformat of 24 hours')
+#
+#     def get_time_of_presence(self):
+#         self.time_of_presence = self.sum_duration(self.end_time, -self.end_time)
+#
+#     def sum_duration(self, duration1, duration2):
+#         sum_minutes = duration1 * 100 + duration2 * 100
+#         sum_time = self.translate_seconds_to_float_time(sum_minutes * 60)
+#         return sum_time
+#
+#     def translate_seconds_to_float_time(self, time_in_seconds):
+#         time_in_minutes = time_in_seconds // 60
+#         hours = time_in_minutes // 60
+#         float_time = hours + (time_in_minutes - hours * 60) / 100
+#         return float_time
+
+
+# self.student.write()
+
+
