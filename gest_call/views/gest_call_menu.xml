@@ -24,9 +24,11 @@
 		sequence="5" />
 
 
-	<menuitem id="menu_gestcal_contact" name="Contact"
-			  parent="menu_gestcal_root"  action="gestcall_contact_action"
-			  sequence="6" />
+<!--	<menuitem id="menu_gestcal_contact" name="Contact"-->
+<!--			  parent="menu_gestcal_root"  action="gestcall_contact_action"-->
+<!--			  sequence="6" />-->
+
+
 	<!-- <menuitem id="menu_gestcal_contact_students" name="Students"
 		parent="menu_gestcal_contact" action="gestcall_kanban_students_action"
 		sequence="1" />

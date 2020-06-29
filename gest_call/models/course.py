@@ -32,7 +32,6 @@ class GestcalCourse(models.Model):
                                      domain=[('state', '=', 'active'), ('is_student', '=', True)])
     #One2many   'gest_course_id',
 
-
     @api.one
     @api.constrains('repetition')
     def check_repetition(self):
@@ -102,6 +101,10 @@ class GestcalCourse(models.Model):
                 if course.id not in course_list:
                     course_list.append(course.id)
             print(self.env['res.partner'].write({'gest_course_id': [(6, 0, course_list)]})) #self.env['res.partner'].  rec.
+        for rec in self.lesson_ids:
+            rec.get_recipients()
+            rec.set_lesson_participations()
+
         #         course_list.append(rec.id)
         # logger.info('__________course_list________: %s  ', course_list)
         # self.write({'': [(6, 0, course_list)]})
