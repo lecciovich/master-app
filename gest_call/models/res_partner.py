@@ -20,6 +20,12 @@ class ResPartner(models.Model):
     participation_hour = fields.Float(string='Participation hours', compute='get_participation_hours')
     tot_inserted_hours = fields.Float(string='Total Inserted Hours', compute='get_inserted_hours')
 
+    recipient_state = fields.Selection([
+        ('active', 'Active'),
+        ('withdrawed', 'Withdrawed')
+    ], string='Recipient_Status', index=True, readonly=True, copy=False, store=True,
+        default='active', track_visibility='onchange')#
+
 
     @api.one
     @api.depends('recipients_course_id')

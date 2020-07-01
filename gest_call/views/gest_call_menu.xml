@@ -2,7 +2,7 @@
 <odoo>
        
         <!-- Menu items -->
-	<menuitem id="menu_gestcal_root" name="Calls management" sequence="1" />
+	<menuitem id="menu_gestcal_root" name="Calls management" sequence="-1" />
 	
 	<menuitem id="menu_gestcal_plan" name="Plan" parent="menu_gestcal_root"
 		action="action_gestcal_plan_view" sequence="1" />
