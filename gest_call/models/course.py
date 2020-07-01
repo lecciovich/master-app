@@ -46,7 +46,7 @@ class GestcalCourse(models.Model):
         for rec in self.lesson_ids:
             if rec.teacher_id.id not in teacher_list:
                 teacher_list.append(rec.teacher_id.id)
-        logger.info('__________teacher_list________: %s  ',teacher_list)
+            logger.info('__________teacher_list________: %s  ',teacher_list)
         self.write({'teacher_ids' : [(6,0,teacher_list)]})
         return  
     
@@ -94,7 +94,7 @@ class GestcalCourse(models.Model):
 class GestcalCourse_topics(models.Model):
    
     _name = 'gestcal.course.topics'
-    _description = 'Topic for the Lessions'
+    _description = 'Topic for the Lesson'
     _rec_name = 'name'
     
     name = fields.Char(string='Name', required=True)
