@@ -23,10 +23,10 @@ class ResPartner(models.Model):
     recipient_state = fields.Selection([
         ('active', 'Active'),
         ('withdrawed', 'Withdrawed')
-    ], string='Recipient_Status', index=True, readonly=True, copy=False, store=True,
-        default='active', track_visibility='onchange')#
-
-
+    ], string='Recipient_Status', default='active', readonly=True)# , store=True, copy=False
+        # default='active', track_visibility='onchange' store=True, readonly=True, recipient_, default='active', readonly=True
+    # , readonly = True, index = True, copy = False, track_visibility = 'onchange'
+    # , index = True, copy = False, track_visibility = 'onchange'
     @api.one
     @api.depends('recipients_course_id')
     def get_participation_hours(self):
