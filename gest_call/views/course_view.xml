@@ -93,9 +93,7 @@
                     <field name="project_id" />
 					<field name="repetition" />
 					<field name="total_hours" />
-					<field name="topics">
-						<tree editable="bottom" edit="True" create="True"></tree>
-					</field>
+ 					<field name="topics" widget="many2many_tags"/>
 <!--							<field name="topics"/>-->
  <!--					<field name="topics" widget="many2many_tags"/>-->
 				<!--						   options="{'no_create': True, 'no_create_edit':True}">-->
