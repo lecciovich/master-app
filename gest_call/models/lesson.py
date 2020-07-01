@@ -59,5 +59,16 @@ class GestcalLesson(models.Model):
     def check_date(self):
         if (self.start_time >= self.end_time):
             logger.info('___________check_date________: %s  ',self.start_time > self.end_time)
-            raise ValidationError (_('Start time must be greater than end time !')) 
-    
+            raise ValidationError(_('Start time must be greater than end time !'))
+
+    @api.multi
+    @api.depends('date', 'start_time', 'end_time')
+    def check_done(self):
+        timezone = 2
+        current_hour = float(datetime.now().strftime("%H.%M"))
+        current_date = str(datetime.now().date())
+        print(current_date, current_hour)
+        date_check = datetime.now().date() >= self.date
+        hour_chek = current_hour + timezone > self.end_time
+        print("date", date_check, "hour", hour_chek)
+        return date_check and hour_chek

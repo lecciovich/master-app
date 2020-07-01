@@ -32,22 +32,28 @@
 						<notebook colspan="4">
 							<page string="Lesson">
 								<group>
-									<field name="lesson_id"  mode="tree">
+<!--									<field name="lesson_ids"  mode="tree">-->
+									<field name="lesson_ids"  mode="tree">
 										<tree string="Lesson" create="false" delete="false">
-										<field name="date" />
-										<field name="start_time" />
-										<field name="end_time" />
-									</tree>
-								 
-								</field>
-                        </group>
-					 </page>
+											<field name="date" />
+											<field name="start_time" />
+											<field name="end_time" />
+										</tree>
+									</field>
+								</group>
+							</page>
 							<page string="Teacher">
 								<button name="get_teachers" type="object" string="Actualize Teacher" icon="fa-exchange"  style="background-color:#f8f8f1;"/>
 								<field name="teacher_ids" mode="tree">
-									<tree string="Teacher" create="false" delete="false">
+ 									<tree string="Teacher" create="true" delete="false">
 										<field name="name"/>
-										<field name="topics"/>
+										<field name="topics" widget="many2many_tags"/>
+<!--										<field name="teacher_skills" widget="many2many_tags">-->
+<!--											<tree>-->
+<!--												<field name="name"/>-->
+<!--												<field name="text"/>-->
+<!--											</tree>-->
+<!--										</field>-->
 									</tree>
 								</field>
 							</page>
@@ -70,13 +76,28 @@
             <field name="name">gestcal.course.tree</field>
             <field name="model">gestcal.course</field>
             <field name="arch" type="xml">
-                <tree string="Lesson place" import="false"> 
-                            <field name="name" />
-                            <field name="project_id" />
-							<field name="repetition" />
-							<field name="total_hours" />
-							<field name="topics" />
-							<field name="lesson_id" />
+				<tree string="Lesson place" import="false">
+					<field name="name" />
+                    <field name="project_id" />
+					<field name="repetition" />
+					<field name="total_hours" />
+<!--							<field name="topics"/>-->
+					<field name="topics" widget="many2many_tags">
+<!--						   options="{'no_create': True, 'no_create_edit':True}">-->
+<!--						<tree string="Thematic Areas">-->
+<!--							<field name="name"/>-->
+<!--							<field name="text"/>-->
+<!--						</tree>-->
+					</field>
+<!--					<field name="lesson_ids"/> &lt;!&ndash; widget="one2many"&ndash;&gt;-->
+					<field name="lesson_ids" widget="many2many_tags"><!--widget="one2many" options="{'no_create': True, 'no_create_edit':True}"-->
+						<tree string="Lessons"  create="false" delete="false">
+							<field name="date"/>
+							<field name="start_time"/>
+							<field name="end_time"/>
+							<field name="teacher_id"/>
+						</tree>
+					</field>
 				</tree>
             </field>
         </record>

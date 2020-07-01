@@ -4,7 +4,7 @@ from odoo import models, fields, api, _
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
- 
+
     lesson_id = fields.Many2one('gestcal.lesson', 'lesson')
     projects_ids = fields.Many2one('gestcal.project', 'project')
     is_student = fields.Boolean(string='Is a Student?')
@@ -13,9 +13,9 @@ class ResPartner(models.Model):
     
     gest_course_id = fields.Many2one('gestcal.course',string='gest cal id')
     recipients_course_id = fields.Many2one('gestcal.course',string='gest cal id')
-    plan_ids = fields.Many2many('gestcal.plan','partner_plan_rel', 'partner_id', 'plan_id', string='Plan',store=True)
+    plan_ids = fields.Many2many('gestcal.plan','partner_plan_rel', 'partner_id', 'plan_id', string='Plan', store=True)
 
-    topics = fields.Many2many('gestcal.course.topics',string='Topics')
+    topics = fields.Many2many('gestcal.course.topics', 'course_topic_rel', 'res_partner_id', 'topic_id', string='Topics')
 
     
  
