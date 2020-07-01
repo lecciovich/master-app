@@ -25,7 +25,7 @@
 							<field name="course_id" />
 							<field name="project_id" />
 							<field name="repetition" />
-							<field name="total_hours" decoration-danger="total_hours &gt; 0"/>
+ 							<field name="total_hours"/><!--	#decoration-danger="total_hours &gt; 0"-->
 							<field name="topics" widget="many2many_tags"/>
 
                         </group>

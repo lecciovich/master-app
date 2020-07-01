@@ -1,6 +1,7 @@
 from odoo import models, fields, api, _
 from datetime import datetime
 import time
+import pytz
 from odoo.exceptions import ValidationError
 import logging
 logger=logging.getLogger('_______LOGGER B____________')
@@ -64,13 +65,21 @@ class GestcalLesson(models.Model):
     @api.multi
     @api.depends('date', 'start_time', 'end_time')
     def check_done(self):
-        timezone = 2
-        current_hour = float(datetime.now().strftime("%H.%M"))
-        current_date = str(datetime.now().date())
-        print(current_date, current_hour)
-        date_check = datetime.now().date() >= self.date
-        hour_chek = current_hour + timezone > self.end_time
-        logger.info('___________check_past_date________: %s  ', date_check)
-        logger.info('___________check_part_hour________: %s  ', hour_chek)
-        print("date", date_check, "hour", hour_chek)
-        return date_check and hour_chek
+        timezone = 2.0
+        current_hour = float(datetime.now().strftime("%H.%M")) + timezone
+        current_date = datetime.now().date()
+        logger.info('___________current_date________: %s  ', current_date)
+        logger.info('___________current_hour________: %s  ', current_hour)
+
+        logger.info('___________lesson_date________: %s  ', self.date)
+        logger.info('___________start_hour________: %s  ', self.start_time)
+        logger.info('___________start_hour________: %s  ', self.end_time)
+
+        sameday_date_check = current_date == self.date
+        sameday_hour_check = current_hour > self.end_time
+        logger.info('___________check_past_date________: %s  ', sameday_date_check)
+        logger.info('___________check_part_hour________: %s  ', sameday_hour_check)
+        sameday_check = sameday_date_check and sameday_hour_check
+
+        print("date", sameday_date_check, "hour", sameday_hour_check)
+        return sameday_check or current_date > self.date

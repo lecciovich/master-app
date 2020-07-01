@@ -15,7 +15,8 @@ class GestcalCourse(models.Model):
     _name = 'gestcal.course'
     _rec_name = 'name'
     _description = 'Gestcal Course'
-    
+
+    course_id = fields.Char(string='Course id', required=True)
     name = fields.Char(string='Name')
     repetition = fields.Char(string='Repetition')
     total_hours = fields.Float(string='Total Hours')
@@ -29,8 +30,7 @@ class GestcalCourse(models.Model):
     teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher')
     # teacher_skills = fields.Many2many('gestcal.course.teacher_ids', 'topics', string='Thematic Areas')
     teacher_skills = fields.Many2many('gestcal.course.topics', string='Thematic Areas', related='teacher_ids.topics')#, domain=[('is_teacher', '=', True)]
-    recipients_ids = fields.One2many('res.partner', 'recipients_course_id', string='Recipients')
-
+    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients')
 
     @api.one
     @api.constrains('repetition')
