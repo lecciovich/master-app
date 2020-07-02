@@ -24,13 +24,13 @@ class GestcalCourse(models.Model):
     lesson_ids = fields.One2many('gestcal.lesson', 'course_id', string='Lesson')
     attachments_ids = fields.One2many('gestcal.attachment', 'courses_id', string='Attachment')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
-    courses_ids = fields.Many2one('gestcal.project', string='Courses')
+    # courses_ids = fields.Many2one('gestcal.project', string='Courses')
     project_id = fields.Many2one('gestcal.project', string='Project')
-    course_id = fields.Char(string='Course id', required=True) 
+    # course_id = fields.Char(string='Course id', required=True)
     teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher')
     # teacher_skills = fields.Many2many('gestcal.course.teacher_ids', 'topics', string='Thematic Areas')
     teacher_skills = fields.Many2many('gestcal.course.topics', string='Thematic Areas', related='teacher_ids.topics')#, domain=[('is_teacher', '=', True)]
-    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients')
+    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients', domain=[('state', '=', 'active')])
 
     @api.one
     @api.constrains('repetition')
@@ -40,7 +40,7 @@ class GestcalCourse(models.Model):
             if repetition_course:
                 raise ValidationError(_("Number of repetition must be unique!"))
         
-        
+    @api.one
     def get_teachers (self):
         teacher_list = []
         for rec in self.lesson_ids:
@@ -50,7 +50,7 @@ class GestcalCourse(models.Model):
         self.write({'teacher_ids' : [(6,0,teacher_list)]})
         return  
     
-    
+    @api.one
     def get_recipients (self):
         recipients_list = []
         for rec in self.lesson_ids:

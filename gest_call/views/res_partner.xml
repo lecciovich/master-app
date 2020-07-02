@@ -12,10 +12,11 @@
 
                 <header>
 
-                    <button name="course_withdraw" type="object" string="Withdraw" recipient_state="active" class="oe_highlight"/>
-                    <button name="course_rejoin" type="object" string="Rejoin" recipient_state="withdrawed" class="oe_highlight"/>
+                    <button name="course_withdraw" type="object" string="Withdraw" states="active" class="oe_highlight"><!--                    <button name="course_rejoin" type="object" string="Rejoin" recipient_state="withdrawed" class="oe_highlight"/>-->
+                     </button>
+                    <button name="course_rejoin" type="object" string="Rejoin" states="withdrawed" class="oe_highlight"/>
 
-                    <field name="recipient_state" widget="statusbar"/>
+                    <field name="state" widget="statusbar"/>
 
                 </header>
             </xpath>

@@ -14,7 +14,7 @@ class GestcalPlace(models.Model):
     _description = 'Gestcal Place' 
     
     name = fields.Char(string='Name')
-    adress = fields.Char(string='Adress') 
+    address = fields.Char(string='Address')
     street = fields.Char(string='Street')
     street2 = fields.Char(string='Street 2')
     zip = fields.Char(string='Zip', change_default=True)
