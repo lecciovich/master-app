@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<!-- partner -->        
+ <!-- PARTNER -->
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.form</field>
         <field name="model">res.partner</field>
@@ -12,8 +12,7 @@
 
                 <header>
 
-                    <button name="course_withdraw" type="object" string="Withdraw" states="active" class="oe_highlight"><!--                    <button name="course_rejoin" type="object" string="Rejoin" recipient_state="withdrawed" class="oe_highlight"/>-->
-                     </button>
+                    <button name="course_withdraw" type="object" string="Withdraw" states="active" class="oe_highlight"/>
                     <button name="course_rejoin" type="object" string="Rejoin" states="withdrawed" class="oe_highlight"/>
 
                     <field name="state" widget="statusbar"/>
@@ -63,8 +62,19 @@
     <record id="view_search_gestcall_contact_form" model="ir.ui.view">
         <field name="name">res.partner.search.form</field>
         <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
         <field name="arch" type="xml">
-            <search string="Contact">
+            <xpath expr="//field[@name='name']" position="after">
+
+<!--                <field name="name"/>-->
+                <field name="lesson_id"/>
+                <field name="projects_ids"/>
+                <field name="gest_course_id"/>
+                <field name="plan_ids"/>
+                <field name="topics"/>
+                <field name="participation_hour"/>
+                <field name="tot_inserted_hours"/>
+                <field name="state"/>
                 <field name="is_student" />
 				<field name="is_teacher" />
 				<field name="is_operator" />
@@ -74,8 +84,28 @@
 					<filter name="is_teacher" string="Teachers" domain="[('is_teacher','=',True)]"/>
 					<filter name="is_operator" string="Operator" domain="[('is_operator','=',True)]"/>
 				</group>
-			</search>
-		 </field>
+            </xpath>
+
+<!--            <search string="Contact">-->
+<!--                <field name="name"/>-->
+<!--                <field name="course_id"/>-->
+<!--                <field name="repetition"/>-->
+<!--                <field name="total_hours"/>-->
+<!--                <field name="topics"/>-->
+<!--                <field name="lesson_ids"/>-->
+<!--                <field name="attachments_ids"/>-->
+<!--                <field name="attachment_count"/>-->
+<!--				<field name="is_student" />-->
+<!--				<field name="is_teacher" />-->
+<!--				<field name="is_operator" />-->
+<!--				<filter string="Companies" name="type_company" domain="[('is_company','=',1)]"/>-->
+<!--				<group expand="0" string="Group By">-->
+<!--					<filter name="is_student" string="Students" domain="[('is_student','=',True)]"/>-->
+<!--					<filter name="is_teacher" string="Teachers" domain="[('is_teacher','=',True)]"/>-->
+<!--					<filter name="is_operator" string="Operator" domain="[('is_operator','=',True)]"/>-->
+<!--				</group>-->
+<!--			</search>-->
+        </field>
     </record>
 
     <record id="gestcall_contact_action" model="ir.actions.act_window">

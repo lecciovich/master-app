@@ -2,183 +2,200 @@
 
 <odoo>
 
-<!-- plan -->
-        <!-- Form View Of plan Information -->
-        <record id="view_gestcal_plan_form" model="ir.ui.view">
-            <field name="name">gestcal.plan.form</field>
-            <field name="model">gestcal.plan</field>
-            <field name="arch" type="xml">
-                <form string="Plan">
-            <header>
-                <button name="submitted_plan" type="object" string="Submit" states="draft" class="oe_highlight"/>
-                <button name="draft_plan" type="object" string="Revert" states="submitted" class="oe_highlight"/>
-                <button name="active_plan" type="object" string="Active" states="submitted" class="oe_highlight"/>
-                <button name="submitted_plan" type="object" string="Revert" states="active" class="oe_highlight"/>
-                <button name="completed_plan" type="object" string="Complet" states="active" class="oe_highlight"/>
-                <button name="active_plan" type="object" string="Revert" states="completed" class="oe_highlight"/>
-                <button name="accounted_plan" type="object" string="Account" states="completed" class="oe_highlight"/>
-                <button name="completed_plan" type="object" string="Revert" states="accounted" class="oe_highlight"/>
-                <button name="closed_plan" type="object" string="Closed" states="accounted" class="oe_highlight"/>
-                <button name="accounted_plan" type="object" string="Revert" states="closed" class="oe_highlight"/>
-                
-                <field name="state" widget="statusbar"/>
-                 
-            </header>
-                    <sheet>
-                 <label for="title" class="oe_edit_only"/>
-                <h1>
-                 <field name="title"/>
-               	</h1>
-                        <group col="4" colspan="4"> 
-                            <field name="plan_code"/> 
-                            <field name="financing_amount"/>
-                            <field name="total_lesson_hours"/>
-                            <field name="total_recipients"/>
-                        </group>
-                        <group col="4" colspan="4"> 
-                            <field name="plan_host" />
-                            <field name="plan_actuator"/>
-                            <field name="plan_handler"/>
-                        </group>
-                        <group col="4" colspan="4">
-                            <field name="call"/>
-                            <field name="submission"/>
-                            <field name="admittance"/>
-                            <field name="agreement" />
-                        </group>
-                        <group col="4" colspan="4">
-                            <field name="plan_director" options="{'no_create': True, 'no_create_edit':True}"/>
-                            <field name="beneficiary_representative" options="{'no_create': True, 'no_create_edit':True}"/>
-                            <field name="plan_assistant" options="{'no_create': True, 'no_create_edit':True}"/>
-                            <field name="auditor" options="{'no_create': True, 'no_create_edit':True}"/>
-                        </group>
-
-                        <group col="4" colspan="4">
-<!--                            <field name="account_request"/>-->
-                        </group>
-               <notebook colspan="4">
-                   <page string="Partner">
-                         <field name="partner" context="{'search_default_type_company':'company'}">
-								<tree string="Partner">
-              						  <field name="name" />
-              						  <field name="city" /> 
-           						 </tree>
-                         </field>
-                   </page>
-                   <page string="Projects">
-                         <field name="projects" >
-								<tree string="projects" editable="bottom">
-              						  <field name="title" />
-              						  <field name="state" /> 
-           						 </tree>
-                         </field>
-                   </page>
-                   <page string="Web partner">
-                         <field name="operative_partner" context="{'search_default_type_company':'company'}">
-								<tree string="Operative Partner">
-              						  <field name="name" />
-              						  <field name="city" />
-           						 </tree>
-                         </field>
-                   </page>
-                   
-                </notebook>         
-                    </sheet>
-                               <div class="oe_chatter">
-				                    <field name="message_follower_ids" widget="mail_followers"/>
-				                    <field name="activity_ids" widget="mail_activity"/>
-				                    <field name="message_ids" widget="mail_thread"/>
-				                </div>
-                    
-                    
-                </form>
-            </field>
-        </record>
-        <!-- Tree View Of plan Information -->
-        <record id="view_gestcal_plan_tree" model="ir.ui.view">
-            <field name="name">gestcal.plan.tree</field>
-            <field name="model">gestcal.plan</field>
-            <field name="arch" type="xml">
-                <tree string="Plan">
-                   <field name="plan_code"/>
-                   <field name="title"/>
-                            <!-- <field name="found"/> -->
+<!-- PLAN -->
+        <!-- Form View Of PLAN Information -->
+    <record id="view_gestcal_plan_form" model="ir.ui.view">
+        <field name="name">gestcal.plan.form</field>
+        <field name="model">gestcal.plan</field>
+        <field name="arch" type="xml">
+            <form string="Plan">
+                <header>
+                    <button name="submitted_plan" type="object" string="Submit" states="draft" class="oe_highlight"/>
+                    <button name="draft_plan" type="object" string="Revert" states="submitted" class="oe_highlight"/>
+                    <button name="active_plan" type="object" string="Active" states="submitted" class="oe_highlight"/>
+                    <button name="submitted_plan" type="object" string="Revert" states="active" class="oe_highlight"/>
+                    <button name="completed_plan" type="object" string="Complet" states="active" class="oe_highlight"/>
+                    <button name="active_plan" type="object" string="Revert" states="completed" class="oe_highlight"/>
+                    <button name="accounted_plan" type="object" string="Account" states="completed" class="oe_highlight"/>
+                    <button name="completed_plan" type="object" string="Revert" states="accounted" class="oe_highlight"/>
+                    <button name="closed_plan" type="object" string="Closed" states="accounted" class="oe_highlight"/>
+                    <button name="accounted_plan" type="object" string="Revert" states="closed" class="oe_highlight"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <label for="title" class="oe_edit_only"/>
+                    <h1>
+                        <field name="title"/>
+                    </h1>
+                    <group col="4" colspan="4">
+                        <field name="plan_code"/>
+<!--                        <field name="financing_amount"/>-->
+                        <field name="total_lesson_hours"/>
+                        <field name="total_recipients"/>
+                    </group>
+                    <group col="4" colspan="4">
+                        <field name="plan_host" />
+                        <field name="plan_actuator"/>
+                        <field name="plan_handler"/>
+                    </group>
+                    <group col="4" colspan="4">
+                        <field name="call"/>
+                        <field name="submission"/>
+                        <field name="admittance"/>
+                        <field name="agreement" />
+                    </group>
+                    <group col="4" colspan="4">
+                        <field name="plan_director" options="{'no_create': True, 'no_create_edit':True}"/>
+                        <field name="beneficiary_representative" options="{'no_create': True, 'no_create_edit':True}"/>
+                        <field name="plan_assistant" options="{'no_create': True, 'no_create_edit':True}"/>
+                        <field name="auditor" options="{'no_create': True, 'no_create_edit':True}"/>
+                    </group>
+<!--                    <group col="4" colspan="4">-->
+<!--&lt;!&ndash;                            <field name="account_request"/>&ndash;&gt;-->
+<!--                    </group>-->
+                    <notebook colspan="4">
+                        <page string="Partner">
+                            <field name="partner" context="{'search_default_type_company':'company'}">
+                                <tree string="Partner">
+                                    <field name="name" />
+                                    <field name="city" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Projects">
+                            <field name="projects" >
+                                <tree string="projects" editable="bottom">
+                                    <field name="title" />
+                                    <field name="state" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Web partner">
+                            <field name="operative_partner" context="{'search_default_type_company':'company'}">
+                                <tree string="Operative Partner">
+                                    <field name="name" />
+                                    <field name="city" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!-- Tree View Of plan Information -->
+    <record id="view_gestcal_plan_tree" model="ir.ui.view">
+        <field name="name">gestcal.plan.tree</field>
+        <field name="model">gestcal.plan</field>
+        <field name="arch" type="xml">
+            <tree string="Plan">
+                <field name="plan_code"/>
+                <field name="title"/>
+<!--                <field name="found"/> -->
 <!--                    <field name="financing_amount"/>-->
 <!--                    <field name="total_lesson_hours" />-->
 <!--    				<field name="plan_director" />-->
 <!--					<field name="beneficiary_representative" />-->
-                    <field name="agreement"/>
-                    <field name="submission"/>
-                    <field name="admittance"/>
-                    <field name="lessons_start"/>
-                    <field name="deadline"/>
-                    <field name="report_submission"/>
-
-
-                </tree>
-            </field>
-        </record>
+                <field name="agreement"/>
+                <field name="submission"/>
+                <field name="admittance"/>
+                <field name="lessons_start"/>
+                <field name="deadline"/>
+                <field name="report_submission"/>
+            </tree>
+        </field>
+    </record>
         
-      <record model="ir.ui.view" id="view_gestcal_plan_kanban">
-            <field name="name">gestcal.plan.kanban</field>
-            <field name="model">gestcal.plan</field>
-            <field name="arch" type="xml">
+    <record model="ir.ui.view" id="view_gestcal_plan_kanban">
+        <field name="name">gestcal.plan.kanban</field>
+        <field name="model">gestcal.plan</field>
+        <field name="arch" type="xml">
             <kanban class="oe_background_grey">
 
-                 <field name ="title"/>
-                 <field name="plan_code" />
-                 <!-- <field name="found" /> -->
+                <field name ="title"/>
+                <field name="plan_code" />
+                <!-- <field name="found" /> -->
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click" >
                              
-                                <div class="oe_kanban_details">
-										<ul>
-											<li style="display:inherit;">
-												<strong style="font-size:20px;">
-													<field t-if="record.title.raw_value" name="title" />
-												</strong>
-											</li>
-											<li style="display:inherit;">
-												<strong style="font-size:15px;">
-													<field t-if="record.plan_code.raw_value" name="plan_code" />
-												</strong>
-											</li>
-										</ul>
-                                </div>
+
+                            <div class="oe_kanban_details">
+                                <ul>
+                                    <li style="display:inherit;">
+                                        <strong style="font-size:20px;">
+                                            <field t-if="record.title.raw_value" name="title" />
+                                        </strong>
+                                    </li>
+                                    <li style="display:inherit;">
+                                        <strong style="font-size:15px;">
+                                            <field t-if="record.plan_code.raw_value" name="plan_code" />
+                                        </strong>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </t>
                 </templates>
             </kanban>
-            </field>
-            </record>   
- 
-          <record id="view_plan_search_form" model="ir.ui.view">
-            <field name="name">gestcal.plan</field>
-            <field name="model">gestcal.plan</field>
-            <field name="arch" type="xml">
-			<search string="Project">
+        </field>
+    </record>
+
+    <record id="view_plan_search_form" model="ir.ui.view">
+        <field name="name">gestcal.plan</field>
+        <field name="model">gestcal.plan</field>
+        <field name="arch" type="xml">
+            <search string="Project">
+                <field name="title"/>
                 <field name="call" />
                 <!-- <field name="found" /> -->
                 <field name="plan_code" />
-			</search>
-		 </field>
-</record>
+<!--&lt;!&ndash;                <field name="financing_amount"/>&ndash;&gt;-->
+                <field name="total_lesson_hours"/>
+                <field name="submission"/>
+                <field name="admittance"/>
+                <field name="agreement"/>
+                <field name="deadline"/>
+                <field name="lessons_start"/>
+                <field name="report_submission"/>
+                <field name="partner"/>
+                <field name="operative_partner"/>
+                <field name="projects"/>
+                <field name="attachments_ids"/>
+                <field name="attachments"/>
+                <field name="attachment_count"/>
+                <field name="plan_host"/>
+                <field name="plan_actuator"/>
+                <field name="plan_handler"/>
+                <field name="total_recipients"/>
+                <field name="plan_director"/>
+                <field name="beneficiary_representative"/>
+                <field name="plan_assistant"/>
+                <field name="auditor"/>
+                <field name="state"/>
+            </search>
+        </field>
+    </record>
         
-        <!-- Actions Of Form & Tree Views Of plan Information -->
-        <record id="action_gestcal_plan_view" model="ir.actions.act_window">
-            <field name="name">Plan</field>
-            <field name="res_model">gestcal.plan</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">kanban,tree,form</field>
-                 <field name="help" type="html">
-              <p class="o_view_nocontent_smiling_face">
+    <!-- Actions Of Form & Tree Views Of plan Information -->
+    <record id="action_gestcal_plan_view" model="ir.actions.act_window">
+        <field name="name">Plan</field>
+        <field name="res_model">gestcal.plan</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
                 Create a new Plan
-              </p> 
-              <p>
+            </p>
+            <p>
                 Plan view Kanban description ....
-              </p>
-            </field>
-        </record>
+            </p>
+        </field>
+    </record>
 
 </odoo>
