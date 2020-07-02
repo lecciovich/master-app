@@ -23,7 +23,8 @@
                         </group>
                     </group>
                     <group>
-                      <field name="recipients_id" domain="[('is_student','=',True)]" context="{'form_view_ref' : 'gest_call.gestcall_kanban_students_action_form', 'default_is_student': 1}" >
+<!--                    domain="[('is_student','=',True)]"   'form_view_ref': 'gest_call.gestcall_kanban_students_action_form',-->
+                        <field name="recipients_id" context="{'search_default_type_student': 1}" >
                             <tree string="Lesson" editable="bottom">
                                   <field name="name" />
                                   <field name="street" />
@@ -78,6 +79,9 @@
                 <field name="course_id"/>
                 <field name="project_id"/>
                 <field name="place"/>
+                <separator />
+                <filter name="myplace" string="MyPlace" domain="[('place', '=', 'class0')]"/>
+<!--                <filter name="type_student" string="Students" domain="[('is_student', '=', True)]"/>-->
             </search>
         </field>
     </record>

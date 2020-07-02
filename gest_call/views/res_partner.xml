@@ -78,11 +78,20 @@
                 <field name="is_student" />
 				<field name="is_teacher" />
 				<field name="is_operator" />
-				<filter string="Companies" name="type_company" domain="[('is_company','=',1)]"/>
+            </xpath>
+            <xpath expr="/search/filter[1]" position="before">
+    <!--                <separator/>-->
+				<filter string="Companies" name="type_company" domain="[('is_company','=', True)]"/>
+                <filter string="Operators" name="type_operator" domain="[('is_operator', '=', True)]"/>
+                <filter string="Teachers" name="type_teacher" domain="[('is_teacher', '=', True)]"/>
+                <filter string="Students" name="type_student" domain="[('is_student', '=', True)]"/>
+<!--&lt;!&ndash;                <filter string="MALE" name="male" domain="[('is company', '=', True)]"/>&ndash;&gt;-->
+
 				<group expand="0" string="Group By">
-					<filter name="is_student" string="Students" domain="[('is_student','=',True)]"/>
-					<filter name="is_teacher" string="Teachers" domain="[('is_teacher','=',True)]"/>
-					<filter name="is_operator" string="Operator" domain="[('is_operator','=',True)]"/>
+
+					<filter name="is_student" string="Students" domain="[('is_student','=',True)]" context="{'group_by' : 'state'}"/>
+					<filter name="is_teacher" string="Teachers" domain="[('is_teacher','=',True)]" context="{'group_by' : 'lesson_id'}"/>
+					<filter name="is_operator" string="Operator" domain="[('is_operator','=',True)]" context="{'group_by' : 'projects_ids'}"/>
 				</group>
             </xpath>
 
@@ -108,12 +117,15 @@
         </field>
     </record>
 
+ <!--         Contact actions for gestcalls -->
     <record id="gestcall_contact_action" model="ir.actions.act_window">
 
         <field name="name">Contact</field>
         <field name="res_model">res.partner</field>
+<!--        <field name="type">ir.actions.act_window</field>-->
         <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{"search_default_type_student":1}</field>
         <field name="search_view_id" ref="view_search_gestcall_contact_form"/>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
@@ -134,6 +146,7 @@
         <field name="view_mode">tree</field>
         <field name="view_id" ref="base.view_partner_tree" />
         <field name="act_window_id" ref="gestcall_contact_action" />
+        <!--        <field name="context">{search_default_type_company:1}</field>-->
     </record>
     <record id="gestcall_kanban_contact_action_form" model="ir.actions.act_window.view">
         <field name="sequence" eval="3" />

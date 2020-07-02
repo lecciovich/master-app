@@ -15,7 +15,8 @@ class GestcalProject(models.Model):
     
     title = fields.Char(string='Title', required=True) 
     project_id = fields.Char(string='Project id', required=True) 
-    courses = fields.Many2many('gestcal.course','courses_ids', string='Courses')
+    courses = fields.Many2many('gestcal.course', string='Courses')
+    # 'courses_ids',
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')

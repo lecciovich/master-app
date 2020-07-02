@@ -1,9 +1,9 @@
 from odoo import models, fields, api, _
-from datetime import datetime
+from datetime import datetime, date
 import time
 from odoo.exceptions import ValidationError
 import logging
-logger=logging.getLogger('_______LOGGER B____________')
+logger = logging.getLogger('_______LOGGER B____________')
 
 
 class GestcalPlan(models.Model):
@@ -19,12 +19,12 @@ class GestcalPlan(models.Model):
     financing_amount = fields.Float('Financing Amount', required=True)
     total_lesson_hours = fields.Integer('Total Lesson Hours')
     call = fields.Many2one('gestcal.call', string='Call title')
-    submission = fields.Date(string='Submission')
-    admittance = fields.Date(string='Admittance')
-    agreement = fields.Date(string='Agreement')
-    deadline = fields.Datetime(string='Deadline')
-    lessons_start = fields.Date(string='Lesson start')
-    report_submission = fields.Date(string='Report Submission')
+    agreement = fields.Date(string='Agreement', default=lambda * a: time.strftime('%Y-%m-%d'))
+    submission = fields.Date(string='Submission', default=lambda * a: time.strftime('%Y-%m-%d'))
+    admittance = fields.Date(string='Admittance', default=lambda * a: time.strftime('%Y-%m-%d'))
+    lessons_start = fields.Date(string='Lesson start', default=lambda * a: time.strftime('%Y-%m-%d'))
+    deadline = fields.Datetime(string='Deadline', default=lambda * a: time.strftime('%Y-%m-%d'))
+    report_submission = fields.Date(string='Report Submission', default=lambda * a: time.strftime('%Y-%m-%d'))
     # account_request = fields.Date(string='Account Request')
     partner = fields.Many2many('res.partner', 'partner_plan_rel', 'plan_id', 'partner_id', string='Partner',store=True)
     operative_partner = fields.Many2many('res.partner','partner_plan_rel', 'plan_id', 'partner_id', string='Operative Partner',store=True)
@@ -78,8 +78,10 @@ class GestcalPlan(models.Model):
                 
     @api.multi
     def submitted_plan(self):
-        return self.write({'state': 'submitted'})
-
+        current_date = str(datetime.now().date())
+        self.search([('agreement', '=', current_date)]).write({'state': 'submitted'})
+        return True
+            # return self.write({'state': 'submitted'})
     @api.multi
     def active_plan(self):
         return self.write({'state': 'active'})
@@ -98,7 +100,7 @@ class GestcalPlan(models.Model):
                     if lesson.check_done():
                         done_lesson_hours += (lesson.end_time-lesson.start_time)
                         logger.info('__________done_lesson_hours_list________: %s  ', done_lesson_hours)
-        if done_lesson_hours >= self.total_lesson_hours:
+        if done_lesson_hours >= self.total_lesson_hours * (70 / 100):
             return self.write({'state': 'completed'})
         else:
             print('error: lesson hours completed doesn\'t match with plan agreement')

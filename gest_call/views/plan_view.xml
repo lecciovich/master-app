@@ -29,7 +29,7 @@
                     </h1>
                     <group col="4" colspan="4">
                         <field name="plan_code"/>
-<!--                        <field name="financing_amount"/>-->
+                        <field name="financing_amount"/>
                         <field name="total_lesson_hours"/>
                         <field name="total_recipients"/>
                     </group>
@@ -63,8 +63,8 @@
                             </field>
                         </page>
                         <page string="Projects">
-                            <field name="projects" >
-                                <tree string="projects" editable="bottom">
+                             <field name="projects">
+                                 <tree string="projects" editable="bottom">
                                     <field name="title" />
                                     <field name="state" />
                                 </tree>

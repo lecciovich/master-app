@@ -45,14 +45,12 @@
 							<group>
 								<button name="get_teachers" type="object" string="Actualize Teacher" icon="fa-exchange"  style="background-color:#f8f8f1;"/>
 								<field name="teacher_ids" mode="tree">
-									<tree string="Teacher" create="true" delete="false" editable="bottom">
-										<field name="name" options="{'no_create_edit': True}" readonly="True"/>
-	<!--								<group>-->
+ 										<tree string="Teacher" create="false" delete="false" editable="True">
+											<field name="name" options="{'no_create_edit': True}" readonly="True"/>
 
-										<field name="topics" widget="many2many_tags" >
-	<!--										<attribute name="editable">top</attribute>-->
-										</field>
-	<!--								</group>-->
+	<!--										 editable="bottom"-->
+											<field name="topics" widget="many2many_tags" editable="bottom"/>
+	<!--										<group></group>-->
 	<!--								 widget="many2many_tags" options="{'no_create': False, 'no_create_edit':False}"-->
 	<!--								<field name="teacher_skills" widget="many2many_tags">-->
 	<!--									<tree>-->
