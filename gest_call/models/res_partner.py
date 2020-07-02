@@ -17,9 +17,13 @@ class ResPartner(models.Model):
 
     topics = fields.Many2many('gestcal.course.topics', 'course_topic_rel', 'res_partner_id', 'topic_id', string='Topics')
 
-    participation_hour = fields.Float(string='Participation hours', compute='get_participation_hours')
-    tot_inserted_hours = fields.Float(string='Total Inserted Hours', compute='get_inserted_hours')
-    tot_inserted_hours = fields.Float(string='Total Inserted Hours', compute='get_inserted_hours')
+    participation_hour = fields.Float(string='Participation hours', compute='get_participation_hours', digits=(2, 2),
+                                      help='Time according to timeformat of 24 hours')
+    tot_inserted_hours = fields.Float(string='Total Inserted Hours', compute='get_inserted_hours', digits=(2, 2),
+                                      help='Time according to timeformat of 24 hours')
+    # participation_hour = fields.Float(compute='', string='Participation Hour')
+
+
     state = fields.Selection([
         ('active', 'Active'),
         ('withdrawed', 'Withdrawed')

@@ -27,10 +27,12 @@ class GestcalCourse(models.Model):
     # courses_ids = fields.Many2one('gestcal.project', string='Courses')
     project_id = fields.Many2one('gestcal.project', string='Project')
     # course_id = fields.Char(string='Course id', required=True)
-    teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher')
-    # teacher_skills = fields.Many2many('gestcal.course.teacher_ids', 'topics', string='Thematic Areas')
+    teacher_ids = fields.One2many('res.partner', 'gest_course_id', string='Teacher', domain=[('is_teacher', '=', True)])    # teacher_skills = fields.Many2many('gestcal.course.teacher_ids', 'topics', string='Thematic Areas')
     teacher_skills = fields.Many2many('gestcal.course.topics', string='Thematic Areas', related='teacher_ids.topics')#, domain=[('is_teacher', '=', True)]
-    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients', domain=[('state', '=', 'active')])
+    recipients_ids = fields.One2many('res.partner', 'gest_course_id', string='Recipients',
+                                     domain=[('state', '=', 'active'), ('is_student', '=', True)])
+
+
 
     @api.one
     @api.constrains('repetition')
