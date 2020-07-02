@@ -7,6 +7,9 @@
         <field name="name">gestcal.lesson.form</field>
         <field name="model">gestcal.lesson</field>
         <field name="arch" type="xml">
+            <header>
+                <button name="saveandcreate" string="Save and Create" type="object" class="oe_edit_only oe_link"/>
+            </header>
             <form string="Lesson">
                 <sheet>
                     <group>
@@ -40,13 +43,13 @@
         
         
 
-    <record id="action_gestcal_calendar_view" model="ir.ui.view">
-        <field name="name">gestcal.lesson.calendar</field>
+<!--action_gestcal_calendar_view-->
+    <record id="view_gestcal_lesson_calendar" model="ir.ui.view">        <field name="name">gestcal.lesson.calendar</field>
         <field name="model">gestcal.lesson</field>
         <field name="priority" eval="2"/>
         <field name="arch" type="xml">
-            <calendar string="Lessons" date_start="date" event_open_popup="true" event_limit="5" color="course_id">
-                <field name="date"/>
+<!--             event_open_popup="true"-->
+            <calendar string="Lessons" date_start="date_start_marco" date_stop="date_end_marco" quick_add="False" event_limit="5" color="course_id">                <field name="date"/>
                 <field name="course_id"/>
             </calendar>
         </field>
@@ -65,6 +68,17 @@
             </tree>
         </field>
     </record>
+
+<!--    &lt;!&ndash; Actions Of Form & Tree Views Of lesson Information &ndash;&gt;-->
+<!--    <record id="action_gestcal_lesson_inherited" model="ir.actions.act_window">-->
+<!--        <field name="name">gestcal.lesson.inherited</field>-->
+<!--        <field name="res_model">gestcal.lesson</field>-->
+<!--        <field name="view_type">form</field>-->
+<!--        <field name="view_id" ref="view_gestcal_lesson_form"/>-->
+<!--        <field name="view_mode">calendar,tree,form</field>-->
+<!--    </record>-->
+
+
 
     <!-- Search in Course fields -->
     <record id="view_gestcal_lesson_search" model="ir.ui.view">
@@ -92,8 +106,21 @@
         <field name="name">Lesson</field>
         <field name="res_model">gestcal.lesson</field>
         <field name="view_type">form</field>
-        <field name="view_mode">calendar,tree,form</field>
+        <field name="view_mode">tree,calendar,form</field>
     </record>
+
+<!--    <record id="action_new_gestcal_lesson_view" model="ir.actions.act_window">-->
+<!--        <field name="name">gestcal.lesson.inherited</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">gestcal.lesson</field>-->
+<!--        <field name="domain">[]</field>-->
+<!--        <field name="view_type">form</field>-->
+<!--        <field name="view_mode">form,tree</field>-->
+<!--        <field name="view_id" ref="gest_call.view_gestcal_lesson_form"/>-->
+<!--        <field name="binding_model_id" ref="model_gestcal_lesson"/>-->
+<!--&lt;!&ndash;        <field name="target">new</field>&ndash;&gt;-->
+<!--        &lt;!&ndash;        gestcal_&ndash;&gt;-->
+<!--    </record>-->
 
 </odoo>
 
