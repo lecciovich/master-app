@@ -15,9 +15,7 @@
                  <button name="completed_project" type="object" string="Complet" states="active" class="oe_highlight"/>
                   <button name="accounted_project" type="object" string="Account" states="completed" class="oe_highlight"/>
                    <button name="closed_project" type="object" string="Closed" states="accounted" class="oe_highlight"/>
-
                <field name="state" widget="statusbar"/>
-
         </header> -->
                 <sheet>
                     <label for="title" class="oe_edit_only"/>
@@ -63,6 +61,17 @@
             </tree>
         </field>
     </record>
+
+        <!-- Tree View Of project Information -->
+        <record id="view_gestcal_project_tree" model="ir.ui.view">
+            <field name="name">gestcal.project.tree</field>
+            <field name="model">gestcal.project</field>
+            <field name="arch" type="xml">
+                <tree string="Project" import="false">
+                   <field name="title"/>
+                </tree>
+            </field>
+        </record>
         
     <record model="ir.ui.view" id="view_gestcal_project_kanban">
         <field name="name">gestcal.project.kanban</field>
@@ -75,6 +84,7 @@
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click" >
+                             
                             <div class="oe_kanban_details">
                                 <ul>
                                     <li style="display:inherit;">
@@ -108,6 +118,7 @@
                 <field name="state"/>
                 <separator />
 <!--                <filter string="" name="type_company" domain="[('is_company','=',1)]"/>-->
+
 
             </search>
         </field>

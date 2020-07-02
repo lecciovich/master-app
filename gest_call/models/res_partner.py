@@ -7,19 +7,21 @@ logger = logging.getLogger('_______LOGGER B____________')
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
- 
+
     lesson_id = fields.Many2one('gestcal.lesson', 'lesson')
     projects_ids = fields.Many2one('gestcal.project', 'project')
     is_student = fields.Boolean(string='Is a Student?')
     is_teacher = fields.Boolean(string='Is a Teacher?')
     is_operator = fields.Boolean(string='Is a Operator?')
-    
-    gest_course_id = fields.Many2many('gestcal.course', string='gest cal id') #, compute='get_courses', 'recipients_id', , compute='get_courses'
-    #gest_course_id = fields.Many2one('gestcal.course', string='gest cal id') #'recipients_ids',
+
+    gest_course_id = fields.Many2many('gestcal.course', string='gest cal id')
+    #, compute='get_courses', 'recipients_id', , compute='get_courses'    # recipients_course_id = fields.Many2one('gestcal.course', string='gest cal id')
     plan_ids = fields.Many2many('gestcal.plan', 'partner_plan_rel', 'partner_id', 'plan_id', string='Plan', store=True)
-    topics = fields.Many2many('gestcal.course.topics', string='Topics')
+
+    topics = fields.Many2many('gestcal.course.topics', 'course_topic_rel', 'res_partner_id', 'topic_id', string='Topics')
+
     participation_hour = fields.Float(string='Participation hours', compute='get_participation_hours', digits=(2, 2),
-                                      help='Time according to timeformat of 24 hours', store=True)
+                                      help='Time according to timeformat of 24 hours')#, store=True
     tot_inserted_hours = fields.Float(string='Total Inserted Hours', compute='get_inserted_hours', digits=(2, 2),
                                       help='Time according to timeformat of 24 hours')
     # participation_hour = fields.Float(compute='', string='Participation Hour')
@@ -28,7 +30,13 @@ class ResPartner(models.Model):
     state = fields.Selection([
         ('active', 'Active'),
         ('withdrawed', 'Withdrawed')
-    ], oldname='recipient_state', string='Recipient_Status', index=True, copy=False, readonly=True, default='active', track_visibility='onchange') #, track_visibility='onchange'copy=False, index=True,
+    ], oldname='recipient_state', string='Status', readonly=True, default='active', index=True, copy=False)  #, track_visibility='onchange'copy=False, index=True,    # , store=True, copy=False
+        # default='active', track_visibility='onchange' store=True, readonly=True, recipient_, default='active', readonly=True
+    # , readonly = True, index = True, copy = False, track_visibility = 'onchange'
+    # ], string='Recipient_Status', index=True, readonly=True, default='active')
+    # , string = 'Recipient_Status', readonly = True, default = 'active'
+    #, readonly=True, default='active',
+        # track_visibility='onchange'
 
     # @api.one
     # def get_courses(self):
@@ -50,10 +58,9 @@ class ResPartner(models.Model):
     #             for course in self.env['gestcal.course'].search([(rec, 'in', 'recipients_ids')]):
     #                 self.write({'gest_course_id': course})
 
-
     @api.one
     @api.depends('gest_course_id')
-    def get_participation_hours(self):#, cr, uid, ids, context=None
+    def get_participation_hours(self):
         tot_participation_hours = 0
         logger.info('__________courseid_context________: %s  ', self.env.context.get('course_id'))
         course_id_sel = self.env.context.get('course_id')
@@ -67,12 +74,13 @@ class ResPartner(models.Model):
                         for registry_page in lesson.registry:
                             if registry_page.student.id == self.id:
                                 tot_participation_hours = self.sum_duration(
-                                    tot_participation_hours, registry_page.time_of_presence)#participation_lesson
+                                    tot_participation_hours, registry_page.time_of_presence)  # participation_lesson
                     # if lesson.check_done():
                     #     tot_participation_hours = self.sum_duration(
                     #         tot_participation_hours, self.sub_duration(lesson.end_time, lesson.start_time))
+
         print(dict(self._fields['state'].selection).get(self.state))
-        #provo con self.search
+        # provo con self.search
         if self.state == 'active':
             self.participation_hour = tot_participation_hours
         else:
@@ -90,6 +98,7 @@ class ResPartner(models.Model):
     #         tot_hours = self.sum_duration(tot_hours,
     #                                       self.sub_duration(lesson.end_time, lesson.start_time))
     #     self.tot_inserted_hours = tot_hours
+
     @api.one
     @api.depends('gest_course_id')
     def get_inserted_hours(self):
@@ -106,7 +115,6 @@ class ResPartner(models.Model):
 
     @api.one
     def course_withdraw(self):
-        # self.get_participation_hours()
         return self.write({'state': 'withdrawed'})
 
     @api.one
@@ -128,5 +136,3 @@ class ResPartner(models.Model):
         float_min = (sub_minutes - 60 * float_hour) / 100
         sum_time = float_hour + float_min
         return sum_time
-
-

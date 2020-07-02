@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<!-- PARTNER -->
+ <!-- PARTNER -->
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.form</field>
         <field name="model">res.partner</field>
@@ -11,14 +11,17 @@
             <xpath expr="//form" position="inside">
 
                 <header>
+
+
 <!--attrs="{'invisible':[('is_student','=',False)]}"   invisible="[('is_student', '=', 0)]"   position="attribute" states="active"  states="withdrawed" attrs="{'invisible':['|',('filed_name_1','=',False),('fieled_name_2','=',False)]}"-->
                     <button name="course_withdraw" type="object" string="Withdraw" class="oe_highlight" attrs="{'invisible':['|',('is_student','=',False),('state','==','withdrawed')]}"/>
                     <button name="course_rejoin" type="object" string="Rejoin" class="oe_highlight" attrs="{'invisible':['|',('is_student','=',False),('state','==','active')]}"/>
 
-                    <field name="state" widget="statusbar"/>
+                    <field name="state" widget="statusbar" attrs="{'invisible':[('is_student','=',False),('state','==','active')]}"/>
+
                 </header>
             </xpath>
-            <!--  recipient_state               field[@name='state']" position="replace"<button name="submitted_plan" type="object" string="Withdraw" states="draft" class="oe_highlight"/>-->
+            <!--                 field[@name='state']" position="replace"<button name="submitted_plan" type="object" string="Withdraw" states="draft" class="oe_highlight"/>-->
             <!--                 <button name="draft_plan" type="object" string="Revert" states="submitted" class="oe_highlight"/>-->
             <!--                    <field name="recipient_state" widget="statusbar" statusbar_visible="active,withdrawed" colspan="2"/>-->
 
@@ -26,10 +29,12 @@
 
                     <!--                    <button name="draft_plan" type="object" string="Revert" states="submitted" class="oe_highlight"/>-->
 
-<!-- states="active" -->
+
 
             <xpath expr="//field[@name='category_id']" position="after">
+
                 <field name="lesson_id"/>
+
             </xpath>
 
             <xpath expr="//page[@name='internal_notes']" position="before">
@@ -51,16 +56,11 @@
                         </field>
                     </group>
                 </page>
-
             </xpath>
         </field>
     </record>
-
-<!--                <field name="name">res.partner.view.search.inherit.mail</field>-->
-<!--            <field name="model">res.partner</field>-->
-<!--            <field name="inherit_id" ref="base.view_res_partner_filter"/>-->
-
-<!--         Contact search for gestcalls -->
+ 
+<!--         Contact action for gestcalls -->
     <record id="view_search_gestcall_contact_form" model="ir.ui.view">
         <field name="name">res.partner.search.form</field>
         <field name="model">res.partner</field>
@@ -77,32 +77,24 @@
                 <field name="participation_hour"/>
                 <field name="tot_inserted_hours"/>
                 <field name="state"/>
-				<field name="is_student" />
+                <field name="is_student" />
 				<field name="is_teacher" />
 				<field name="is_operator" />
             </xpath>
-            <xpath expr="//separator" position="after">
-<!--                <separator/>-->
+            <xpath expr="/search/filter[1]" position="before">
+    <!--                <separator/>-->
 				<filter string="Companies" name="type_company" domain="[('is_company','=', True)]"/>
                 <filter string="Operators" name="type_operator" domain="[('is_operator', '=', True)]"/>
                 <filter string="Teachers" name="type_teacher" domain="[('is_teacher', '=', True)]"/>
                 <filter string="Students" name="type_student" domain="[('is_student', '=', True)]"/>
-<!--                <filter string="MALE" name="male" domain="[('is company', '=', True)]"/>-->
+<!--&lt;!&ndash;                <filter string="MALE" name="male" domain="[('is company', '=', True)]"/>&ndash;&gt;-->
 
 				<group expand="0" string="Group By">
+
 					<filter name="is_student" string="Students" domain="[('is_student','=',True)]" context="{'group_by' : 'state'}"/>
 					<filter name="is_teacher" string="Teachers" domain="[('is_teacher','=',True)]" context="{'group_by' : 'lesson_id'}"/>
 					<filter name="is_operator" string="Operator" domain="[('is_operator','=',True)]" context="{'group_by' : 'projects_ids'}"/>
 				</group>
-<!--                <separator />-->
-<!--				<filter string="Companies" name="company" domain="[('is_company','=',True)]"/>-->
-<!--                <filter string="Stundent" name="is_student" domain="[('is_student', '=', True)]"/>-->
-<!--				<group expand="0" string="Group By">-->
-<!--					<filter name="is_student" string="Students" domain="[('is_student','=',True)]"/>-->
-<!--					<filter name="is_teacher" string="Teachers" domain="[('is_teacher','=',True)]"/>-->
-<!--					<filter name="is_operator" string="Operator" domain="[('is_operator','=',True)]"/>-->
-<!--				</group>-->
-<!--                <filter string="Student" name="type_student" domain="[('is_student', '=', True)]"/>-->
             </xpath>
 
 <!--            <search string="Contact">-->
@@ -124,18 +116,18 @@
 <!--					<filter name="is_operator" string="Operator" domain="[('is_operator','=',True)]"/>-->
 <!--				</group>-->
 <!--			</search>-->
-		 </field>
+        </field>
     </record>
 
-<!--         Contact actions for gestcalls -->
+ <!--         Contact actions for gestcalls -->
     <record id="gestcall_contact_action" model="ir.actions.act_window">
+
         <field name="name">Contact</field>
         <field name="res_model">res.partner</field>
 <!--        <field name="type">ir.actions.act_window</field>-->
         <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
-<!--        <field name="context">{search_default_type_student:1}</field>-->
-<!--        <field name="context">{search_default_company:1}</field>-->
+        <field name="context">{"search_default_type_student":1}</field>
         <field name="search_view_id" ref="view_search_gestcall_contact_form"/>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
@@ -155,8 +147,8 @@
         <field name="sequence" eval="2" />
         <field name="view_mode">tree</field>
         <field name="view_id" ref="base.view_partner_tree" />
-<!--        <field name="context">{search_default_type_company:1}</field>-->
         <field name="act_window_id" ref="gestcall_contact_action" />
+        <!--        <field name="context">{search_default_type_company:1}</field>-->
     </record>
     <record id="gestcall_kanban_contact_action_form" model="ir.actions.act_window.view">
         <field name="sequence" eval="3" />
@@ -164,5 +156,5 @@
         <field name="view_id" ref="base.view_partner_form" />
         <field name="act_window_id" ref="gestcall_contact_action" />
     </record>
-        
+
  </odoo>

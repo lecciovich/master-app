@@ -3,7 +3,7 @@ from datetime import datetime, date
 import time
 from odoo.exceptions import ValidationError
 import logging
-logger=logging.getLogger('_______LOGGER B____________')
+logger = logging.getLogger('_______LOGGER B____________')
 
 
 class GestcalPlan(models.Model):
@@ -23,10 +23,10 @@ class GestcalPlan(models.Model):
     submission = fields.Date(string='Submission', default=lambda * a: time.strftime('%Y-%m-%d'))
     admittance = fields.Date(string='Admittance', default=lambda * a: time.strftime('%Y-%m-%d'))
     lessons_start = fields.Date(string='Lesson start', default=lambda * a: time.strftime('%Y-%m-%d'))
-    deadline = fields.Date(string='Deadline', default=lambda * a: time.strftime('%Y-%m-%d'))#Datetime
+    deadline = fields.Date(string='Deadline', default=lambda *a: time.strftime('%Y-%m-%d'))  #Datetime
     report_submission = fields.Date(string='Report Submission', default=lambda * a: time.strftime('%Y-%m-%d'))
     # account_request = fields.Date(string='Account Request')
-    partner = fields.Many2many('res.partner','partner_plan_rel', 'plan_id', 'partner_id', string='Partner',store=True)
+    partner = fields.Many2many('res.partner', 'partner_plan_rel', 'plan_id', 'partner_id', string='Partner',store=True)
     operative_partner = fields.Many2many('res.partner','partner_plan_rel', 'plan_id', 'partner_id', string='Operative Partner',store=True)
     projects = fields.Many2many('gestcal.project','project_ids', string='Projects')
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
@@ -50,6 +50,7 @@ class GestcalPlan(models.Model):
         ('closed', 'Closed')
         
         ], string='Status', index=True, readonly=True, copy=False, default='draft', track_visibility='onchange')
+
 
     def count_lesson_hours(self):
         for record in self:
@@ -80,24 +81,22 @@ class GestcalPlan(models.Model):
         current_date = str(datetime.now().date())
         self.search([('agreement', '=', current_date)]).write({'state': 'submitted'})
         return True
-        # return self.write({'state': 'submitted'})
+            # return self.write({'state': 'submitted'})
 
     @api.multi
     def revertToSubmitted_plan(self):
         return self.write({'state': 'submitted'})
 
-
     @api.multi
     def active_plan(self):
-            return self.write({'state': 'active'})
+        return self.write({'state': 'active'})
 
     @api.multi
-    # @api.depends('projects')
     def completed_plan(self):
         # Questo stage scatta se e solo se la somma delle ore dei corsi coincide con la  dkj
         # ciclo sui record di lesson e sui lesson_id di self e se coincidono addo oggetto a lista
-        tot_lesson_hours=0
-        done_lesson_hours=0
+        tot_lesson_hours = 0
+        done_lesson_hours = 0
 
         for project in self.projects:
             for course in project.courses:
@@ -106,7 +105,7 @@ class GestcalPlan(models.Model):
                     if lesson.check_done():
                         done_lesson_hours += (lesson.end_time-lesson.start_time)
                         logger.info('__________done_lesson_hours_list________: %s  ', done_lesson_hours)
-        if done_lesson_hours >= self.total_lesson_hours * (70/100):
+        if done_lesson_hours >= self.total_lesson_hours * (70 / 100):
             return self.write({'state': 'completed'})
         else:
             print('error: lesson hours completed doesn\'t match with plan agreement')
@@ -126,11 +125,11 @@ class GestcalPlan(models.Model):
     def closed_plan(self):
         return self.write({'state': 'closed'})
 
+
 class Call(models.Model):
     _name = 'gestcal.call'
     _rec_name = 'title'
     _description = 'Gestcal Call'
 
     title = fields.Char(string='Call title')
-
 

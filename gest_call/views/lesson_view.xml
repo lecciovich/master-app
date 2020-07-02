@@ -8,33 +8,31 @@
         <field name="model">gestcal.lesson</field>
         <field name="arch" type="xml">
             <header>
-                <button name="%(action_new_gestcal_lesson_view)d" string="Save and Create" type="action" class="oe_edit_only oe_link"/>
+                <button name="saveandcreate" string="Save and Create" type="object" class="oe_edit_only oe_link"/>
             </header>
             <form string="Lesson">
                 <sheet>
                     <group>
-
-                       <group>
-                        <field name="project_id" />
-                        <field name="date"/>
+                        <group>
+                            <field name="project_id" />
+                            <field name="date"/>
                         </group>
-                            <group>
+                        <group>
                                <field name="start_time"/>
 <!--                                widget="timepicker"-->
                                 <field name="end_time"/>
-                                <field name="teacher_id"  domain="[('is_teacher','=',True)]"  context="{'default_is_teacher': 1}"/>
-                                <field name="course_id" />
-                                <field name="place" />
-                             </group>
+                            <field name="teacher_id"  domain="[('is_teacher','=',True)]"  context="{'default_is_teacher': 1}"/>
+                            <field name="course_id" />
+                            <field name="place" />
+                        </group>
                     </group>
                     <group>
-    <!--                    domain="[('is_student','=',True)]"   'form_view_ref': 'gest_call.gestcall_kanban_students_action_form',-->
+<!--                    domain="[('is_student','=',True)]"   'form_view_ref': 'gest_call.gestcall_kanban_students_action_form',-->
                         <button name="get_recipients" type="object" string="Actualize Recipients" icon="fa-exchange"  style="background-color:#f8f8f1;"/>
-                        <field name="recipients_id" context="{'search_default_type_student': 1, 'registry': registry}" readonly="False" >
-                            <tree string="Lesson" editable="bottom">
-                                <field name="name" />
-                                <field name="street" />
-                                <field name="company_type" />
+                         <field name="recipients_id" context="{'search_default_type_student': 1, 'registry': registry}" readonly="False" >                            <tree string="Lesson" editable="bottom">
+                                <field name="name"/>
+                                <field name="street"/>
+                                <field name="company_type"/>
 <!--                                <field name="participation_hour" sum="Total participation hours"/>-->
                             </tree>
                         </field>
@@ -52,15 +50,15 @@
         </field>
     </record>
         
+        
+
 <!--action_gestcal_calendar_view-->
-    <record id="view_gestcal_lesson_calendar" model="ir.ui.view">
-        <field name="name">gestcal.lesson.calendar</field>
+    <record id="view_gestcal_lesson_calendar" model="ir.ui.view">        <field name="name">gestcal.lesson.calendar</field>
         <field name="model">gestcal.lesson</field>
         <field name="priority" eval="2"/>
         <field name="arch" type="xml">
 <!--             event_open_popup="true"-->
-            <calendar string="Lessons" date_start="date_start_marco" date_stop="date_end_marco" quick_add="False" event_limit="5" color="course_id">
-                <field name="date"/>
+            <calendar string="Lessons" date_start="date_start_marco" date_stop="date_end_marco" quick_add="False" event_limit="5" color="course_id">                <field name="date"/>
                 <field name="course_id"/>
             </calendar>
         </field>
@@ -75,11 +73,21 @@
                         <field name="date"/>
                         <field name="start_time"/>
                         <field name="end_time"/>
-<!--                 widget='timepicker'-->
                         <field name="teacher_id" />
             </tree>
         </field>
     </record>
+
+<!--    &lt;!&ndash; Actions Of Form & Tree Views Of lesson Information &ndash;&gt;-->
+<!--    <record id="action_gestcal_lesson_inherited" model="ir.actions.act_window">-->
+<!--        <field name="name">gestcal.lesson.inherited</field>-->
+<!--        <field name="res_model">gestcal.lesson</field>-->
+<!--        <field name="view_type">form</field>-->
+<!--        <field name="view_id" ref="view_gestcal_lesson_form"/>-->
+<!--        <field name="view_mode">calendar,tree,form</field>-->
+<!--    </record>-->
+
+
 
     <!-- Search in Course fields -->
     <record id="view_gestcal_lesson_search" model="ir.ui.view">
@@ -90,7 +98,6 @@
                 <field name="date"/>
                 <field name="start_time"/>
                 <field name="end_time"/>
-<!--             widget="timepicker"    widget="float_time"-->
                 <field name="teacher_id"/>
                 <field name="recipients_id"/>
                 <field name="course_id"/>
@@ -103,15 +110,6 @@
         </field>
     </record>
  
-<!--    &lt;!&ndash; Actions Of Form & Tree Views Of lesson Information &ndash;&gt;-->
-<!--    <record id="action_gestcal_lesson_inherited" model="ir.actions.act_window">-->
-<!--        <field name="name">gestcal.lesson.inherited</field>-->
-<!--        <field name="res_model">gestcal.lesson</field>-->
-<!--        <field name="view_type">form</field>-->
-<!--        <field name="view_id" ref="view_gestcal_lesson_form"/>-->
-<!--        <field name="view_mode">calendar,tree,form</field>-->
-<!--    </record>-->
-
     <!-- Actions Of Form & Tree Views Of lesson Information -->
     <record id="action_gestcal_lesson_view" model="ir.actions.act_window">
         <field name="name">Lesson</field>
@@ -120,13 +118,18 @@
         <field name="view_mode">tree,calendar,form</field>
     </record>
 
-    <record id="action_new_gestcal_lesson_view" model="ir.actions.act_window">
-        <field name="name">gestcal.lesson.inherited</field>
-        <field name="res_model">gestcal.lesson</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="view_gestcal_lesson_form"/>
-    </record>
+<!--    <record id="action_new_gestcal_lesson_view" model="ir.actions.act_window">-->
+<!--        <field name="name">gestcal.lesson.inherited</field>-->
+<!--        <field name="type">ir.actions.act_window</field>-->
+<!--        <field name="res_model">gestcal.lesson</field>-->
+<!--        <field name="domain">[]</field>-->
+<!--        <field name="view_type">form</field>-->
+<!--        <field name="view_mode">form,tree</field>-->
+<!--        <field name="view_id" ref="gest_call.view_gestcal_lesson_form"/>-->
+<!--        <field name="binding_model_id" ref="model_gestcal_lesson"/>-->
+<!--&lt;!&ndash;        <field name="target">new</field>&ndash;&gt;-->
+<!--        &lt;!&ndash;        gestcal_&ndash;&gt;-->
+<!--    </record>-->
 
 </odoo>
 

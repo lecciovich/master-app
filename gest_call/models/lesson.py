@@ -1,9 +1,9 @@
 from odoo import models, fields, api, _
 from datetime import datetime, timedelta
 import time
+import pytz
 from odoo.exceptions import ValidationError
 import logging
-import pytz
 logger = logging.getLogger('_______LOGGER B____________')
 
 class GestcalLesson(models.Model):
@@ -16,6 +16,9 @@ class GestcalLesson(models.Model):
     date = fields.Date(string='Date', required=True)
     date_start_marco = fields.Datetime(string='Start datetime', compute='datetime_start_calc')
     date_end_marco = fields.Datetime(string='End datetime', compute='datetime_end_calc')
+    # .to_string(date.strftime('%Y-%M-%D') + self.start_time)
+    # start_time = fields.Datetime(string='Start Time')
+    # end_time = fields.Datetime(string='End Time')
     start_time = fields.Float(string='Start Time', required=True, digits=(2, 2),
                               help='Time according to timeformat of 24 hours')
     end_time = fields.Float(string='End Time', required=True, digits=(2, 2),
@@ -28,8 +31,8 @@ class GestcalLesson(models.Model):
     course_id = fields.Many2one('gestcal.course', string='course')
     project_id = fields.Many2one('gestcal.project', string='Project',  related='course_id.project_id')
     place = fields.Many2one('gestcal.place', string='Place')
-    registry = fields.Many2many('gestcal.lesson.registry', string='Students Presence')#, store=True , readonly=False, store=True
-
+    registry = fields.Many2many('gestcal.lesson.registry',
+                                string='Students Presence')  #, store=True , readonly=False, store=True
     @api.multi
     def set_lesson_participations(self):
         for rec in self:
@@ -37,6 +40,7 @@ class GestcalLesson(models.Model):
                 recipient.with_context(course_id=rec.course_id.course_id).get_participation_hours()
         return
     # context = "{'course_id':course_id,'lessons':lesson_ids}"
+
     @api.one
     def get_recipients(self):
         recipients_list = []#self.recipients_id.id#self.recipients_id.read(self.recipients_id)
@@ -92,20 +96,24 @@ class GestcalLesson(models.Model):
     @api.depends('date', 'start_time')
     def datetime_start_calc(self):
         [_, _, _, user_tz] = self.calc_date_and_time_local(datetime.utcnow())
+
         print(self.date)
         print(self.start_time)
         logger.info('___________start_time________: %s  ', self.start_time)
         logger.info('___________start_date________: %s  ', self.date)
+
         self.date_start_marco = self.from_t_and_d_to_datetime(self.start_time, self.date, user_tz)
 
     @api.one
     @api.depends('date', 'end_time')
     def datetime_end_calc(self):
         [_, _, _, user_tz] = self.calc_date_and_time_local(datetime.utcnow())
+
         print(self.date)
         print(self.end_time)
         logger.info('___________end_time________: %s  ', self.end_time)
         logger.info('___________end_date________: %s  ', self.date)
+
         self.date_end_marco = self.from_t_and_d_to_datetime(self.end_time, self.date, user_tz)
 
     def from_t_and_d_to_datetime(self, attr_time, attr_date, tzone):
@@ -116,12 +124,12 @@ class GestcalLesson(models.Model):
         result_datetime = datetime.strptime(str(strdate) + ' ' + str(strhour), '%Y-%m-%d %H.%M')  # .astimezone(user_tz)
         logger.info('___________end_datetime________: %s  ', result_datetime)
         current_datetime = self.convert_TZ_UTC(result_datetime, tzone)
-        logger.info('___________datetime_local________: %s  ', current_datetime)#datetime_local)
+        logger.info('___________datetime_local________: %s  ', current_datetime)  # datetime_local)
         return current_datetime
 
 #     @api.constrains('date','start_time','end_time','teacher_id')
-#     def cheking_lesson(self):
-#   
+    # def cheking_lesson(self):
+#
 #         for record in self:
 #             logger.info('__________record________: %s  ',record)
 #             date = self.search([('date','=',record.date),('id','!=',record.id)])
@@ -160,12 +168,10 @@ class GestcalLesson(models.Model):
     @api.depends('date', 'start_time', 'end_time')
     def check_done(self):
         [current_date, current_hour, datetime_today, user_tz] = self.calc_date_and_time_local(datetime.utcnow())
-
         print('datetime today', datetime_today)
         print('date today', current_date)
         print('time today', current_hour)
         print('user tz: ', user_tz)
-
         logger.info('___________current_date________: %s  ', current_date)
         logger.info('___________current_hour________: %s  ', current_hour)
 
@@ -185,11 +191,17 @@ class GestcalLesson(models.Model):
         print("date", sameday_date_check, "hour", past_hour_check)
         return sameday_check or current_date > self.date
 
+
     def get_now_date_and_time_local(self):
         return self.calc_date_and_time_local(datetime.utcnow())
 
     def calc_date_and_time_local(self, datetime_arg):
-        user_tz = pytz.timezone(self.env.context.get('tz') or self.env.user.tz)
+        logger.info('___________current_tz________: %s  ', self.env.context.get('tz'))
+        logger.info('___________current_date_hour________: %s  ', self.env.user.tz)
+        system_tz = self.env.context.get('tz') or self.env.user.tz
+        if not system_tz:
+            system_tz = "UTC"
+        user_tz = pytz.timezone(system_tz)
         datetime_local = datetime_arg.astimezone(user_tz)
         date_local = datetime_local.date()#.isoformat()
         time_local = datetime.time(datetime_local)#.strftime("%H.%M")
@@ -200,15 +212,15 @@ class GestcalLesson(models.Model):
         utc_time = local_time - float_tzone
         return utc_time
 
+
     def trasform_time_in_float(self, datetime_time):
         logger.info('___________current_date_hour________: %s  ', datetime_time.hour)
         logger.info('___________current_date_hour_from_minute________: %s  ', datetime_time.minute//60)
         logger.info('___________current_date_minute________: %s  ', datetime_time.minute - datetime_time.minute//60)
+
         tot_seconds = datetime_time.hour * 3600 + datetime_time.minute * 60
         float_time = self.translate_seconds_to_float_time(tot_seconds)
         return float_time
-
-
 
     def sum_duration(self, duration1, duration2):
         # sum_minutes = duration1 * 100 + duration2 * 100
@@ -231,8 +243,18 @@ class GestcalLesson(models.Model):
         float_time = hours + (time_in_minutes - hours * 60) / 100
         return float_time
 
-    def saveandcreate(self, cr, uid, ids, context=None):
-        return True
+    @api.multi
+    def saveandcreate(self):#, cr, uid, ids, context=None
+        return {
+            'name': 'gestcal.lesson.form',
+            'res_model': 'gestcal.lesson',
+            'type': 'ir.actions.act_window',
+            'context': {},
+            'view_mode': 'form',
+            'view_type': 'form',
+            'view_id': self.env.ref('gest_call.view_gestcal_lesson_form').id,
+            'target': 'current',
+        }
 
     def convert_TZ_UTC(self, TZ_datetime, tzone):
         fmt = "%YYYY-%mm-%dd %HH:%MM"
@@ -245,6 +267,7 @@ class GestcalLesson(models.Model):
         local_datetime = datetime.strptime(TZ_datetime.strftime(fmt), fmt)
         result_utc_datetime = local_datetime + UTC_OFFSET_TIMEDELTA
         return result_utc_datetime
+
 
 class GestcalResPartner_Registry(models.Model):
     _name = 'gestcal.lesson.registry'
@@ -260,14 +283,16 @@ class GestcalResPartner_Registry(models.Model):
 
     student = fields.Many2one('res.partner', string='Student', required=True)
     lesson = fields.Many2one('gestcal.lesson', string='Lesson')
-    time_of_presence = fields.Float(string='Participation time')##default=lambda self: self._get_default_time_of_presence()  , compute='_get_default_time_of_presence'
+    time_of_presence = fields.Float(
+        string='Participation time')  ##default=lambda self: self._get_default_time_of_presence()  , compute='_get_default_time_of_presence'
     # withdraw = fields.Char(string='Future withdraw attribute') #lambda a: a._get_default_time_of_presence()##, default=lambda self: self._context.get('start_time')
     start_time = fields.Float(string='Start Time', required=True, digits=(2, 2),
-                              help='Time according to timeformat of 24 hours')#, default=_get_default_time_of_presence()
-    #'gestcal.lesson', 'start_time',  , related='lesson.start_time'   , default=_get_default_time_of_presence
+                              help='Time according to timeformat of 24 hours')  # , default=_get_default_time_of_presence()
+    # 'gestcal.lesson', 'start_time',  , related='lesson.start_time'   , default=_get_default_time_of_presence
     end_time = fields.Float(string='End Time', required=True, digits=(2, 2),
                             help='Time according to timeformat of 24 hours')
-    #'gestcal.lesson', 'end_time', , related='lesson.end_time'
+
+    # 'gestcal.lesson', 'end_time', , related='lesson.end_time'
 
     # @api.model
 
@@ -299,7 +324,5 @@ class GestcalResPartner_Registry(models.Model):
 
 
 
-
-# self.student.write()
 
 
