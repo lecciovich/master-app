@@ -1,6 +1,9 @@
 # See LICENSE file for full copyright and licensing details.
 
 from odoo import models, fields, api, _
+import logging
+logger = logging.getLogger('_______LOGGER B____________')
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -59,11 +62,22 @@ class ResPartner(models.Model):
     @api.depends('gest_course_id')
     def get_participation_hours(self):
         tot_participation_hours = 0
+        logger.info('__________courseid_context________: %s  ', self.env.context.get('course_id'))
+        course_id_sel = self.env.context.get('course_id')
+        logger.info('__________course_id_sel________: %s  ', course_id_sel)
+        # course_sel = self.env['gestcal.course'].search([('course_id', '=', course_id_sel)])
         for course in self.gest_course_id:
-            for lesson in course.lesson_ids:
-                if lesson.check_done():
-                    tot_participation_hours = self.sum_duration(
-                        tot_participation_hours, self.sub_duration(lesson.end_time, lesson.start_time))
+            if course_id_sel == course.course_id:
+                for lesson in course.lesson_ids:
+                    if lesson.check_done():
+                        # registry_pages = lesson.registry.search([('student.name', '=', self.name)])
+                        for registry_page in lesson.registry:
+                            if registry_page.student.id == self.id:
+                                tot_participation_hours = self.sum_duration(
+                                    tot_participation_hours, registry_page.time_of_presence)  # participation_lesson
+                    # if lesson.check_done():
+                    #     tot_participation_hours = self.sum_duration(
+                    #         tot_participation_hours, self.sub_duration(lesson.end_time, lesson.start_time))
 
         print(dict(self._fields['state'].selection).get(self.state))
         # provo con self.search
@@ -89,10 +103,14 @@ class ResPartner(models.Model):
     @api.depends('gest_course_id')
     def get_inserted_hours(self):
         tot_hours = 0
+        logger.info('__________courseid_context________: %s  ', self.env.context.get('course_id'))
+        course_id_sel = self.env.context.get('course_id')
+        logger.info('__________course_id_sel________: %s  ', course_id_sel)
         for course in self.gest_course_id:
-            for lesson in course.lesson_ids:
-                tot_hours = self.sum_duration(tot_hours,
-                                              self.sub_duration(lesson.end_time, lesson.start_time))
+            if course_id_sel == course.course_id:
+                for lesson in course.lesson_ids:
+                    tot_hours = self.sum_duration(tot_hours,
+                                                  self.sub_duration(lesson.end_time, lesson.start_time))
         self.tot_inserted_hours = tot_hours
 
     @api.one
