@@ -13,7 +13,7 @@ class GestcalPlace(models.Model):
     _rec_name = 'name'
     _description = 'Gestcal Place' 
     
-    name = fields.Char(string='Name')
+    name = fields.Char(string='Name', required=True)
     address = fields.Char(string='Address')
     street = fields.Char(string='Street')
     street2 = fields.Char(string='Street 2')
@@ -21,9 +21,10 @@ class GestcalPlace(models.Model):
     city = fields.Char(string='City')
     state_id = fields.Many2one('res.country.state', string='State', ondelete='restrict')
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict')
-    seats = fields.Integer (string='Seats')
-    equipment = fields.One2many('gestcal.equipment','place_id' ,string='Equipment',
-                              help='Related Course equipment') 
+    seats = fields.Integer(string='Seats')
+    equipment = fields.One2many('gestcal.equipment', 'place_id', string='Equipment',
+                                help='Related Course equipment')
     referent = fields.Float(string='Referent', required=True,
-                              help='Time according to timeformat of 24 hours')
+                            help='Time according to timeformat of 24 hours')
+    lesson_ids = fields.One2many('gestcal.lesson', 'place', string='Lessons in Class')
 

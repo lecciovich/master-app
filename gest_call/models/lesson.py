@@ -30,7 +30,7 @@ class GestcalLesson(models.Model):
     # 'gestcal.lesson', 'recipients_ids'
     course_id = fields.Many2one('gestcal.course', string='course')
     project_id = fields.Many2one('gestcal.project', string='Project',  related='course_id.project_id')
-    place = fields.Many2one('gestcal.place', string='Place')
+    place = fields.Many2one('gestcal.place', string='Place', required=True)
     registry = fields.Many2many('gestcal.lesson.registry',
                                 string='Students Presence')  #, store=True , readonly=False, store=True
     @api.multi
@@ -149,13 +149,43 @@ class GestcalLesson(models.Model):
 
     @api.one
     @api.constrains('date', 'start_time', 'end_time', 'teacher_id')
-    def checking_lesson(self):
+    def checking_lesson_teach(self):
         lesson_obj = self.env['gestcal.lesson']
-  
+
         for rec in lesson_obj.search([]):
-            check_less = rec.search([('date' ,'=',self.date),('start_time' ,'=', self.start_time),('end_time' ,'=', self.end_time),('teacher_id' ,'=', self.teacher_id.id)])
-            if len(check_less) > 1 :
-                raise ValidationError(_('This date already exists for the lesson'))
+            check_teach = rec.search([('date', '=', self.date), '&', '!', ('start_time', '>=', self.end_time),
+                                      '!', ('end_time', '<=', self.start_time),
+                                      ('teacher_id.id', '=', self.teacher_id.id)])  # ('place', '=', self.place),
+            # check_teach = rec.search([('date', '=', self.date),
+            #                          ('start_time', '=', self.start_time), ('end_time', '=', self.end_time),
+            #                          ('teacher_id.id', '=', self.teacher_id.id)])  # ('place', '=', self.place),
+        if len(check_teach) > 1:
+            raise ValidationError(_('This date already exists for the lesson'))
+
+    @api.one
+    @api.constrains('date', 'start_time', 'end_time', 'place')
+    def checking_lesson_place(self):
+        lesson_obj = self.env['gestcal.lesson']
+
+        for rec in lesson_obj.search([]):
+            check_place = rec.search([('date', '=', self.date), '&', '!', ('start_time', '>=', self.end_time),
+                                      '!', ('end_time', '<=', self.start_time),
+                                      ('place.id', '=', self.place.id)])
+        if len(check_place) >= 1:
+            raise ValidationError(_('This place already have a lesson at hour selected'))
+
+    # @api.one
+    # @api.constrains('date', 'start_time', 'end_time', 'recipients_id')
+    # def checking_lesson_recipients(self):
+    #     lesson_obj = self.env['gestcal.lesson']
+    #
+    #     for rec in lesson_obj.search([]):
+    #         for recipient in rec.recipients_id:
+    #             check_less = rec.search([('date', '=', self.date),
+    #                                      ('start_time', '=', self.start_time), ('end_time', '=', self.end_time),
+    #                                      ('recipients_', 'in', recipient)])  # ('place', '=', self.place),
+    #         if len(check_less) > 1:
+    #             raise ValidationError(_('These recipients already attend a lesson in same time'))
 
     @api.one
     @api.constrains('start_time', 'end_time')
