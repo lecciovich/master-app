@@ -153,14 +153,16 @@ class GestcalLesson(models.Model):
         lesson_obj = self.env['gestcal.lesson']
 
         for rec in lesson_obj.search([]):
-            check_teach = rec.search([('date', '=', self.date), '&', '!', ('start_time', '>=', self.end_time),
+            check_teach = rec.search([('date', '=', self.date), '!', ('start_time', '>=', self.end_time),
                                       '!', ('end_time', '<=', self.start_time),
-                                      ('teacher_id.id', '=', self.teacher_id.id)])  # ('place', '=', self.place),
+                                      ('teacher_id.id', '=', self.teacher_id.id)])
+            # ('place', '=', self.place),  '&',
             # check_teach = rec.search([('date', '=', self.date),
             #                          ('start_time', '=', self.start_time), ('end_time', '=', self.end_time),
             #                          ('teacher_id.id', '=', self.teacher_id.id)])  # ('place', '=', self.place),
         if len(check_teach) > 1:
-            raise ValidationError(_('This date already exists for the lesson'))
+            err_str = 'This place ' + self.teacher_id.name + ' already have a lesson at hour selected'
+            raise ValidationError(_(err_str))
 
     @api.one
     @api.constrains('date', 'start_time', 'end_time', 'place')
@@ -168,11 +170,12 @@ class GestcalLesson(models.Model):
         lesson_obj = self.env['gestcal.lesson']
 
         for rec in lesson_obj.search([]):
-            check_place = rec.search([('date', '=', self.date), '&', '!', ('start_time', '>=', self.end_time),
+            check_place = rec.search([('date', '=', self.date), '!', ('start_time', '>=', self.end_time),
                                       '!', ('end_time', '<=', self.start_time),
-                                      ('place.id', '=', self.place.id)])
-        if len(check_place) >= 1:
-            raise ValidationError(_('This place already have a lesson at hour selected'))
+                                      ('place.id', '=', self.place.id)])  # '&',
+        if len(check_place) > 1:
+            err_str = 'This place ' + self.place.name + ' already have a lesson at hour selected'
+            raise ValidationError(_(err_str))
 
     # @api.one
     # @api.constrains('date', 'start_time', 'end_time', 'recipients_id')
