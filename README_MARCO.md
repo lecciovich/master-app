@@ -70,3 +70,97 @@ Web Timepicker Widget | web_widget_timepicker | This module provides a timepicke
 Customer Portal | portal | This module adds required base code for a fully integrated customer portal. It contains the base controller class and base templates. Business addons will add their specific templates and controllers to extend the customer portal. This module contains most code coming from odoo v10 website_portal. Purpose of this module is to allow the display of a customer portal without having a dependency towards website edition and customization capabilities.
 Web Routing | http_routing | Proposes advanced routing options not available in web or base to keep base modules simple. <br>
 Colorize field in tree views | web_tree_dynamic_colored_field | This module aims to add support for dynamically coloring fields in tree view according to data in the record. https://github.com/OCA/web <br>
+
+Install procedures
+Install dev version Odoo
+
+To install Odoo to develop more modules you have to follow the video below.
+How to Configure Odoo With Pycharm - Odoo Mates
+
+https://www.youtube.com/watch?v=p7SJW36lqVE
+
+0. Download pycharm
+1. $ sudo apt-get install postgresql -y
+2. $ mkdir ~/Odoo
+3. $ mkdir ~/Odoo/odoo12
+4. $ cd ~/Odoo/odoo12
+5. $ git clone --single-branch --branch 12.0 https://github.com/odoo/odoo.git
+6. Extract pycharm in ~/
+7. $ sh ~/pycharm12-2-2019/bin/pycharm.sh
+8. flag create a script to run pycharm as "charm" from terminal
+9. $ cd ~/Odoo/odoo12/odoo
+9. $ git clone https://github.com/lecciovich/master-app.git
+10. $ cp $ ~/Odoo/odoo12/odoo/debian/odoo.conf ~/Odoo/odoo12/odoo/
+11. open project in folder ~/Odoo/odoo12/odoo
+12. modify odoo.conf in project folder as in the video
+13. modify configuration as in the video
+14. go to requirements.txt
+15. $ sudo apt-get install python3 python-dev python3-dev \
+     build-essential libssl-dev libffi-dev \
+     libxml2-dev libxslt1-dev zlib1g-dev \
+     python-pip
+16. $ sudo pip3 install --requirement requirements.txt
+    o meglio ancora: installazione automatica gestita da pycharm(se funziona ti chiede per ogni pacchetto la pwd di root)
+    se non dovessero funzionare correttamente entrambi(:librerie con versioni cannate o non installate proprio) allora apro requirements.txt come testo e installo da Pycharm IDE File>Settings>Project Interpreter tutte le librerie con le versioni specificate
+17. sudo su postgres
+18. psql
+19. alter roles odoo
+20. with 'odoo';
+21. \q
+22. exit
+23. RUN DEL PROGETTO
+3. $ git clone https://github.com/
+
+
+
+
+
+
+
+
+Issues with odoo configuration
+
+In the tutorial you have to get from zip or git clone the Repository of Odoo (https://github.com/odoo/odoo/).
+First of all keep attention to select from github page the branch of correct odoo version (in our case 12.0 https://github.com/odoo/odoo/tree/12.0).
+After this unzip the content and open with pycharm the folder extracted.
+Install this application
+
+First of all you need to install postgresql as shown in video.
+You now need to install python libraries dependencies.
+I got some problem trying to run pip install -r requirements.txt however it could be useful this discussion about it https://stackoverflow.com/questions/41457612/how-to-use-requirements-txt-to-install-all-dependencies-in-a-python-project. 
+
+
+UNISTALL COMPLETLY GUIDE
+
+In my case I used for a local installation via .deb installation.
+However the principle can be adapted to all system installations.
+
+* Stop Server
+* Remove all odoo files
+* Remove postgresql from system
+
+STOP SERVER
+sudo service odoo stop
+or sudo service odoo-server stop (if odoo-server instead of odoo)
+REMOVE ALL ODOO FILES
+sudo rm -R /opt/odoo
+REMOVE CONFIG FILES
+sudo rm -f /etc/odoo.conf
+sudo rm -f /etc/odoo/odoo.conf (if any)
+sudo rm -f /etc/odoo-server.conf (if any)
+sudo update-rc.d -f odoo remove
+sudo update-rc.d -f odoo-server remove (if odoo-server instead of odoo)
+sudo rm -f /etc/init.d/odoo (or odoo-server)
+REMOVE USER AND USER GROUP
+sudo userdel -r postgres
+sudo groupdel postgres
+REMOVE DATABASE
+sudo apt-get remove postgresql -y
+sudo apt-get --purge remove postgresql\* -y
+sudo rm -rf /etc/postgresql/
+sudo rm -rf /etc/postgresql-common/
+sudo rm -rf /var/lib/postgresql/
+
+
+
+839bbfdcaa01b858b32607d50a4e740ba14fb75f
