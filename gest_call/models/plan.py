@@ -1,3 +1,5 @@
+import pytz
+
 from odoo import models, fields, api, _
 from datetime import datetime, date
 import time
@@ -19,12 +21,14 @@ class GestcalPlan(models.Model):
     financing_amount = fields.Float('Financing Amount', required=True)
     total_lesson_hours = fields.Integer('Total Lesson Hours')
     call = fields.Many2one('gestcal.call', string='Call title')
-    agreement = fields.Date(string='Agreement', default=lambda * a: time.strftime('%Y-%m-%d'))
+    # plan steps date: draft always
     submission = fields.Date(string='Submission', default=lambda * a: time.strftime('%Y-%m-%d'))
+    agreement = fields.Date(string='Agreement', default=lambda * a: time.strftime('%Y-%m-%d'))
     admittance = fields.Date(string='Admittance', default=lambda * a: time.strftime('%Y-%m-%d'))
     lessons_start = fields.Date(string='Lesson start', default=lambda * a: time.strftime('%Y-%m-%d'))
     deadline = fields.Date(string='Deadline', default=lambda *a: time.strftime('%Y-%m-%d'))  #Datetime
     report_submission = fields.Date(string='Report Submission', default=lambda * a: time.strftime('%Y-%m-%d'))
+
     # account_request = fields.Date(string='Account Request')
     partner = fields.Many2many('res.partner', 'partner_plan_rel', 'plan_id', 'partner_id', string='Partner',store=True)
     operative_partner = fields.Many2many('res.partner','partner_plan_rel', 'plan_id', 'partner_id', string='Operative Partner',store=True)
@@ -46,9 +50,9 @@ class GestcalPlan(models.Model):
         ('submitted', 'Submitted'),
         ('active', 'Active'), 
         ('completed', 'Completed'),
-        ('accounted', 'Sent To Financial Director'),
-        ('closed', 'Closed')
-        
+        ('closed', 'Closed'),
+        ('accounted', 'Sent To Financial Director')
+
         ], string='Status', index=True, readonly=True, copy=False, default='draft', track_visibility='onchange')
 
 
@@ -72,27 +76,54 @@ class GestcalPlan(models.Model):
             if code_plan:
                 self.title = str(title) + '(' + (str(lenplan))+')'
  
-    @api.multi
+    @api.one
     def draft_plan(self):
         return self.write({'state': 'draft'})
                 
+    # @api.one
     @api.multi
     def submitted_plan(self):
-        current_date = str(datetime.now().date())
-        self.search([('agreement', '=', current_date)]).write({'state': 'submitted'})
-        return True
-            # return self.write({'state': 'submitted'})
+        system_tz = self.env.context.get('tz') or self.env.user.tz
+        if not system_tz:
+            system_tz = "UTC"
+        user_tz = pytz.timezone(system_tz)
+        current_date = str(datetime.now().astimezone(user_tz).date().strftime('%Y-%m-%d'))
+
+        if self.submission:
+            plan_submission = self.env['gestcal.plan'].search([('submission', '<=', current_date)])
+            if self in plan_submission:
+                return self.write({'state': 'submitted'})
+            elif self.state != 'draft':
+                # raise ValueError(_('Submission date assigned is not present or past date'))
+                self.draft_plan()
 
     @api.multi
-    def revertToSubmitted_plan(self):
-        return self.write({'state': 'submitted'})
+    def revert_to_submitted_plan(self):
+        return self.submitted_plan()
 
     @api.multi
     def active_plan(self):
-        return self.write({'state': 'active'})
+        system_tz = self.env.context.get('tz') or self.env.user.tz
+        if not system_tz:
+            system_tz = "UTC"
+        user_tz = pytz.timezone(system_tz)
+        current_date = str(datetime.now().astimezone(user_tz).date().strftime('%Y-%m-%d'))
+
+        if self.agreement:
+            plan_agreement = self.env['gestcal.plan'].search([('agreement', '<=', current_date)])
+            if self in plan_agreement:
+                return self.write({'state': 'active'})
+            elif self.state != 'submitted':
+                self.submitted_plan()
 
     @api.multi
     def completed_plan(self):
+        system_tz = self.env.context.get('tz') or self.env.user.tz
+        if not system_tz:
+            system_tz = "UTC"
+        user_tz = pytz.timezone(system_tz)
+        current_date = str(datetime.now().astimezone(user_tz).date().strftime('%Y-%m-%d'))
+
         # Questo stage scatta se e solo se la somma delle ore dei corsi coincide con la  dkj
         # ciclo sui record di lesson e sui lesson_id di self e se coincidono addo oggetto a lista
         tot_lesson_hours = 0
@@ -105,10 +136,17 @@ class GestcalPlan(models.Model):
                     if lesson.check_done():
                         done_lesson_hours += (lesson.end_time-lesson.start_time)
                         logger.info('__________done_lesson_hours_list________: %s  ', done_lesson_hours)
-        if done_lesson_hours >= self.total_lesson_hours * (70 / 100):
-            return self.write({'state': 'completed'})
+        if done_lesson_hours >= self.total_lesson_hours * (70 / 100):  # and self.admittance <= current_date
+            if self.admittance:
+                plan_admittance = self.env['gestcal.plan'].search([('admittance', '<=', current_date)])
+                if self in plan_admittance:
+                    return self.write({'state': 'completed'})
+            # return self.write({'state': 'completed'})
         else:
-            print('error: lesson hours completed doesn\'t match with plan agreement')
+            print('error: lesson hours completed doesn\'t match with plan agreement or admittance date is not reached yet')
+            if self.state != 'active':
+                return self.active_plan()
+            # raise ValidationError (_('error: lesson hours completed doesn\'t match with plan agreement'))
 
         #             if lesson.search(['date','<', current_date],['end_time','<',current_hour]):
         #                 done_lesson_hours+=(lesson.end_time-lesson.start_time)
@@ -118,12 +156,38 @@ class GestcalPlan(models.Model):
         #     return self.write({'state': 'completed'})
 
     @api.multi
-    def accounted_plan(self):
-        return self.write({'state': 'accounted'})
+    def closed_plan(self):
+        system_tz = self.env.context.get('tz') or self.env.user.tz
+        if not system_tz:
+            system_tz = "UTC"
+        user_tz = pytz.timezone(system_tz)
+        current_date = str(datetime.now().astimezone(user_tz).date().strftime('%Y-%m-%d'))
+
+        if self.agreement:
+            plan_deadline = self.env['gestcal.plan'].search([('deadline', '<=', current_date)])
+            if self in plan_deadline:
+                return self.write({'state': 'closed'})
+            elif self.state != 'completed':
+                return self.completed_plan()
 
     @api.multi
-    def closed_plan(self):
-        return self.write({'state': 'closed'})
+    def accounted_plan(self):
+        system_tz = self.env.context.get('tz') or self.env.user.tz
+        if not system_tz:
+            system_tz = "UTC"
+        user_tz = pytz.timezone(system_tz)
+        current_date = str(datetime.now().astimezone(user_tz).date().strftime('%Y-%m-%d'))
+
+        if self.agreement:
+            plan_report_submission = self.env['gestcal.plan'].search([('report_submission', '<=', current_date)])
+            if self in plan_report_submission:
+                return self.write({'state': 'accounted'})
+            elif self.state != 'closed':
+                return self.closed_plan()
+
+    # @api.multi
+    # def closed_plan(self):
+    #     return self.write({'state': 'closed'})
 
 
 class Call(models.Model):

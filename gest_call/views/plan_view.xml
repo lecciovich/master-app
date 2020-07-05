@@ -10,16 +10,18 @@
         <field name="arch" type="xml">
             <form string="Plan">
                 <header>
+<!--                     attrs="{'invisible':[('submission','<=',True)]}" -->
                     <button name="submitted_plan" type="object" string="Submit" states="draft" class="oe_highlight"/>
-                    <button name="draft_plan" type="object" string="Revert" states="submitted" class="oe_highlight"/>
                     <button name="active_plan" type="object" string="Active" states="submitted" class="oe_highlight"/>
-                    <button name="revertToSubmitted_plan" type="object" string="Revert" states="active" class="oe_highlight"/>
-                    <button name="completed_plan" type="object" string="Complet" states="active" class="oe_highlight"/>
+                    <button name="completed_plan" type="object" string="Complete" states="active" class="oe_highlight"/>
+                    <button name="closed_plan" type="object" string="Close" states="completed" class="oe_highlight"/>
+                    <button name="accounted_plan" type="object" string="Account" states="closed" class="oe_highlight"/>
+
+                    <button name="draft_plan" type="object" string="Revert" states="submitted" class="oe_highlight"/>
+                    <button name="submitted_plan" type="object" string="Revert" states="active" class="oe_highlight"/>
                     <button name="active_plan" type="object" string="Revert" states="completed" class="oe_highlight"/>
-                    <button name="accounted_plan" type="object" string="Account" states="completed" class="oe_highlight"/>
-                    <button name="completed_plan" type="object" string="Revert" states="accounted" class="oe_highlight"/>
-                    <button name="closed_plan" type="object" string="Closed" states="accounted" class="oe_highlight"/>
-                    <button name="accounted_plan" type="object" string="Revert" states="closed" class="oe_highlight"/>
+                    <button name="completed_plan" type="object" string="Revert" states="closed" class="oe_highlight"/>
+                    <button name="closed_plan" type="object" string="Revert" states="accounted" class="oe_highlight"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
