@@ -182,18 +182,21 @@ class GestcalLesson(models.Model):
     @api.one
     @api.constrains('date', 'start_time', 'end_time', 'recipients_id')
     def checking_lesson_recipients(self):
-        lesson_obj = self.env['gestcal.lesson']
+        lesson_obj = self.env['gestcal.lesson'].search([])
         recipient_overlapped = []
         check_less = []
         for recipient in self.recipients_id:
             for rec in lesson_obj.search([]):
                 if recipient in rec.recipients_id:
-                    overlapped_lessons = rec.search([('date', '=', self.date),
-                                ('start_time', '=', self.start_time),
-                                ('end_time', '=', self.end_time)])
+                    if rec.date == self.date and rec.start_time == self.start_time \
+                            and rec.end_time == self.end_time:
+                        overlapped_lesson = rec
+                        # overlapped_lessons = rec.search([('date', '=', self.date),
+                        #                                  ('start_time', '=', self.start_time),
+                        #                                  ('end_time', '=', self.end_time)])
 
-                    check_less.append(overlapped_lessons)
-                    recipient_overlapped.append(recipient.name)
+                        check_less.append(overlapped_lesson)
+                        recipient_overlapped.append(recipient.name)
             if len(check_less) > 1:
                 raise ValidationError(_('These recipients already attend a lesson in same time'))
 

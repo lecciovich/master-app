@@ -64,7 +64,7 @@ class GestcalPlan(models.Model):
     def _compute_attachment_count(self):
         for attachment in self: 
             attachment.attachment_count = len(attachment.attachments_ids)
-            logger.info('___________count________: %s  ',attachment.attachment_count)
+            logger.info('___________count________: %s  ', attachment.attachment_count)
 
     @api.one
     @api.constrains('plan_code')
