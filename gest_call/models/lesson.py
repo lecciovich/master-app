@@ -182,14 +182,18 @@ class GestcalLesson(models.Model):
     @api.one
     @api.constrains('date', 'start_time', 'end_time', 'recipients_id')
     def checking_lesson_recipients(self):
-        lesson_obj = self.env['gestcal.lesson'].search([])
+        lesson_obj = self.env['gestcal.lesson'].sudo().search([('id', '!=', self.id)])
+        logger.info('___________lesson_obj________: %s  ', lesson_obj)
+
         recipient_overlapped = []
         check_less = []
+        couple_less_recip = []
         for recipient in self.recipients_id:
-            for rec in lesson_obj.search([]):
+            for rec in lesson_obj:  # .search([])
+                logger.info('___________lesson_obj_rec________: %s  ', rec)
                 if recipient in rec.recipients_id:
-                    if rec.date == self.date and rec.start_time == self.start_time \
-                            and rec.end_time == self.end_time:
+                    if rec.date == self.date and (not(rec.start_time >= self.end_time or\
+                            rec.end_time <= self.start_time)):
                         overlapped_lesson = rec
                         # overlapped_lessons = rec.search([('date', '=', self.date),
                         #                                  ('start_time', '=', self.start_time),
@@ -197,8 +201,15 @@ class GestcalLesson(models.Model):
 
                         check_less.append(overlapped_lesson)
                         recipient_overlapped.append(recipient.name)
+                        couple_less_recip.append([recipient.name, overlapped_lesson.date, overlapped_lesson.start_time, overlapped_lesson.end_time])
             if len(check_less) > 1:
-                raise ValidationError(_('These recipients already attend a lesson in same time'))
+                error_msg = 'These recipients: \n'
+                # for recipient_lesson in couple_less_recip:
+                #     error_msg += recipient_lesson[0] + 'in the lesson in ' + recipient_lesson[1].strptime("%YYYY-%mm-%dd") + 'from' + recipient_lesson[2] + 'to' +'\n'
+                for recipient_name in recipient_overlapped:
+                    error_msg += recipient_name + '\n'
+                error_msg += '\nalready attend a lesson in same time'
+                raise ValidationError(_(error_msg))
 
     @api.one
     @api.constrains('start_time', 'end_time')
