@@ -8,7 +8,8 @@
         <field name="model">gestcal.lesson</field>
         <field name="arch" type="xml">
             <header>
-                <button name="saveandcreate" string="Save and Create" type="object" class="oe_edit_only oe_link"/>
+                <button name="saveandcreate" string="Save and Create" type="object" class="oe_highlight"/>
+<!--                oe_edit_only oe_link-->
             </header>
             <form string="Lesson">
                 <sheet>
