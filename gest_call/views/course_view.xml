@@ -74,7 +74,7 @@
 											 <!--											 context="{'course_id':course_id,'lessons':lesson_ids}"-->
 											<field name="tot_inserted_hours"/>
 											 <!--											 context="{'course_id':course_id,'lessons':lesson_ids}"-->
-											<field name="participation_hour" string="Total done hours" options='{"fg_color": "red:participation_hour &gt; 70/100*tot_inserted_hours"}'/>
+											<field name="participation_hour" string="Total done hours" options='{"fg_color": "red:participation_hour &lt; 70/100*tot_inserted_hours"}'/>
 	<!--								colors="green:True" class="opt_required" decoration-warning="participation_hour == participation_hour" decoration-danger="name=='student 1'"-->
 									</tree>
 								</field>
