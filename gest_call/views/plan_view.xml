@@ -43,9 +43,9 @@
                     </group>
                      <group col="6" colspan="6">
                          <field name="submission"/>
-                         <field name="admittance"/>
                          <field name="agreement" />
                          <field name="lessons_start"/>
+                         <field name="admittance"/>
                          <field name="deadline"/>
                          <field name="report_submission"/>
                      </group>

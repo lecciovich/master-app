@@ -22,16 +22,17 @@ class GestcalPlan(models.Model):
     total_lesson_hours = fields.Integer('Total Lesson Hours')
     call = fields.Many2one('gestcal.call', string='Call title')
     # plan steps date: draft always
-    submission = fields.Date(string='Submission', default=lambda * a: time.strftime('%Y-%m-%d'))
-    agreement = fields.Date(string='Agreement', default=lambda * a: time.strftime('%Y-%m-%d'))
-    admittance = fields.Date(string='Admittance', default=lambda * a: time.strftime('%Y-%m-%d'))
-    lessons_start = fields.Date(string='Lesson start', default=lambda * a: time.strftime('%Y-%m-%d'))
-    deadline = fields.Date(string='Deadline', default=lambda *a: time.strftime('%Y-%m-%d'))  #Datetime
-    report_submission = fields.Date(string='Report Submission', default=lambda * a: time.strftime('%Y-%m-%d'))
+    submission = fields.Date(string='Submission')#, default=lambda * a: time.strftime('%Y-%m-%d')
+    agreement = fields.Date(string='Agreement')
+    admittance = fields.Date(string='Admittance')
+    lessons_start = fields.Date(string='Lesson start')
+    deadline = fields.Date(string='Deadline')  #Datetime
+    report_submission = fields.Date(string='Report Submission')#, default=lambda * a: time.strftime('%Y-%m-%d')
 
     # account_request = fields.Date(string='Account Request')
-    partner = fields.Many2many('res.partner', 'partner_plan_rel', 'plan_id', 'partner_id', string='Partner',store=True)
-    operative_partner = fields.Many2many('res.partner','partner_plan_rel', 'plan_id', 'partner_id', string='Operative Partner',store=True)
+    partner = fields.Many2many('res.partner', 'partner_plan_rel', 'plan_id', 'partner_id', string='Partner', store=True)
+    operative_partner = fields.Many2many('res.partner', string='Operative Partner',
+                                         domain=[('is_company', '=', True)], store=True)
     projects = fields.Many2many('gestcal.project','project_ids', string='Projects')
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
