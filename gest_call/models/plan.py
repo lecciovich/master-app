@@ -30,10 +30,11 @@ class GestcalPlan(models.Model):
     report_submission = fields.Date(string='Report Submission')#, default=lambda * a: time.strftime('%Y-%m-%d')
 
     # account_request = fields.Date(string='Account Request')
-    partner = fields.Many2many('res.partner', 'partner_plan_rel', 'plan_id', 'partner_id', string='Partner', store=True)
+    partner = fields.Many2many('res.partner', 'partner_plan_rel', 'plan_id', 'partner_id', string='Partner')#, store=True
     operative_partner = fields.Many2many('res.partner', string='Operative Partner',
                                          domain=[('is_company', '=', True)], store=True)
-    projects = fields.Many2many('gestcal.project','project_ids', string='Projects')
+    projects = fields.One2many('gestcal.project', 'plan_id', string='Projects')#'rel_plan_project', 'plan_code',
+    # projects = fields.Many2many('gestcal.project', 'plan_id', 'project_ids', string='Projects')
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')

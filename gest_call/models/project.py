@@ -20,7 +20,7 @@ class GestcalProject(models.Model):
     attachments_ids = fields.One2many('gestcal.attachment', 'projects_id', string='Attachment')
     attachments = fields.Many2one('gestcal.attachment', string='Attachments')
     attachment_count = fields.Integer(compute='_compute_attachment_count', string='Attachment count')
-    plan_id = fields.Many2one('gestcal.plan', string='Plan')
+    plan_id = fields.Many2one('gestcal.plan', string='Plan')#'projects',
     project_ids = fields.Many2one('gestcal.plan', string='Projects')
 
     state = fields.Selection([
