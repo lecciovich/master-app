@@ -85,10 +85,10 @@ class GestcalLesson(models.Model):
         #     if recipient.id not in recipients_list:
         #         recipients_list.append(recipient.id)
         #         self.set_registry(recipient)
-        logger.info('__________recipients_list________: %s  ', recipients_list)
-        self.write({'recipients_id': [(6, 0, recipients_list)]})
         for recipient in self.recipients_id:
             self.set_registry(recipient)
+        logger.info('__________recipients_list________: %s  ', recipients_list)
+        self.write({'recipients_id': [(6, 0, recipients_list)]})
         return
 
     @api.one
