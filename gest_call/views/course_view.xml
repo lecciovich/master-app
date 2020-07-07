@@ -64,21 +64,21 @@
 						</page>
 
 						<page string="Recipients">
-							<group>
+<!--							<group>-->
 								<button name="get_recipients" type="object" string="Actualize Recipients" icon="fa-exchange" style="background-color:#f8f8f8;" context="{'course_id':course_id,'lessons':lesson_ids}"/>
 									<field name="recipients_ids" mode="tree" context="{'course_id':course_id,'lessons':lesson_ids}">
 										<tree string="Recipients" create="true" delete="true" ><!--create="false" delete="false"-->
 											<field name="name"/>
 											<!--											 context="{'course_id':course_id,'lessons':lesson_ids}"-->
-											<field name="participation_hour"/>
-											 <!--											 context="{'course_id':course_id,'lessons':lesson_ids}"-->
 											<field name="tot_inserted_hours"/>
 											 <!--											 context="{'course_id':course_id,'lessons':lesson_ids}"-->
-											<field name="participation_hour" string="Total done hours" options='{"fg_color": "red:participation_hour &lt; 70/100*tot_inserted_hours"}'/>
+											<field name="participation_hour" sum="Total Attended Hours"/>
+											 <!--											 context="{'course_id':course_id,'lessons':lesson_ids}"-->
+<!--											<field name="participation_hour" string="Total done hours" options='{"fg_color": "red:participation_hour &lt; 70/100*tot_inserted_hours"}'/>-->
 	<!--								colors="green:True" class="opt_required" decoration-warning="participation_hour == participation_hour" decoration-danger="name=='student 1'"-->
 									</tree>
 								</field>
-							</group>
+<!--							</group>-->
 						</page>
 					</notebook>
                       
