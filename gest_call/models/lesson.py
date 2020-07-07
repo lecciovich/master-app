@@ -29,10 +29,23 @@ class GestcalLesson(models.Model):
                                      copy=True, readonly=False)#, store=True##, store=True ##related='course_id.recipients_ids',
     # 'gestcal.lesson', 'recipients_ids'
     course_id = fields.Many2one('gestcal.course', string='course')
+    past_course = fields.Many2one('gestcal.course', string='Past Course')
     project_id = fields.Many2one('gestcal.project', string='Project',  related='course_id.project_id')
     place = fields.Many2one('gestcal.place', string='Place', required=True)
     registry = fields.Many2many('gestcal.lesson.registry',
                                 string='Students Presence')  #, store=True , readonly=False, store=True
+    @api.onchange('course_id')
+    def onchange_course_id(self):
+        # old_value = self.past_course
+        self.past_course = self.course_id
+
+    @api.multi
+    def set_lesson_participations(self):
+        for rec in self:
+            for recipient in rec.recipients_id:
+                recipient.with_context(course_id=rec.course_id.course_id).get_participation_hours()
+        return
+
     @api.multi
     def set_lesson_participations(self):
         for rec in self:
@@ -43,18 +56,39 @@ class GestcalLesson(models.Model):
 
     @api.one
     def get_recipients(self):
+        self.write({'recipients_id': [(6, 0, [])]})
+        self.write({'registry': [(6, 0, [])]})
+
+        # recipients_list = []#self.recipients_id.id#self.recipients_id.read(self.recipients_id)
         recipients_list = []#self.recipients_id.id#self.recipients_id.read(self.recipients_id)
+        current_course_recip = []
         # for course in self.course_id:
         for recipient in self.recipients_id:
             recipients_list.append(recipient.id)
-            self.set_registry(recipient)
-        course = self.course_id
+            # self.set_registry(recipient)
         for recipient in self.course_id.recipients_ids:
-            if recipient.id not in recipients_list:
-                recipients_list.append(recipient.id)
-                self.set_registry(recipient)
+            recipients_list.append(recipient.id)
+            current_course_recip.append(recipient.id)
+            # self.set_registry(recipient)
+        # for recipient in self.recipients_id:
+        for recipient_past in self.past_course:
+            if recipient_past.id in current_course_recip:
+                continue
+            else:
+                recipients_list.remove(recipient_past.id)
+        # # for course in self.course_id:
+        # for recipient in self.recipients_id:
+        #     recipients_list.append(recipient.id)
+        #     self.set_registry(recipient)
+        # course = self.course_id
+        # for recipient in self.course_id.recipients_ids:
+        #     if recipient.id not in recipients_list:
+        #         recipients_list.append(recipient.id)
+        #         self.set_registry(recipient)
         logger.info('__________recipients_list________: %s  ', recipients_list)
         self.write({'recipients_id': [(6, 0, recipients_list)]})
+        for recipient in self.recipients_id:
+            self.set_registry(recipient)
         return
 
     @api.one

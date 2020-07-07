@@ -82,10 +82,10 @@ class GestcalCourse(models.Model):
             recipients_list.append(recipient.id)
         # recipients_list = self.recipients_ids
         # recipients_list = []
-        for rec in self.lesson_ids:
-            for i in rec.recipients_id:
-                if i.id not in recipients_list:
-                    recipients_list.append(i.id)
+        # for rec in self.lesson_ids:
+        #     for i in rec.recipients_id:
+        #         if i.id not in recipients_list:
+        #             recipients_list.append(i.id)
         logger.info('__________recipients_list________: %s  ',recipients_list)
         self.write({'recipients_ids' : [(6,0,recipients_list)]})
         self.set_course()
