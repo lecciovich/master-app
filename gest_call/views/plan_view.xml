@@ -69,7 +69,8 @@
                         </page>
                         <page string="Projects">
                              <field name="projects">
-                                 <tree string="projects" editable="bottom">
+                                 <tree string="projects">
+<!--                                     editable="bottom"-->
                                     <field name="title" />
                                     <field name="state" />
                                 </tree>
