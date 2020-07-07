@@ -136,8 +136,9 @@ class GestcalPlan(models.Model):
                 tot_lesson_hours += course.total_hours
                 for lesson in course.lesson_ids:
                     if lesson.check_done():
-                        done_lesson_hours += (lesson.end_time-lesson.start_time)
-                        logger.info('__________done_lesson_hours_list________: %s  ', done_lesson_hours)
+                        for reg_recipient in lesson.registry:
+                            done_lesson_hours += reg_recipient.time_of_presence#(lesson.end_time-lesson.start_time)
+                            logger.info('__________done_lesson_hours_list________: %s  ', done_lesson_hours)
         if done_lesson_hours >= self.total_lesson_hours * (70 / 100):  # and self.admittance <= current_date
             if self.admittance:
                 plan_admittance = self.env['gestcal.plan'].search([('admittance', '<=', current_date)])

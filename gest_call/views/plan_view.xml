@@ -60,7 +60,7 @@
 <!--                    </group>-->
                     <notebook colspan="4">
                         <page string="Partner">
-                            <field name="partner" context="{'search_default_type_company':'company'}">
+                            <field name="partner"  context="{'search_default_type_company':'company'}">
                                 <tree string="Partner">
                                     <field name="name" />
                                     <field name="city" />

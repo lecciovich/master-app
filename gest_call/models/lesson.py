@@ -26,7 +26,8 @@ class GestcalLesson(models.Model):
     teacher_id = fields.Many2one('res.partner', string='Teacher', required=True, domain=[('is_teacher', '=', True)]) # each lession have only ONE teacher
     # recipients_id = fields.Many2many('res.partner', 'lesson_id', string='Recipients', domain=[('is_student', '=', True)])#
     recipients_id = fields.Many2many('res.partner', string='Recipients', domain=[('is_student', '=', True)],
-                                     copy=True, readonly=False)#, store=True##, store=True ##related='course_id.recipients_ids',
+                                     copy=True, readonly=False)#, store=True##, store=True ##related='course_id.
+    # s_ids',
     # 'gestcal.lesson', 'recipients_ids'
     course_id = fields.Many2one('gestcal.course', string='course')
     past_course = fields.Many2one('gestcal.course', string='Past Course')
