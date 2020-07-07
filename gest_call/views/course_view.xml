@@ -65,7 +65,7 @@
 
 						<page string="Recipients">
 <!--							<group>-->
-								<button name="get_recipients" type="object" string="Actualize Recipients" icon="fa-exchange" style="background-color:#f8f8f8;" context="{'course_id':course_id,'lessons':lesson_ids}"/>
+<!--								<button name="get_recipients" type="object" string="Actualize Recipients" icon="fa-exchange" style="background-color:#f8f8f8;" context="{'course_id':course_id,'lessons':lesson_ids}"/>-->
 									<field name="recipients_ids" mode="tree" context="{'course_id':course_id,'lessons':lesson_ids}">
 										<tree string="Recipients" create="true" delete="true" ><!--create="false" delete="false"-->
 											<field name="name"/>

@@ -31,7 +31,8 @@
 
                     <notebook colspan="4">
                         <page string="Courses">
-                            <field name="courses" domain="[('project_id.project_id', '=', project_id)]">
+                            <field name="courses" widget="many2many">
+<!--                                 domain="[('project_id.project_id', '=', project_id)]"-->
 <!--                                filter_domain="[('project_id.project_id', 'ilike', project_id)]"-->
                                 <tree string="courses">
 <!--                                     editable="bottom" -->

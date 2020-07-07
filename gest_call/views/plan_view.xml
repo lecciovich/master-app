@@ -68,7 +68,7 @@
                             </field>
                         </page>
                         <page string="Projects">
-                             <field name="projects">
+                             <field name="projects" widget="many2many">
                                  <tree string="projects">
 <!--                                     editable="bottom"-->
                                     <field name="title" />

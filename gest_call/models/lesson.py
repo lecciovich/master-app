@@ -69,7 +69,7 @@ class GestcalLesson(models.Model):
         for recipient in self.course_id.recipients_ids:
             recipients_list.append(recipient.id)
             current_course_recip.append(recipient.id)
-            # self.set_registry(recipient)
+            self.set_registry(recipient)
         # for recipient in self.recipients_id:
         for recipient_past in self.past_course:
             if recipient_past.id in current_course_recip:
@@ -236,7 +236,7 @@ class GestcalLesson(models.Model):
                         check_less.append(overlapped_lesson)
                         recipient_overlapped.append(recipient.name)
                         couple_less_recip.append([recipient.name, overlapped_lesson.date, overlapped_lesson.start_time, overlapped_lesson.end_time])
-            if len(check_less) > 1:
+            if len(check_less) >= 1:
                 error_msg = 'These recipients: \n'
                 # for recipient_lesson in couple_less_recip:
                 #     error_msg += recipient_lesson[0] + 'in the lesson in ' + recipient_lesson[1].strptime("%YYYY-%mm-%dd") + 'from' + recipient_lesson[2] + 'to' +'\n'
